@@ -104,6 +104,7 @@ auto main(int argc, char * argv[]) -> int
         display_options.add_options()
             ("help",                                  "Display help information")
             ("timeout",            po::value<int>(),  "Abort after this many seconds")
+            ("induced",                               "Induced version")
             ;
 
         po::options_description all_options{ "All options" };
@@ -152,6 +153,8 @@ auto main(int argc, char * argv[]) -> int
 
         /* Figure out what our options should be. */
         Params params;
+
+        params.induced = options_vars.count("induced");
 
         /* Create graphs */
         auto graphs = std::make_pair(

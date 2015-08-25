@@ -79,6 +79,17 @@ class FixedBitSet
         }
 
         /**
+         * Complement.
+         */
+        auto complement_up_to(int size) -> void
+        {
+            for (unsigned i = 0 ; i < words_ ; ++i)
+                _bits[i] = ~_bits[i];
+            for (unsigned i = size ; i < words_ * bits_per_word ; ++i)
+                unset(i);
+        }
+
+        /**
          * Is a given bit on?
          */
         auto test(int a) const -> bool
@@ -269,6 +280,15 @@ class FixedBitGraph
         auto neighbourhood(int vertex) const -> FixedBitSet<size_>
         {
             return _adjacency[vertex];
+        }
+
+        /**
+         * Complement.
+         */
+        auto complement() -> void
+        {
+            for (int i = 0 ; i < _size ; ++i)
+                _adjacency[i].complement_up_to(_size);
         }
 };
 

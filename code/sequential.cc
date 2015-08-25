@@ -17,7 +17,7 @@ namespace
         Satisfiable
     };
 
-    template <unsigned n_words_, int k_, int l_>
+    template <unsigned n_words_, int k_, int l_, bool induced_>
     struct SequentialSubgraphIsomorphism
     {
         struct Domain
@@ -65,7 +65,7 @@ namespace
 
         const Params & params;
 
-        static constexpr int max_graphs = 1 + (l_ - 1) * k_;
+        static constexpr int max_graphs = 1 + (l_ - 1) * k_ + (induced_ ? 1 : 0);
         std::array<FixedBitGraph<n_words_>, max_graphs> target_graphs;
         std::array<FixedBitGraph<n_words_>, max_graphs> pattern_graphs;
 
@@ -208,6 +208,14 @@ namespace
                         }
                     }
                 }
+            }
+
+            if (induced_) {
+                pattern_graphs.at(1 + ((l_ - 1) * k_)) = pattern_graphs.at(0);
+                pattern_graphs.at(1 + ((l_ - 1) * k_)).complement();
+
+                target_graphs.at(1 + ((l_ - 1) * k_)) = target_graphs.at(0);
+                target_graphs.at(1 + ((l_ - 1) * k_)).complement();
             }
         }
 
@@ -509,10 +517,10 @@ namespace
         }
     };
 
-    template <template <unsigned, int, int> class SGI_, int n_, int m_>
+    template <template <unsigned, int, int, bool> class SGI_, int n_, int m_, bool i_>
     struct Apply
     {
-        template <unsigned size_, typename> using Type = SGI_<size_, n_, m_>;
+        template <unsigned size_, typename> using Type = SGI_<size_, n_, m_, i_>;
     };
 }
 
@@ -520,7 +528,11 @@ auto sequential_subgraph_isomorphism(const std::pair<Graph, Graph> & graphs, con
 {
     if (graphs.first.size() > graphs.second.size())
         return Result{ };
-    return select_graph_size<Apply<SequentialSubgraphIsomorphism, 3, 3>::template Type, Result>(
-            AllGraphSizes(), graphs.second, graphs.first, params);
+    if (params.induced)
+        return select_graph_size<Apply<SequentialSubgraphIsomorphism, 3, 3, true>::template Type, Result>(
+                AllGraphSizes(), graphs.second, graphs.first, params);
+    else
+        return select_graph_size<Apply<SequentialSubgraphIsomorphism, 3, 3, false>::template Type, Result>(
+                AllGraphSizes(), graphs.second, graphs.first, params);
 }
 
