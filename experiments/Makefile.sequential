@@ -1,0 +1,21 @@
+SHELL := /bin/bash
+ALGORITHMS := sequential
+RESULTS := results
+PATTERN_SIZES := 15
+TARGET_SIZES := 75
+PATTERN_DENSITIES := $(shell for a in `seq 0 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
+TARGET_DENSITIES := $(PATTERN_DENSITIES)
+REPEATS := $(shell seq 0 9 )
+
+all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES),$(foreach i,$(REPEATS),$(RESULTS)/ps$(ps)-ts$(ts)/pd$(pd)-td$(td)/$(i).out )))))
+
+define INSTANCE_template =
+dir-ps$(1)-ts$(2)/pd$(3)-td$(4) :
+	mkdir -p $(RESULTS) $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)
+
+$(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.out : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
+	../code/random_subgraph_isomorphism $(1) $(3) 11$$* $(2) $(4) 22$$* | tee $$@
+endef
+
+$(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES),$(eval $(call INSTANCE_template,$(ps),$(ts),$(pd),$(td)))))))
+
