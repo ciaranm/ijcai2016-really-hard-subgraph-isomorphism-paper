@@ -9,7 +9,7 @@ REPEATS := $(shell seq 0 9 )
 
 all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES),$(foreach i,$(REPEATS),$(foreach v,$(VARIANTS),$(RESULTS)/ps$(ps)-ts$(ts)/pd$(pd)-td$(td)/$(i).$(v).out ))))))
 
-define INSTANCE_template =
+define INSTANCE_template
 dir-ps$(1)-ts$(2)/pd$(3)-td$(4) :
 	mkdir -p $(RESULTS) $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)
 
