@@ -27,6 +27,36 @@ using std::chrono::duration_cast;
 
 namespace
 {
+    unsigned long long hacky_global_nodes = 0;
+
+    struct CountingVF2SubState : VF2SubState
+    {
+        using VF2SubState::VF2SubState;
+
+        virtual void BackTrack() {
+            ++hacky_global_nodes;
+            VF2SubState::BackTrack();
+        }
+
+        State* Clone()
+        { return new CountingVF2SubState(*this);
+        }
+    };
+
+    struct CountingVF2MonoState : VF2MonoState
+    {
+        using VF2MonoState::VF2MonoState;
+
+        virtual void BackTrack() {
+            ++hacky_global_nodes;
+            VF2MonoState::BackTrack();
+        }
+
+        State* Clone()
+        { return new CountingVF2MonoState(*this);
+        }
+    };
+
     auto create_random_graph(int size, double density, int seed, ARGEdit & ed, std::vector<int> & loops) -> void
     {
         std::mt19937 rand;
@@ -165,14 +195,17 @@ int main(int argc, char * argv[])
         target_g.SetNodeComparator(new OurComparator);
 
         bool result;
+        unsigned long long nodes;
 
         if (options_vars.count("induced")) {
-            VF2SubState s0(&pattern_g, &target_g);
+            CountingVF2SubState s0(&pattern_g, &target_g);
             result = match(&s0, &n, ni1, ni2);
+            nodes = hacky_global_nodes;
         }
         else {
-            VF2MonoState s0(&pattern_g, &target_g);
+            CountingVF2MonoState s0(&pattern_g, &target_g);
             result = match(&s0, &n, ni1, ni2);
+            nodes = hacky_global_nodes;
         }
 
         auto overall_time = duration_cast<milliseconds>(steady_clock::now() - start_time);
@@ -180,12 +213,12 @@ int main(int argc, char * argv[])
         int exp = 0;
         if (state.compare_exchange_strong(exp, 1)) {
             if (! result) {
-                std::cout << "false" << std::endl;
+                std::cout << "false" << " " << nodes << std::endl;
                 std::cout << std::endl;
                 std::cout << overall_time.count() << std::endl;
             }
             else {
-                std::cout << "true" << std::endl;
+                std::cout << "true" << " " << nodes << std::endl;
                 for (int i = 0 ; i < n ; i++)
                     std::cout << "(" << ni1[i] << "=" << ni2[i] << ") ";
                 std::cout << std::endl;
