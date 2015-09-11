@@ -69,8 +69,10 @@ namespace
 
         for (int e = 0 ; e < size ; ++e) {
             for (int f = e + 1 ; f < size ; ++f) {
-                if (dist(rand) <= density)
+                if (dist(rand) <= density) {
                     ed.InsertEdge(e, f, NULL);
+                    ed.InsertEdge(f, e, NULL);
+                }
             }
         }
     }
