@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-VARIANTS := non-induced induced
+VARIANTS := non-induced induced vf2-non-induced vf2-induced
 RESULTS := results
 PATTERN_SIZES := $(shell seq -w 10 20 ) 25
 TARGET_SIZES := 100
