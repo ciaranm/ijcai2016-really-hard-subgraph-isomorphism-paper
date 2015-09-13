@@ -1,12 +1,11 @@
 SHELL := /bin/bash
 VARIANTS := non-induced induced vf2-non-induced vf2-induced
 RESULTS := results
-PATTERN_SIZES := $(shell seq -w 10 20 ) 25
-TARGET_SIZES := 100
-PATTERN_DENSITIES := $(shell for a in `seq 0 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
+PATTERN_SIZES := 10 15 20 25
+TARGET_SIZES := 150
+PATTERN_DENSITIES := $(shell for a in `seq 0 4 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
 TARGET_DENSITIES := $(PATTERN_DENSITIES)
 REPEATS := $(shell seq -w 01 10 )
-TIMEOUT := 100
 
 all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES),$(foreach v,$(VARIANTS),\
     $(RESULTS)/ps$(ps)-ts$(ts)/pd$(pd)-td$(td)/$(v).proportion-sat \
