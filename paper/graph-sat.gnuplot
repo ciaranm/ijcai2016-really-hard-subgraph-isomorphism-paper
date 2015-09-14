@@ -41,7 +41,6 @@ load "ylgnbu.pal"
 unset colorbox
 
 set title "\\textbf{Glasgow} ($10 \\hookrightarrow 75$)"
-set cbrange [2:6]
 set cbtics 2 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
 set format cb '$10^{%.0f}$'
 plot "ps10-ts75.induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle

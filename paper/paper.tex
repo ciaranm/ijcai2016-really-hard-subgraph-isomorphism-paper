@@ -61,25 +61,45 @@ near each transition, there is an even harder region in between the two transiti
 
 \section{Non-Induced Isomorphisms}
 
-\subsection{Varying Densities}
-
-\subsection{Varying Sizes}
+\begin{figure*}[p]
+    \input{gen-graph-non-induced.tex}
+    \setlength{\abovecaptionskip}{-3em}
+    \caption{Behaviour of algorithms on the non-induced variant. Each point is the average of ten
+        runs. For each plot, the x-axis is the pattern density and the y-axis is the target
+        density, both from 0 to 1. Along the top row, we show the proportion of instances which are
+        satisfiable; the white bands shows the phase transitions. On the second row, we show the
+        number of search nodes used by the Glasgow algorithm, and on the third row, the number of
+        search nodes used by the VF2 algorithm: the dark regions indicate ``really hard''
+        instances.}
+\end{figure*}
 
 \section{Induced Isomorphisms}
+
+\begin{figure*}[p]
+    \input{gen-graph-induced.tex}
+    \setlength{\abovecaptionskip}{-3em}
+    \caption{Behaviour of algorithms on the induced variant. Each point is the average of ten
+        runs. For each plot, the x-axis is the pattern density and the y-axis is the target
+        density, both from 0 to 1. Along the top row, we show the proportion of instances which are
+        satisfiable; the white bands shows the phase transitions. On the second row, we show the
+        number of search nodes used by the Glasgow algorithm, and on the third row, the number of
+        search nodes used by the VF2 algorithm: the dark regions indicate ``really hard''
+        instances.}
+\end{figure*}
 
 \section{Other Encodings}
 
 \begin{figure*}[tb]
     \input{gen-graph-sat.tex}
+    \setlength{\abovecaptionskip}{-3em}
     \caption{Behaviour of other solvers on the induced variant. Each point is the average of ten
         runs. For each plot, the x-axis is the pattern density and the y-axis is the target
         density, both from 0 to 1. Along the top row, we show the proportion of instances which are
         satisfiable; the white bands shows the phase transitions. On the second row, we show the
         number of search nodes used by the Glasgow algorithm, and on the third row, the number of
-        conflicts recorded by the Glucose SAT solver: the dark regions indicate ``really hard''
+        decisions made by the Glucose SAT solver: the dark regions indicate ``really hard''
         instances. These results show that instances which are hard for the Glasgow algorithm tend
-        to be hard using other solvers too, but do not otherwise allow comparisons between solver
-        performances.}
+        to be hard using other solvers too.}
 \end{figure*}
 
 \section{Conclusion}

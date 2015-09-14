@@ -3,7 +3,7 @@ all : tables graphs
 
 TABLES =
 
-GRAPHS = gen-graph-sat.tex
+GRAPHS = gen-graph-sat.tex gen-graph-non-induced.tex gen-graph-induced.tex
 
 tables : $(TABLES)
 
