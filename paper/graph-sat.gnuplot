@@ -62,21 +62,21 @@ plot "ps16-ts75.induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matr
 
 unset colorbox
 
-set title "\\textbf{Glucose} ($10 \\rightarrowtail 75$)"
+set title "\\textbf{Glucose} ($10 \\hookrightarrow 75$)"
 set format cb '$10^{%.0f}$'
 plot "ps10-ts75.glucose-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
-set title "\\textbf{Glucose} ($12 \\rightarrowtail 75$)"
+set title "\\textbf{Glucose} ($12 \\hookrightarrow 75$)"
 set format cb '$10^{%.0f}$'
 plot "ps12-ts75.glucose-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
-set title "\\textbf{Glucose} ($14 \\rightarrowtail 75$)"
+set title "\\textbf{Glucose} ($14 \\hookrightarrow 75$)"
 set format cb '$10^{%.0f}$'
 plot "ps14-ts75.glucose-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
 set colorbox
 
-set title "\\textbf{Glucose} ($16 \\rightarrowtail 75$)"
+set title "\\textbf{Glucose} ($16 \\hookrightarrow 75$)"
 set format cb '$10^{%.0f}$'
 plot "ps16-ts75.glucose-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
