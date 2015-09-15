@@ -73,7 +73,7 @@ namespace
         {
             // populate our order with every vertex initially
             std::iota(order.begin(), order.end(), 0);
-            degree_sort(g, order, false);
+            dynexdegree_sort(g, order, false);
 
             // re-encode graph as a bit graph
             graph.resize(g.size());
