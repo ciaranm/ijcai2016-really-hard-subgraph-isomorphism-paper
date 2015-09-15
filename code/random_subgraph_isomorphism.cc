@@ -1,6 +1,7 @@
 /* vim: set sw=4 sts=4 et foldmethod=syntax : */
 
 #include "sequential.hh"
+#include "clique.hh"
 
 #include <boost/program_options.hpp>
 
@@ -105,6 +106,7 @@ auto main(int argc, char * argv[]) -> int
             ("help",                                  "Display help information")
             ("timeout",            po::value<int>(),  "Abort after this many seconds")
             ("induced",                               "Induced version")
+            ("clique",                                "Use clique algorithm")
             ;
 
         po::options_description all_options{ "All options" };
@@ -163,11 +165,20 @@ auto main(int argc, char * argv[]) -> int
 
         /* Do the actual run. */
         bool aborted = false;
-        auto result = run_this(sequential_subgraph_isomorphism)(
-                graphs,
-                params,
-                aborted,
-                options_vars.count("timeout") ? options_vars["timeout"].as<int>() : 0);
+        Result result;
+
+        if (options_vars.count("clique"))
+            result = run_this(clique_subgraph_isomorphism)(
+                    graphs,
+                    params,
+                    aborted,
+                    options_vars.count("timeout") ? options_vars["timeout"].as<int>() : 0);
+        else
+            result = run_this(sequential_subgraph_isomorphism)(
+                    graphs,
+                    params,
+                    aborted,
+                    options_vars.count("timeout") ? options_vars["timeout"].as<int>() : 0);
 
         /* Stop the clock. */
         auto overall_time = duration_cast<milliseconds>(steady_clock::now() - params.start_time);

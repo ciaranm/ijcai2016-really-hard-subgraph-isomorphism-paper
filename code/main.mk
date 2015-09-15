@@ -10,6 +10,7 @@ TARGET := random_subgraph_isomorphism
 
 SOURCES := \
     sequential.cc \
+    clique.cc \
     bit_graph.cc \
     degree_sort.cc \
     graph.cc \

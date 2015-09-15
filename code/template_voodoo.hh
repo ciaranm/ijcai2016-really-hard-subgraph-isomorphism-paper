@@ -56,4 +56,6 @@ auto select_graph_size(const NoMoreGraphSizes &, const Graph_ &, Params_ && ...)
 
 using AllGraphSizes = GraphSizes<1, 2, 3, 4, 5, 6, 7, 8>;
 
+using AllProductGraphSizes = GraphSizes<1, 2, 3, 4, 5, 6, 7, 8, 12, 14, 16, 18, 24, 32>;
+
 #endif
