@@ -13,10 +13,4 @@
  */
 auto degree_sort(const Graph & graph, std::vector<int> & p, bool reverse) -> void;
 
-/**
- * Sort the vertices of p in non-decreasing dynamic degree order (or non-increasing
- * if 'reverse' is true), tie-breaking on non-dynamic exdegree then vertex number.
- */
-auto dynexdegree_sort(const Graph & graph, std::vector<int> & p, bool reverse) -> void;
-
 #endif
