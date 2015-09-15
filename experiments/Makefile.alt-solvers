@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-VARIANTS := induced glucose-induced
+VARIANTS := induced glucose-induced clique-induced
 RESULTS := results
 PATTERN_SIZES := 10 12 14 16 18 25
 TARGET_SIZES := 75
@@ -14,21 +14,15 @@ define INSTANCE_template
 dir-ps$(1)-ts$(2)/pd$(3)-td$(4) :
 	mkdir -p $(RESULTS) $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)
 
-$(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.non-induced.out : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
-	../code/random_subgraph_isomorphism --timeout $(TIMEOUT) \
-	    $(1) $(3) `echo $$*$(4)$(3)$(1) 2 31 ^ % p | tr -d . | dc` \
-	    $(2) $(4) `echo $(1)$(3)$(4)$$* 2 31 ^ % p | tr -d . | dc` | tee $$@
-
 $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.induced.out : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
 	../code/random_subgraph_isomorphism --induced --timeout $(TIMEOUT) \
 	    $(1) $(3) `echo $$*$(4)$(3)$(1) 2 31 ^ % p | tr -d . | dc` \
 	    $(2) $(4) `echo $(1)$(3)$(4)$$* 2 31 ^ % p | tr -d . | dc` | tee $$@
 
-$(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.glucose-non-induced.out : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
-	../sat/sat_random_subgraph_isomorphism \
+$(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.clique-induced.out : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
+	../code/random_subgraph_isomorphism --induced --clique --timeout $(TIMEOUT) \
 	    $(1) $(3) `echo $$*$(4)$(3)$(1) 2 31 ^ % p | tr -d . | dc` \
-	    $(2) $(4) `echo $(1)$(3)$(4)$$* 2 31 ^ % p | tr -d . | dc` \
-	    | ../sat/glucose-syrup/simp/glucose -cpu-lim=$(TIMEOUT) -model -vv=1000000 | tee $$@
+	    $(2) $(4) `echo $(1)$(3)$(4)$$* 2 31 ^ % p | tr -d . | dc` | tee $$@
 
 $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.glucose-induced.out : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
 	../sat/sat_random_subgraph_isomorphism --induced \

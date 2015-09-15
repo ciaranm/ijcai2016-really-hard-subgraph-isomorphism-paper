@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-VARIANTS := induced glucose-induced
+VARIANTS := induced glucose-induced clique-induced
 RESULTS := results
 PATTERN_SIZES := 10 12 14 16 18 25
 TARGET_SIZES := 75
@@ -10,7 +10,8 @@ TIMEOUT := 100
 all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach v,$(VARIANTS),\
     $(RESULTS)/ps$(ps)-ts$(ts).$(v).proportion-sat.plot \
     $(RESULTS)/ps$(ps)-ts$(ts).$(v).proportion-aborted.plot \
-    $(RESULTS)/ps$(ps)-ts$(ts).$(v).average-nodes.plot )))
+    $(RESULTS)/ps$(ps)-ts$(ts).$(v).average-nodes.plot \
+    $(RESULTS)/ps$(ps)-ts$(ts).$(v).best-nodes.plot )))
 
 define INSTANCE_template
 $(RESULTS)/ps$(1)-ts$(2).%.proportion-sat.plot : $(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES), $(RESULTS)/ps$(1)-ts$(2)/pd$(pd)-td$(td)/%.proportion-sat ))
@@ -21,6 +22,9 @@ $(RESULTS)/ps$(1)-ts$(2).%.proportion-aborted.plot : $(foreach pd,$(PATTERN_DENS
 
 $(RESULTS)/ps$(1)-ts$(2).%.average-nodes.plot : $(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES), $(RESULTS)/ps$(1)-ts$(2)/pd$(pd)-td$(td)/%.average-nodes ))
 	for pd in $(PATTERN_DENSITIES) ; do { for td in $(TARGET_DENSITIES) ; do cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/$$*.average-nodes ; done ; } | xargs ; done | tee $$@
+
+$(RESULTS)/ps$(1)-ts$(2).%.best-nodes.plot : $(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES), $(RESULTS)/ps$(1)-ts$(2)/pd$(pd)-td$(td)/%.best-nodes ))
+	for pd in $(PATTERN_DENSITIES) ; do { for td in $(TARGET_DENSITIES) ; do cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/$$*.best-nodes ; done ; } | xargs ; done | tee $$@
 endef
 
 $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(eval $(call INSTANCE_template,$(ps),$(ts)))))
