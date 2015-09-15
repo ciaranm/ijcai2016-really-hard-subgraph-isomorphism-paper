@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz color size 7in,6in font ',8'
+set terminal tikz color size 3in,3.5in font '\scriptsize'
 set output "gen-graph-non-induced.tex"
 
 unset xlabel
@@ -12,71 +12,58 @@ set noytics
 set size square
 set cbtics out scale 0.5 nomirror offset -1
 
-set multiplot layout 3,4 spacing 0.005, 0.08
+set multiplot layout 3,3 spacing 0.01, 0.05
 
-set palette negative
 load "puor.pal"
 unset colorbox
 
-set title "\\textbf{SAT} ($10 \\rightarrowtail 150$)"
+set title "$10 \\rightarrowtail 150$"
 set cbtics 0.5
 plot "ps10-ts150.non-induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
-set title "\\textbf{SAT} ($15 \\rightarrowtail 150$)"
-set cbtics 0.5
-plot "ps15-ts150.non-induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
-
-set title "\\textbf{SAT} ($20 \\rightarrowtail 150$)"
+set title "$20 \\rightarrowtail 150$"
 set cbtics 0.5
 plot "ps20-ts150.non-induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
 set colorbox
 
-set title "\\textbf{SAT} ($25 \\rightarrowtail 150$)"
+set title "$30 \\rightarrowtail 150$"
 set cbtics 0.5
-plot "ps25-ts150.non-induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+plot "ps30-ts150.non-induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
-set palette positive
 load "ylgnbu.pal"
-unset colorbox
-
-set title "\\textbf{Glasgow} ($10 \\rightarrowtail 150$)"
-set cbrange [2:6]
-set cbtics 2 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
 set format cb '$10^{%.0f}$'
+unset colorbox
+set cbrange [2:6]
+
+set notitle
+set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
 plot "ps10-ts150.non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
-set title "\\textbf{Glasgow} ($15 \\rightarrowtail 150$)"
-set format cb '$10^{%.0f}$'
-plot "ps15-ts150.non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
-
-set title "\\textbf{Glasgow} ($20 \\rightarrowtail 150$)"
-set format cb '$10^{%.0f}$'
+set notitle
+set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
 plot "ps20-ts150.non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
 set colorbox
 
-set title "\\textbf{Glasgow} ($25 \\rightarrowtail 150$)"
-set format cb '$10^{%.0f}$'
-plot "ps25-ts150.non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+set notitle
+plot "ps30-ts150.non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
 unset colorbox
+set cbrange [3:7]
 
-set title "\\textbf{VF2} ($10 \\rightarrowtail 150$)"
-set format cb '$10^{%.0f}$'
+set notitle
 plot "ps10-ts150.vf2-non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
-set title "\\textbf{VF2} ($15 \\rightarrowtail 150$)"
-set format cb '$10^{%.0f}$'
-plot "ps15-ts150.vf2-non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
-
-set title "\\textbf{VF2} ($20 \\rightarrowtail 150$)"
-set format cb '$10^{%.0f}$'
+set notitle
 plot "ps20-ts150.vf2-non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
 set colorbox
 
-set title "\\textbf{VF2} ($25 \\rightarrowtail 150$)"
-set format cb '$10^{%.0f}$'
-plot "ps25-ts150.vf2-non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+set label 1 at screen 0.05, screen 0.71 'Satisfiable' rotate by 90
+set label 2 at screen 0.05, screen 0.43 'Glasgow' rotate by 90
+set label 3 at screen 0.05, screen 0.17 'VF2' rotate by 90
+
+set cbtics 1 add ('${\le}10^{3}$' 3) add ('${\ge}10^{7}$' 7)
+plot "ps30-ts150.vf2-non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
