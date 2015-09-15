@@ -1,7 +1,7 @@
 SHELL := /bin/bash
-VARIANTS := non-induced induced vf2-non-induced vf2-induced
+VARIANTS := non-induced vf2-non-induced
 RESULTS := results
-PATTERN_SIZES := 10 15 20 25
+PATTERN_SIZES := 10 20 30
 TARGET_SIZES := 150
 PATTERN_DENSITIES := $(shell for a in `seq 0 4 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
 TARGET_DENSITIES := $(PATTERN_DENSITIES)
@@ -20,7 +20,7 @@ $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.proportion-aborted : $(foreach r,$(REPE
 	{ echo 3 k ; cat $(foreach r,$(REPEATS), $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/$(r).$$*.out ) | grep --count aborted ; echo $(REPEATS) | wc -w ; echo / p ; } | xargs | dc | tee $$@
 
 $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.average-nodes : $(foreach r,$(REPEATS), $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/$(r).%.out )
-	{ echo 3 k 0 ; echo $(foreach r,$(REPEATS), $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/$(r).$$*.out )  | xargs -n1 sed -n -e '1s/^[^ ]\+ \([^ ]\+\).*/\1 + /p' ; echo $(REPEATS) | wc -w ; echo / p ; } | xargs | dc | tee $$@
+	{ echo 3 k 0 ; echo $(foreach r,$(REPEATS), $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/$(r).$$*.out )  | xargs -n1 bash -c "if grep -q aborted \$$$$1 ; then echo 100000000 ; else cat \$$$$1 | sed -n -e '1s/^[^ ]\\+ \\([^ ]\+\\).*/\\1 + /p' ; fi ;" bash ; echo $(REPEATS) | wc -w ; echo / p ; } | xargs | dc | tee $$@
 endef
 
 $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES),$(eval $(call INSTANCE_template,$(ps),$(ts),$(pd),$(td)))))))
