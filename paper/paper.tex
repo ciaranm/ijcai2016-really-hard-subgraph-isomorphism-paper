@@ -57,12 +57,12 @@ case that a relatively small random graph is very unlikely to appear in a larger
 
 Here we present and evaluate a new method for creating random pattern/target pairs which can
 generate both satisfiable and unsatisfiable instances. Our work builds upon the widely studied phase
-transition phenomena observed in satisfiability and graph colouring problems. However, we have three
-control parameters rather than one: we can independently alter the density of the pattern graph, the
-density of the target graph, and the relative orders (number of vertices) of the pattern and target
-graphs.  For non-induced isomorphisms, with the correct choice of parameters there is a phase
-transition from satisfiable to unsatisfiable, and as expected we see a complexity peak occur (with
-three different solvers) near this phase transition.
+transition phenomena observed in satisfiability and graph colouring problems ?? cite stuff. However,
+we have three control parameters rather than one: we can independently alter the density of the
+pattern graph, the density of the target graph, and the relative orders (number of vertices) of the
+pattern and target graphs.  For non-induced isomorphisms, with the correct choice of parameters
+there is a phase transition from satisfiable to unsatisfiable, and as expected we see a complexity
+peak occur (with three different solvers) near this phase transition.
 
 For certain choices of parameter for induced isomorphisms, there are two phase transitions, going
 from satisfiable to unsatisfiable, and then from unsatisfiable back to satisfiable. Again, when
@@ -70,8 +70,8 @@ going from satisfiable to unsatisfiable (from either direction), instances go fr
 really hard to solve. However, each of the three solvers we tested also finds the central
 unsatisfiable region to be really hard---this is surprising, since this region is apparently
 over-constrained. To show that this is not a simple weakness of subgraph isomorphism algorithms, we
-show that the same behaviour occurs when using use a SAT solver, a pseudo-boolean solver, and a
-clique encoding.
+verify that the same behaviour occurs when using use a SAT solver, a pseudo-boolean solver, and a
+clique encoding. ?? Except maybe it doesn't...
 
 \subsection{Definitions}
 
@@ -79,7 +79,11 @@ clique encoding.
 
 \subsection{Experimental Setup}
 
-?? experimental setup.
+?? Software versions.
+
+Our experiments were performed on systems with Intel Xeon E5-4650 v2 (Q1'14) CPUs and 768GBytes RAM
+(although this much RAM was not needed), running Scientific Linux release 6.7. Software was compiled
+using GCC 4.9.
 
 \section{Non-Induced Subgraph Isomorphisms}
 
