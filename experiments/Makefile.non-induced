@@ -6,7 +6,7 @@ TARGET_SIZES := 150
 PATTERN_DENSITIES := $(shell for a in `seq 0 4 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
 TARGET_DENSITIES := $(PATTERN_DENSITIES)
 REPEATS := $(shell seq -w 01 10 )
-TIMEOUT := 10
+TIMEOUT := 1000
 
 all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES),$(foreach i,$(REPEATS),$(foreach v,$(VARIANTS),$(RESULTS)/ps$(ps)-ts$(ts)/pd$(pd)-td$(td)/$(i).$(v).out ))))))
 
