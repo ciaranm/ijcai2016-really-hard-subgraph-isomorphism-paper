@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz color size 3in,3.5in font '\scriptsize'
+set terminal tikz color size 3in,4.5in font '\scriptsize'
 set output "gen-graph-non-induced.tex"
 
 unset xlabel
@@ -12,14 +12,24 @@ set noytics
 set size square
 set cbtics out scale 0.5 nomirror offset -1
 
-set multiplot layout 3,3 spacing 0.01, 0.05
+set multiplot layout 4,3 spacing 0.01, 0.01
 
 load "puor.pal"
 unset colorbox
 
+set label 1 at screen 0.05, screen 0.74 'Satisfiable' rotate by 90
+set label 2 at screen 0.05, screen 0.55 'Glasgow' rotate by 90
+set label 3 at screen 0.05, screen 0.36 'VF2' rotate by 90
+set label 4 at screen 0.05, screen 0.15 'LAD' rotate by 90
+
 set title "$10 \\rightarrowtail 150$"
 set cbtics 0.5
 plot "ps10-ts150.non-induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+
+unset label 1
+unset label 2
+unset label 3
+unset label 4
 
 set title "$20 \\rightarrowtail 150$"
 set cbtics 0.5
@@ -34,19 +44,18 @@ plot "ps30-ts150.non-induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix 
 load "ylgnbu.pal"
 set format cb '$10^{%.0f}$'
 unset colorbox
-set cbrange [2:6]
+set cbrange [2:8]
 
 set notitle
-set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
 plot "ps10-ts150.non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
 set notitle
-set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
 plot "ps20-ts150.non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
 set colorbox
 
 set notitle
+set cbtics 2 add ('${\le}10^{2}$' 2) add ('${\ge}10^{8}$' 8)
 plot "ps30-ts150.non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
 unset colorbox
@@ -60,10 +69,15 @@ plot "ps20-ts150.vf2-non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3
 
 set colorbox
 
-set label 1 at screen 0.05, screen 0.71 'Satisfiable' rotate by 90
-set label 2 at screen 0.05, screen 0.43 'Glasgow' rotate by 90
-set label 3 at screen 0.05, screen 0.17 'VF2' rotate by 90
-
 set cbtics 1 add ('${\le}10^{3}$' 3) add ('${\ge}10^{7}$' 7)
 plot "ps30-ts150.vf2-non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+
+unset colorbox
+set cbrange [1:7]
+
+set notitle
+plot "ps10-ts150.lad-non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+
+set notitle
+plot "ps20-ts150.lad-non-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
