@@ -69,13 +69,14 @@ from satisfiable to unsatisfiable, and then from unsatisfiable back to satisfiab
 going from satisfiable to unsatisfiable (from either direction), instances go from being trivial to
 really hard to solve. However, each of the three solvers we tested also finds the central
 unsatisfiable region to be really hard---this is surprising, since this region is apparently
-over-constrained. To show that this is not a simple weakness of subgraph isomorphism algorithms, we
-verify that the same behaviour occurs when using use a SAT solver, a pseudo-boolean solver, and a
-clique encoding. ?? Except maybe it doesn't...
+over-constrained. ?? Except really it's because solvers can't handle edges and non-edges
+simultaneously. To show that this is not a simple weakness of subgraph isomorphism algorithms, we
+verify that this region is also hard when using use a SAT solver, a pseudo-boolean solver, and a
+clique encoding.
 
 \subsection{Definitions}
 
-?? Some stuff about order, density, random
+?? Some stuff about order, density, random, $\rightarrowtail$ and $\hookrightarrow$.
 
 \subsection{Experimental Setup}
 
@@ -87,16 +88,16 @@ using GCC 4.9.
 
 \section{Non-Induced Subgraph Isomorphisms}
 
-\begin{figure}[h]
-    \input{gen-graph-non-induced.tex}
-    \setlength{\abovecaptionskip}{-1.5em}
+\begin{figure}[tb]
+    \hskip-0.2cm\input{gen-graph-non-induced.tex}
+    \setlength{\abovecaptionskip}{-2.5em}
     \caption{Behaviour of algorithms on the non-induced variant. Each point is the average of ten
         runs. For each plot, the x-axis is the pattern density and the y-axis is the target
         density, both from 0 to 1. Along the top row, we show the proportion of instances which are
         satisfiable; the white bands shows the phase transitions. On the second row, we show the
-        number of search nodes used by the Glasgow algorithm, and on the third row, the number of
-        search nodes used by the VF2 algorithm: the dark regions indicate ``really hard''
-        instances.}
+        number of search nodes used by the Glasgow algorithm, on the third row, the number of
+        search nodes used by the LAD algorithm, and the fourth, VF2; the dark regions indicate
+        ``really hard'' instances.}
     \label{figure:non-induced}
 \end{figure}
 
@@ -109,30 +110,37 @@ in a dense target (which is easy, since we only have to preserve adjacency, not 
 white band between the regions shows the location of the phase transition: here, roughly half the
 instances are satisfiable.
 
-On subsequent rows, we show the average difficulty of different algorithms.
-
-We measure search nodes. Cannot be used to compare performance of algorithms directly, but this does
-show that each solver found the same set of instances difficult.
+On subsequent rows, we show the average difficulty of different algorithms.  We measure search
+nodes. Cannot be used to compare performance of algorithms directly, but this does show that each
+solver found the same set of instances difficult.
 
 Satisfiable is easy, until very close to the phase transition. Unsatisfiable is much harder than
-satisfiable.
+satisfiable. This is solver-independent, although VF2 is terrible.
 
 ?? Are unsatisfiable instances on the phase transition much harder than satisfiable ones?
 
 \subsection{Locating the Phase Transition}
 
+?? Can we predict where that line is?
+
 \section{Induced Isomorphisms}
 
-\begin{figure*}
+In \cref{figure:induced} we show the induced behaviour (modified Glasgow to include the complement
+as a supplemental graph).
+
+Pattern size 10, what we expect. Patterns 20 and 30 have large unsatisfiable regions in the middle,
+but these remain hard. Paattern sizes 14, 15 and 16 show the transition between the two styles.
+
+Odd unsat with LAD at the top right (not EHPs), trivial for Glasgow: mapping a non-clique into a
+clique. Glasgow looks at non-edges and can see immediately that no mapping is possible.
+
+Note that this is solver-independent.
+
+\begin{figure*}[tb]
     \hskip-1.2cm\input{gen-graph-induced.tex}
     \setlength{\abovecaptionskip}{-2em}
-    \caption{Behaviour of algorithms on the induced variant. Each point is the average of ten
-        runs. For each plot, the x-axis is the pattern density and the y-axis is the target
-        density, both from 0 to 1. Along the top row, we show the proportion of instances which are
-        satisfiable; the white bands shows the phase transitions. On the second row, we show the
-        number of search nodes used by the Glasgow algorithm, and on the third row, the number of
-        search nodes used by the VF2 algorithm: the dark regions indicate ``really hard''
-        instances.}\label{figure:induced}
+    \caption{Behaviour of algorithms on the induced variant, shown in the style
+    of \cref{figure:non-induced}.}\label{figure:induced}
 \end{figure*}
 
 \subsection{Predicting Induced Behaviour}
@@ -140,16 +148,33 @@ satisfiable.
 ?? Graph showing the product of satisfiable with vertical flip, min (unsat) and max (sat) of search
 nodes with vertical flip.
 
+This suggests that we're not able to make use of adjacency and non-adjacency simultaneously.
+
 \section{Other Encodings and Solvers}
 
-\begin{figure*}
+\begin{figure*}[tb]
     \hskip-1.2cm\input{gen-graph-sat.tex}
     \setlength{\abovecaptionskip}{-2em}
     \caption{Behaviour of other solvers on the induced variant on smaller graphs, shown in the style of
-        \cref{figure:induced}. The second row shows the number of search nodes used by the Glasgow
+        \cref{figure:non-induced}. The second row shows the number of search nodes used by the Glasgow
         algorithm, the third row shows the number of decisions made by the Glucose SAT solver, and
-        the third row shows the number of search nodes used by a clique encoding.}
+    the fourth row shows the number of search nodes used by a clique encoding.}\label{figure:alt}
 \end{figure*}
+
+Is this just a weakness of current subgraph isomorphism solvers? In \cref{figure:alt} we repeat the
+experiments on smaller pattern and target graphs, using different solving techniques. Although these
+techniques are not competitive in absolute terms, we wish to see if the same pattern of behaviour
+occurs.
+
+Direct SAT encoding: variables for each assignment, cardinality constraints, edge and non-edge
+constraints. We use the Glucose SAT solver. We see that hard instances remain hard, including inside
+the central region, and that the easy satisfiable instances remain easy.
+
+Clique encoding: association graph, a version of BBMC modified to solve the decision problem. The
+hard instances in the central region remain hard. Additionally, some of the easy satisfiable
+instances become hard. Possible weakness of clique algorithms for this kind of input.
+
+?? Pseudo-boolean, incomplete solvers?
 
 ?? \cite{Anton:2009}
 

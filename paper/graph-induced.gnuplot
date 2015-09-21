@@ -22,7 +22,7 @@ set label 4 at screen 0.08, screen 0.16 'LAD' rotate by 90
 load "puor.pal"
 unset colorbox
 
-set title "$10 \\hookrightarrow 150$"
+set title "$G(10,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
 plot "ps10-ts150.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
@@ -31,25 +31,25 @@ unset label 2
 unset label 3
 unset label 4
 
-set title "$14 \\hookrightarrow 150$"
+set title "$G(14,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
 plot "ps14-ts150.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
-set title "$15 \\hookrightarrow 150$"
+set title "$G(15,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
 plot "ps15-ts150.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
-set title "$16 \\hookrightarrow 150$"
+set title "$G(16,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
 plot "ps16-ts150.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
-set title "$20 \\hookrightarrow 150$"
+set title "$G(20,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
 plot "ps20-ts150.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
 set colorbox
 
-set title "$30 \\hookrightarrow 150$"
+set title "$G(30,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
 plot "ps30-ts150.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
@@ -111,4 +111,7 @@ set cbrange [2:8]
 
 set notitle
 plot "ps10-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+
+set notitle
+plot "ps14-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 

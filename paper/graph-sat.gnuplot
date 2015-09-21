@@ -17,29 +17,29 @@ set multiplot layout 4,6 spacing 0.02, 0.02
 load "puor.pal"
 unset colorbox
 
-set title "$G(10,x){\\hookrightarrow}G(75,y)$"
+set title "$G(10,x) \\hookrightarrow G(75,y)$"
 set cbtics 0.5
 plot "ps10-ts75.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
-set title "$G(12,x){\\hookrightarrow}G(75,y)$"
+set title "$G(12,x) \\hookrightarrow G(75,y)$"
 set cbtics 0.5
 plot "ps12-ts75.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
-set title "$G(14,x){\\hookrightarrow}G(75,y)$"
+set title "$G(14,x) \\hookrightarrow G(75,y)$"
 set cbtics 0.5
 plot "ps14-ts75.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
-set title "$G(16,x){\\hookrightarrow}G(75,y)$"
+set title "$G(16,x) \\hookrightarrow G(75,y)$"
 set cbtics 0.5
 plot "ps16-ts75.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
-set title "$G(18,x){\\hookrightarrow}G(75,y)$"
+set title "$G(18,x) \\hookrightarrow G(75,y)$"
 set cbtics 0.5
 plot "ps18-ts75.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
 set colorbox
 
-set title "$G(25, x){\\hookrightarrow}G(75,y)$"
+set title "$G(25, x) \\hookrightarrow G(75,y)$"
 set cbtics 0.5
 plot "ps25-ts75.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
