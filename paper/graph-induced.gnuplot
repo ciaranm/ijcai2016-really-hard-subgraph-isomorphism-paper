@@ -56,7 +56,7 @@ plot "ps30-ts150.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w im
 load "ylgnbu.pal"
 set format cb '$10^{%.0f}$'
 unset colorbox
-set cbrange [2:6]
+set cbrange [2:8]
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
@@ -75,7 +75,7 @@ set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
 plot "ps16-ts150.induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
 set notitle
-set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
+set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{8}$' 8)
 plot "ps20-ts150.induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
 set colorbox
@@ -114,4 +114,10 @@ plot "ps10-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1))
 
 set notitle
 plot "ps14-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+
+set notitle
+plot "ps15-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+
+set notitle
+plot "ps16-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
