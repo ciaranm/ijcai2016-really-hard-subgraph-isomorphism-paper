@@ -16,8 +16,8 @@ set multiplot layout 4,6 spacing 0.02, 0.02
 
 set label 1 at screen 0.08, screen 0.75 'Satisfiable' rotate by 90
 set label 2 at screen 0.08, screen 0.55 'Glasgow' rotate by 90
-set label 3 at screen 0.08, screen 0.36 'VF2' rotate by 90
-set label 4 at screen 0.08, screen 0.16 'LAD' rotate by 90
+set label 3 at screen 0.08, screen 0.36 'LAD' rotate by 90
+set label 4 at screen 0.08, screen 0.16 'VF2' rotate by 90
 
 load "puor.pal"
 unset colorbox
@@ -84,7 +84,31 @@ set notitle
 plot "ps30-ts150.induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
 unset colorbox
-set cbrange [3:7]
+set cbrange [2:8]
+
+set notitle
+plot "ps10-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+
+set notitle
+plot "ps14-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+
+set notitle
+plot "ps15-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+
+set notitle
+plot "ps16-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+
+set notitle
+plot "ps20-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+
+set colorbox
+
+set notitle
+set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{8}$' 8)
+plot "ps30-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+
+unset colorbox
+set cbrange [2:8]
 
 set notitle
 plot "ps10-ts150.vf2-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
@@ -103,21 +127,6 @@ plot "ps20-ts150.vf2-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1))
 
 set colorbox
 
-set cbtics 1 add ('${\le}10^{3}$' 3) add ('${\ge}10^{7}$' 7)
+set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{8}$' 8)
 plot "ps30-ts150.vf2-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
-
-unset colorbox
-set cbrange [2:8]
-
-set notitle
-plot "ps10-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
-
-set notitle
-plot "ps14-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
-
-set notitle
-plot "ps15-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
-
-set notitle
-plot "ps16-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
