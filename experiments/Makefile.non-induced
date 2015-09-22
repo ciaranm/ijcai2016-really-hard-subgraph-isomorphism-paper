@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-VARIANTS := non-induced vf2-non-induced
+VARIANTS := non-induced vf2-non-induced lad-non-induced
 RESULTS := results
 PATTERN_SIZES := 10 20 30
 TARGET_SIZES := 150
@@ -18,6 +18,11 @@ $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.non-induced.out : | dir-ps$(1)-ts$(2)/p
 	../code/random_subgraph_isomorphism --timeout $(TIMEOUT) \
 	    $(1) $(3) `echo $$*$(4)$(3)$(1) 2 31 ^ % p | tr -d . | dc` \
 	    $(2) $(4) `echo $(1)$(3)$(4)$$* 2 31 ^ % p | tr -d . | dc` | tee $$@
+
+$(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.lad-non-induced.out : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
+	../lad/directedLAD/main -v -f -s $(TIMEOUT) \
+	    -p <(../lad/lad_random_subgraph_isomorphism $(1) $(3) `echo $$*$(4)$(3)$(1) 2 31 ^ % p | tr -d . | dc` ) \
+	    -t <(../lad/lad_random_subgraph_isomorphism $(2) $(4) `echo $(1)$(3)$(4)$$* 2 31 ^ % p | tr -d . | dc` ) | tee $$@
 
 $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.vf2-non-induced.out : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
 	../vflib/vf_random_subgraph_isomorphism --timeout $(TIMEOUT) \
