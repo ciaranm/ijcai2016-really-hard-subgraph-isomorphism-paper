@@ -89,6 +89,17 @@ using GCC 4.9.
 \section{Non-Induced Subgraph Isomorphisms}
 
 \begin{figure}[tb]
+    \input{gen-graph-phase-transition.tex}
+    \caption{With a fixed a pattern size of 20, a target size of 150, a target density of 0.4, and
+    varying pattern density, we observe a phase transition and complexity peak in the non-induced
+    variant. Each point represents one instance.}
+    \label{figure:phase-transition}
+\end{figure}
+
+Arbitrarily decide upon a pattern size of 20, a target size of 150, and a fixed target density of
+0.40. \cref{figure:phase-transition}.
+
+\begin{figure}[tb]
     \hskip-0.2cm\input{gen-graph-non-induced.tex}
     \setlength{\abovecaptionskip}{-2.5em}
     \caption{Behaviour of algorithms on the non-induced variant. Each point is the average of ten
