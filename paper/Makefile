@@ -1,5 +1,5 @@
 all : tables graphs
-	latexmk -pdf -pdflatex='pdflatex -interaction=nonstopmode %O %S' -shell-escape paper
+	latexmk -pdf -pdflatex='lualatex -interaction=nonstopmode %O %S' -shell-escape paper
 
 TABLES =
 
