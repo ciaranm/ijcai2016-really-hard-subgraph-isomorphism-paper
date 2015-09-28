@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz color size 7.8in,5.3in font '\scriptsize'
+set terminal tikz color size 7.8in,6.4in font '\scriptsize'
 set output "gen-graph-sat.tex"
 
 unset xlabel
@@ -12,14 +12,26 @@ set noytics
 set size square
 set cbtics out scale 0.5 nomirror offset -1
 
-set multiplot layout 4,6 spacing 0.02, 0.02
+set multiplot layout 5,6 spacing 0.02, 0.02
 
 load "puor.pal"
 unset colorbox
 
+set label 1 at screen 0.08, screen 0.79 'Satisfiable' rotate by 90
+set label 2 at screen 0.08, screen 0.63 'Glasgow' rotate by 90
+set label 3 at screen 0.08, screen 0.45 'Glucose (SAT)' rotate by 90
+set label 4 at screen 0.08, screen 0.28 'BBMC (Clique)' rotate by 90
+set label 5 at screen 0.08, screen 0.12 'Gurobi (MIP)' rotate by 90
+
 set title "$G(10,x) \\hookrightarrow G(75,y)$"
 set cbtics 0.5
 plot "ps10-ts75.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+
+unset label 1
+unset label 2
+unset label 3
+unset label 4
+unset label 5
 
 set title "$G(12,x) \\hookrightarrow G(75,y)$"
 set cbtics 0.5
@@ -116,11 +128,12 @@ plot "ps18-ts75.clique-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1
 
 set colorbox
 
-set label 1 at screen 0.08, screen 0.75 'Satisfiable' rotate by 90
-set label 2 at screen 0.08, screen 0.55 'Glasgow' rotate by 90
-set label 3 at screen 0.08, screen 0.33 'Glucose (SAT)' rotate by 90
-set label 4 at screen 0.08, screen 0.13 'BBMC (Clique)' rotate by 90
-
 set cbtics 1 add ('${\le}10^{3}$' 3) add ('${\ge}10^{9}$' 9)
 plot "ps25-ts75.clique-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+
+unset colorbox
+set cbrange [0:5]
+
+set notitle
+plot "ps10-ts75.gurobi-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
