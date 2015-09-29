@@ -153,7 +153,7 @@ plot "ps18-ts75.gurobi-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1
 
 set notitle
 set colorbox
-set cbtics 1 add ('${\le}10^{0}$' 0) add ('${\ge}10^{5}$' 5)
+set cbtics 1 add ('1' 0) add ('10' 1) add ('${\ge}10^{5}$' 5)
 plot "ps25-ts75.gurobi-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
 unset colorbox
@@ -173,4 +173,9 @@ plot "ps16-ts75.clasp-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)
 
 set notitle
 plot "ps18-ts75.clasp-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+
+set notitle
+set colorbox
+set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{7}$' 7)
+plot "ps25-ts75.clasp-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
 
