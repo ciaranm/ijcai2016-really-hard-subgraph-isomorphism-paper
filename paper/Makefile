@@ -1,5 +1,5 @@
 all : tables graphs
-	latexmk -pdf -pdflatex='lualatex -interaction=nonstopmode %O %S' -shell-escape paper
+	latexmk -pdf -pdflatex='pdflatex -interaction=nonstopmode %O %S' -shell-escape paper
 
 TABLES =
 
@@ -11,4 +11,5 @@ graphs : $(GRAPHS)
 
 gen-graph-%.tex : graph-%.gnuplot
 	gnuplot $<
+	sed -i -e '5s/^\(\\path.*\)/\% \1/' $@ # epic haxx
 

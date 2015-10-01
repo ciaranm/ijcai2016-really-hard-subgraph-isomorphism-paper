@@ -6,7 +6,7 @@
 \usepackage{ijcai13}
 \usepackage{times}
 \usepackage{complexity}
-% \usepackage{microtype}
+\usepackage{microtype}
 \usepackage{gnuplot-lua-tikz}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -14,6 +14,7 @@
 \usepackage{cleveref}
 
 % \usepackage{showframe}
+\usepackage{lipsum}
 
 \title{Really Hard Instances for the Subgraph Isomorphism Problem}
 \author{Ciaran McCreesh\thanks{This work was supported by the Engineering and Physical Sciences
@@ -26,7 +27,7 @@ c.mccreesh.1@research.gla.ac.uk}
 \maketitle
 
 \begin{abstract}
-    Really hard SIP instances. Phase transitions. Alternative models and reduction.
+    Really hard SIP instances. Phase transitions. Alternative models and reduction. \lipsum[1]
 \end{abstract}
 
 \section{Introduction}
@@ -78,6 +79,8 @@ clique encoding.
 
 ?? Some stuff about order, density, random, $\rightarrowtail$ and $\hookrightarrow$.
 
+\lipsum[2]
+
 \subsection{Experimental Setup}
 
 ?? Software versions.
@@ -88,20 +91,20 @@ using GCC 4.9.
 
 \section{Non-Induced Subgraph Isomorphisms}
 
-\begin{figure}[tb]
+\begin{figure}[t]
     \input{gen-graph-phase-transition.tex}
     \caption{With a fixed a pattern size of 20, a target size of 150, a target density of 0.4, and
     varying pattern density, we observe a phase transition and complexity peak in the non-induced
-    variant. Each point represents one instance.}
+    variant. Each point represents one instance. The lines show mean search effort, and mean
+    proportion satisfiable, using a larger sample size.}
     \label{figure:phase-transition}
 \end{figure}
 
 Arbitrarily decide upon a pattern size of 20, a target size of 150, and a fixed target density of
-0.40. \cref{figure:phase-transition}.
+0.40. \cref{figure:phase-transition}. \lipsum[3]
 
-\begin{figure}[tb]
-    \hskip-0.2cm\input{gen-graph-non-induced.tex}
-    \setlength{\abovecaptionskip}{-2.5em}
+\begin{figure}[t]
+    \input{gen-graph-non-induced.tex}
     \caption{Behaviour of algorithms on the non-induced variant. Each point is the average of ten
         runs. For each plot, the x-axis is the pattern density and the y-axis is the target
         density, both from 0 to 1. Along the top row, we show the proportion of instances which are
@@ -130,9 +133,15 @@ satisfiable. This is solver-independent, although VF2 is terrible.
 
 ?? Are unsatisfiable instances on the phase transition much harder than satisfiable ones?
 
+\lipsum[4]
+
 \subsection{Locating the Phase Transition}
 
 ?? Can we predict where that line is?
+
+\lipsum[5]
+
+\lipsum[6]
 
 \section{Induced Isomorphisms}
 
@@ -140,18 +149,23 @@ In \cref{figure:induced} we show the induced behaviour (modified Glasgow to incl
 as a supplemental graph).
 
 Pattern size 10, what we expect. Patterns 20 and 30 have large unsatisfiable regions in the middle,
-but these remain hard. Paattern sizes 14, 15 and 16 show the transition between the two styles.
+but these remain hard. Pattern sizes 14, 15 and 16 show the transition between the two styles.
 
 Odd unsat with LAD at the top right (not EHPs), trivial for Glasgow: mapping a non-clique into a
 clique. Glasgow looks at non-edges and can see immediately that no mapping is possible.
 
 Note that this is solver-independent.
 
-\begin{figure*}[tb]
-    \hskip-1.2cm\input{gen-graph-induced.tex}
-    \setlength{\abovecaptionskip}{-3em}
+\lipsum[7]
+
+\lipsum[8]
+
+\begin{figure*}[t]
+    \input{gen-graph-induced.tex}
     \caption{Behaviour of algorithms on the induced variant, shown in the style
-    of \cref{figure:non-induced}.}\label{figure:induced}
+    of \cref{figure:non-induced}. The second row shows a bound on the satisfiable region, by
+    considering where a \emph{non-}induced isomorphism may also be a non-induced isomorphism between
+    complement graphs.}\label{figure:induced}
 \end{figure*}
 
 \subsection{Predicting Induced Behaviour}
@@ -161,15 +175,19 @@ nodes with vertical flip.
 
 This suggests that we're not able to make use of adjacency and non-adjacency simultaneously.
 
+\lipsum[9]
+
+\lipsum[10]
+
 \section{Other Encodings and Solvers}
 
-\begin{figure*}[tb]
-    \hskip-1.2cm\input{gen-graph-sat.tex}
-    \setlength{\abovecaptionskip}{-3em}
+\begin{figure*}[t]
+    \input{gen-graph-sat.tex}
     \caption{Behaviour of other solvers on the induced variant on smaller graphs, shown in the style of
         \cref{figure:non-induced}. The second row shows the number of search nodes used by the Glasgow
-        algorithm, the third row shows the number of decisions made by the Glucose SAT solver, and
-    the fourth row shows the number of search nodes used by a clique encoding.}\label{figure:alt}
+        algorithm, the third row shows the number of decisions made by the Clasp pseudo-boolean solver,
+        the fourth row shows the number of search nodes used by a clique encoding, and the fifth a mixed
+        integer encoding with Gurobi.}\label{figure:alt}
 \end{figure*}
 
 Is this just a weakness of current subgraph isomorphism solvers? In \cref{figure:alt} we repeat the
@@ -177,21 +195,27 @@ experiments on smaller pattern and target graphs, using different solving techni
 techniques are not competitive in absolute terms, we wish to see if the same pattern of behaviour
 occurs.
 
-Direct SAT encoding: variables for each assignment, cardinality constraints, edge and non-edge
-constraints. We use the Glucose SAT solver. We see that hard instances remain hard, including inside
-the central region, and that the easy satisfiable instances remain easy.
+Direct pseudo-boolean encoding: variables for each assignment, cardinality constraints, edge and
+non-edge constraints. We use the Clasp solver. We see that hard instances remain hard, including
+inside the central region, and that the easy satisfiable instances remain easy. (Although not
+presented here, we also tried an equivalent SAT encoding with the Glucose solver, and saw very
+similar performance.)
 
 Clique encoding: association graph, a version of BBMC modified to solve the decision problem. The
 hard instances in the central region remain hard. Additionally, some of the easy satisfiable
 instances become hard. Possible weakness of clique algorithms for this kind of input.
 
-?? Pseudo-boolean, incomplete solvers?
+MIP encoding with Gurobi.
 
 ?? \cite{Anton:2009}
 
 ?? \cite{Lipets:2009}
 
 \section{Conclusion}
+
+\lipsum[11]
+
+\lipsum[12]
 
 \bibliographystyle{named}
 \bibliography{paper}

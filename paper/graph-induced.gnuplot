@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz color size 7.8in,5.3in font '\scriptsize'
+set terminal tikz color size 7.8in,6.5in font '\scriptsize'
 set output "gen-graph-induced.tex"
 
 unset xlabel
@@ -12,12 +12,13 @@ set noytics
 set size square
 set cbtics out scale 0.5 nomirror offset -1
 
-set multiplot layout 4,6 spacing 0.02, 0.02
+set multiplot layout 5,6 spacing 0.02, 0.02
 
-set label 1 at screen 0.08, screen 0.75 'Satisfiable' rotate by 90
-set label 2 at screen 0.08, screen 0.55 'Glasgow' rotate by 90
-set label 3 at screen 0.08, screen 0.36 'LAD' rotate by 90
-set label 4 at screen 0.08, screen 0.16 'VF2' rotate by 90
+set label 1 at screen 0.08, screen 0.79 'Satisfiable' rotate by 90
+set label 2 at screen 0.08, screen 0.63 'Bound' rotate by 90
+set label 3 at screen 0.08, screen 0.47 'Glasgow' rotate by 90
+set label 4 at screen 0.08, screen 0.31 'LAD' rotate by 90
+set label 5 at screen 0.08, screen 0.15 'VF2' rotate by 90
 
 load "puor.pal"
 unset colorbox
@@ -30,6 +31,7 @@ unset label 1
 unset label 2
 unset label 3
 unset label 4
+unset label 5
 
 set title "$G(14,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
@@ -52,6 +54,31 @@ set colorbox
 set title "$G(30,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
 plot "ps30-ts150.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+
+unset colorbox
+set cbrange [0:1]
+
+set notitle
+
+set cbtics 0.5
+plot "ps10-ts150.induced.predicted-proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+
+set cbtics 0.5
+plot "ps14-ts150.induced.predicted-proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+
+set cbtics 0.5
+plot "ps15-ts150.induced.predicted-proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+
+set cbtics 0.5
+plot "ps16-ts150.induced.predicted-proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+
+set cbtics 0.5
+plot "ps20-ts150.induced.predicted-proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+
+set colorbox
+
+set cbtics 0.5
+plot "ps30-ts150.induced.predicted-proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
 load "ylgnbu.pal"
 set format cb '$10^{%.0f}$'
