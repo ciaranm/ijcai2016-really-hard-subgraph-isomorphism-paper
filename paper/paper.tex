@@ -27,7 +27,11 @@ c.mccreesh.1@research.gla.ac.uk}
 \maketitle
 
 \begin{abstract}
-    Really hard SIP instances. Phase transitions. Alternative models and reduction. \lipsum[1]
+    How to generate hard random instances for variants of the subgraph isomorphism problem. Phase
+    transition between satisfiable and unsatisfiable instances, with corresponding complexity peak
+    seen in three different solvers. For the induced variant, behaviour is much more complicated,
+    with an unexpectedly hard region. This remains hard under pseudo-boolean and mixed integer
+    encodings, and reduction to clique.
 \end{abstract}
 
 \section{Introduction}
@@ -72,8 +76,8 @@ really hard to solve. However, each of the three solvers we tested also finds th
 unsatisfiable region to be really hard---this is surprising, since this region is apparently
 over-constrained. ?? Except really it's because solvers can't handle edges and non-edges
 simultaneously. To show that this is not a simple weakness of subgraph isomorphism algorithms, we
-verify that this region is also hard when using use a SAT solver, a pseudo-boolean solver, and a
-clique encoding.
+verify that this region is also hard when using use a pseudo-boolean solver, a mixed integer solver,
+and clique encoding.
 
 \subsection{Definitions}
 
@@ -83,11 +87,13 @@ clique encoding.
 
 \subsection{Experimental Setup}
 
-?? Software versions.
-
 Our experiments were performed on systems with Intel Xeon E5-4650 v2 (Q1'14) CPUs and 768GBytes RAM
-(although this much RAM was not needed), running Scientific Linux release 6.7. Software was compiled
-using GCC 4.9.
+(although this much RAM was not needed), running Scientific Linux release 6.7.   ?? Software
+versions. Clasp 3.1.3, Gurobi 6.0.5, Glasgow, LAD version 2, VFLib. Software was compiled using GCC
+4.9.
+
+?? Stuff about runtimes and recursive calls. We are not aiming to compare solvers; rather, we are
+looking for solver-independent behaviour.
 
 \section{Non-Induced Subgraph Isomorphisms}
 
@@ -100,8 +106,15 @@ using GCC 4.9.
     \label{figure:phase-transition}
 \end{figure}
 
-Arbitrarily decide upon a pattern size of 20, a target size of 150, and a fixed target density of
-0.40. \cref{figure:phase-transition}. \lipsum[3]
+Suppose we arbitrarily decide upon a pattern size of 20, a target size of 150, and a fixed target
+density of 0.40. As we vary the pattern density from 0 to 1, we would expect to see a shift from
+entirely satisfiable instances (with no edges in the pattern, we can always find a match) to
+entirely unsatisfiable instances (a maximum clique in this size and density of target graph will
+usually have between 9 and 12 vertices). Indeed, \cref{figure:phase-transition} shows that this is
+the case: the line (and the points show a subset of the samples) ?? describe this a bit more, find
+the 0.5 SAT mark.
+
+Some stuff about the complexity peak in the Glasgow solver. This looks remarkably similar to 3SAT.
 
 \begin{figure}[t]
     \input{gen-graph-non-induced.tex}
