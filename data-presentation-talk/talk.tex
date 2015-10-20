@@ -86,7 +86,7 @@
         \node [anchor=west, xshift=0.2cm] at (current page.west |- logo.west) {
             \begin{minipage}{0.65\paperwidth}\raggedright
                 {\usebeamerfont{title}\usebeamercolor[white]{}\inserttitle}\\[0.1cm]
-                {\usebeamerfont{author}\usebeamercolor[white]{}\insertauthor}
+                {\usebeamerfont{author}\usebeamercolor[white]{}\scriptsize\insertauthor}
             \end{minipage}
         };
     \end{tikzpicture}
@@ -128,7 +128,7 @@
 % }}}
 
 \title[When is Finding Little Graphs Inside Big Graphs Hard?]{When is Finding Little Graphs \\ Inside Big Graphs Hard?}
-\author[Ciaran McCreesh and Patrick Prosser]{\textbf{Ciaran McCreesh} and Patrick Prosser}
+\author[Ciaran McCreesh, Patrick Prosser and James Trimble]{\textbf{Ciaran McCreesh}, Patrick Prosser and James Trimble}
 
 \begin{document}
 
@@ -242,16 +242,153 @@
 
 \end{frame}
 
-\begin{frame}{A Phase Transition}
+\begin{frame}[plain,t]{A Phase Transition}
+
+    \only<1>{
+        \input{gen-graph-phase-1}
+    }
+
+    \only<2>{
+        \input{gen-graph-phase-2}
+    }
+
+    \only<3>{
+        \input{gen-graph-phase-3}
+    }
+
+\end{frame}
+
+\begin{frame}{This Looks Familiar\ldots}
+    \centering
+    \includegraphics*[keepaspectratio=true,scale=0.25]{sat.jpg}
+
+    \par\flushleft
+    Understanding the Empirical Hardness of NP-Complete Problems. Kevin Leyton-Brown, Holger H.
+    Hoos, Frank Hutter, Lin Xu.  Communications of the ACM, Vol. 57 No. 5, Pages 98-107
 \end{frame}
 
 \begin{frame}{2D Phase Transitions}
+
+    \only<1>{
+        \input{gen-graph-2d-1}
+    }
+
+    \only<2>{
+        \input{gen-graph-2d-2}
+    }
+
+    \only<3>{
+        \input{gen-graph-2d-3}
+    }
+
 \end{frame}
 
-\begin{frame}{3D Phase Transitions}
+\begin{frame}[plain,t]{3D Phase Transitions?}
+
+    \only<1>{
+        \input{gen-graph-3d-1}
+    }
+
+    \only<2>{
+        \input{gen-graph-3d-2}
+    }
+
+\end{frame}
+
+\begin{frame}[t,plain]{What About Induced?}
+
+    \only<1>{
+        \input{gen-graph-induced-2d-1}
+    }
+
+    \only<2>{
+        \input{gen-graph-induced-2d-2}
+    }
+
+    \only<3>{
+        \input{gen-graph-induced-2d-3}
+    }
+
+    \only<4>{
+        \input{gen-graph-induced-2d-4}
+    }
+
+    \only<5>{
+        \input{gen-graph-induced-2d-5}
+    }
+
+    \only<6>{
+        \input{gen-graph-induced-3d-1}
+    }
+
+    \only<7>{
+        \input{gen-graph-induced-3d-2}
+    }
+
+\end{frame}
+
+\begin{frame}{Other Solvers?}
+
+    \only<1>{
+        \input{gen-graph-alt-1}
+    }
+
+    \only<2>{
+        \input{gen-graph-alt-2}
+    }
+
+    \only<3>{
+        \input{gen-graph-alt-3}
+    }
+
 \end{frame}
 
 \begin{frame}{Reductions}
+
+    \only<1>{
+        \input{gen-graph-red-1}
+    }
+
+    \only<2>{
+        \input{gen-graph-red-2}
+    }
+
+    \only<3>{
+        \input{gen-graph-red-3}
+    }
+
+    \only<4>{
+        \input{gen-graph-red-4}
+    }
+
+    \only<5>{
+        \input{gen-graph-red-5}
+    }
+
+\end{frame}
+
+\begin{frame}{Why the Weird Shape?}
+
+    \only<1>{
+        \input{gen-graph-shape-1}
+    }
+
+    \only<2>{
+        \input{gen-graph-shape-2}
+    }
+
+    \only<3>{
+        \input{gen-graph-shape-3}
+    }
+
+    \only<4>{
+        \input{gen-graph-shape-4}
+    }
+
+    \only<5>{
+        \input{gen-graph-shape-5}
+    }
+
 \end{frame}
 
 \begin{frame}[plain,noframenumbering]
