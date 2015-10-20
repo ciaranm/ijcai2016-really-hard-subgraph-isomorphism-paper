@@ -145,33 +145,61 @@
 \begin{frame}{Non-Induced Subgraph Isomorphism}
 
     \begin{center}\begin{tikzpicture}
-        \node[draw, circle, fill=uofgcobalt, inner sep=4pt, font=\bfseries] (Na) at (1,  0) {1};
-        \node[draw, circle, fill=uofgpumpkin, inner sep=4pt, font=\bfseries] (Nb) at (1, -1.5) {2};
-        \node[draw, circle, fill=uofglawn, inner sep=4pt, font=\bfseries] (Nc) at (0, -3) {3};
-        \node[draw, circle, fill=uofgthistle, inner sep=4pt, font=\bfseries] (Nd) at (2, -3) {4};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (Na) at (1,  0) {1};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (Nb) at (1, -1.5) {2};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (Nc) at (0, -3) {3};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (Nd) at (2, -3) {4};
 
-        \draw [ultra thick] (Na) -- (Nb);
-        \draw [ultra thick] (Nb) -- (Nc);
-        \draw [ultra thick] (Nc) -- (Nd);
-        \draw [ultra thick] (Nb) -- (Nd);
+        \node <2> [draw, circle, fill=uofgcobalt, inner sep=4pt, font=\bfseries] (Na) at (1,  0) {1};
+        \node <2> [draw, circle, fill=uofgpumpkin, inner sep=4pt, font=\bfseries] (Nb) at (1, -1.5) {2};
+        \node <2> [draw, circle, fill=uofglawn, inner sep=4pt, font=\bfseries] (Nc) at (0, -3) {3};
+        \node <2> [draw, circle, fill=uofgthistle, inner sep=4pt, font=\bfseries] (Nd) at (2, -3) {4};
 
-        \node[draw, circle, fill=uofgcobalt, inner sep=4pt, font=\bfseries] (N1) at (5.5,  0) {1};
-        \node[draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N2) at (7.5,  0) {2};
-        \node[draw, circle, fill=uofgpumpkin, inner sep=4pt, font=\bfseries] (N3) at (5.5, -1.5) {3};
-        \node[draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N4) at (7.5, -1.5) {4};
-        \node[draw, circle, fill=uofglawn, inner sep=4pt, font=\bfseries] (N5) at (5.5, -3) {5};
-        \node[draw, circle, fill=uofgthistle, inner sep=4pt, font=\bfseries] (N6) at (7.5, -3) {6};
+        \draw <1> [thick, color=uofgsandstone!50] (Na) -- (Nb);
+        \draw <1> [thick, color=uofgsandstone!50] (Nb) -- (Nc);
+        \draw <1> [thick, color=uofgsandstone!50] (Nc) -- (Nd);
+        \draw <1> [thick, color=uofgsandstone!50] (Nb) -- (Nd);
 
-        \draw [thick, color=uofgsandstone!50] (N1) -- (N2);
-        \draw [ultra thick] (N1) -- (N3);
-        \draw [thick, color=uofgsandstone!50] (N1) -- (N4);
-        \draw [thick, color=uofgsandstone!50] (N2) -- (N4);
-        \draw [ultra thick] (N3) -- (N5);
-        \draw [ultra thick] (N3) -- (N6);
-        \draw [thick, color=uofgsandstone!50] (N4) -- (N6);
-        \draw [ultra thick] (N5) -- (N6);
-        \draw [thick, color=uofgsandstone!50] (N2) to [in=45, out=315] (N6);
-        \draw [thick, color=uofgsandstone!50] (N1) to [in=135, out=225] (N5);
+        \draw <2> [ultra thick] (Na) -- (Nb);
+        \draw <2> [ultra thick] (Nb) -- (Nc);
+        \draw <2> [ultra thick] (Nc) -- (Nd);
+        \draw <2> [ultra thick] (Nb) -- (Nd);
+
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N1) at (5.5,  0) {1};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N2) at (7.5,  0) {2};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N3) at (5.5, -1.5) {3};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N4) at (7.5, -1.5) {4};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N5) at (5.5, -3) {5};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N6) at (7.5, -3) {6};
+
+        \node <2> [draw, circle, fill=uofgcobalt, inner sep=4pt, font=\bfseries] (N1) at (5.5,  0) {1};
+        \node <2> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N2) at (7.5,  0) {2};
+        \node <2> [draw, circle, fill=uofgpumpkin, inner sep=4pt, font=\bfseries] (N3) at (5.5, -1.5) {3};
+        \node <2> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N4) at (7.5, -1.5) {4};
+        \node <2> [draw, circle, fill=uofglawn, inner sep=4pt, font=\bfseries] (N5) at (5.5, -3) {5};
+        \node <2> [draw, circle, fill=uofgthistle, inner sep=4pt, font=\bfseries] (N6) at (7.5, -3) {6};
+
+        \draw <1> [thick, color=uofgsandstone!50] (N1) -- (N2);
+        \draw <1> [thick, color=uofgsandstone!50] (N1) -- (N3);
+        \draw <1> [thick, color=uofgsandstone!50] (N1) -- (N4);
+        \draw <1> [thick, color=uofgsandstone!50] (N2) -- (N4);
+        \draw <1> [thick, color=uofgsandstone!50] (N3) -- (N5);
+        \draw <1> [thick, color=uofgsandstone!50] (N3) -- (N6);
+        \draw <1> [thick, color=uofgsandstone!50] (N4) -- (N6);
+        \draw <1> [thick, color=uofgsandstone!50] (N5) -- (N6);
+        \draw <1> [thick, color=uofgsandstone!50] (N2) to [in=45, out=315] (N6);
+        \draw <1> [thick, color=uofgsandstone!50] (N1) to [in=135, out=225] (N5);
+
+        \draw <2> [thick, color=uofgsandstone!50] (N1) -- (N2);
+        \draw <2> [ultra thick] (N1) -- (N3);
+        \draw <2> [thick, color=uofgsandstone!50] (N1) -- (N4);
+        \draw <2> [thick, color=uofgsandstone!50] (N2) -- (N4);
+        \draw <2> [ultra thick] (N3) -- (N5);
+        \draw <2> [ultra thick] (N3) -- (N6);
+        \draw <2> [thick, color=uofgsandstone!50] (N4) -- (N6);
+        \draw <2> [ultra thick] (N5) -- (N6);
+        \draw <2> [thick, color=uofgsandstone!50] (N2) to [in=45, out=315] (N6);
+        \draw <2> [thick, color=uofgsandstone!50] (N1) to [in=135, out=225] (N5);
     \end{tikzpicture}\end{center}
 
 \end{frame}
@@ -179,34 +207,61 @@
 \begin{frame}{Induced Subgraph Isomorphism}
 
     \begin{center}\begin{tikzpicture}
-        \node[draw, circle, fill=uofgcobalt, inner sep=4pt, font=\bfseries] (Na) at (1,  0) {1};
-        \node[draw, circle, fill=uofgpumpkin, inner sep=4pt, font=\bfseries] (Nb) at (1, -1.5) {2};
-        \node[draw, circle, fill=uofglawn, inner sep=4pt, font=\bfseries] (Nc) at (0, -3) {3};
-        \node[draw, circle, fill=uofgthistle, inner sep=4pt, font=\bfseries] (Nd) at (2, -3) {4};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (Na) at (1,  0) {1};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (Nb) at (1, -1.5) {2};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (Nc) at (0, -3) {3};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (Nd) at (2, -3) {4};
 
-        \draw [ultra thick] (Na) -- (Nb);
-        \draw [ultra thick] (Nb) -- (Nc);
-        \draw [ultra thick] (Nc) -- (Nd);
-        \draw [ultra thick] (Nb) -- (Nd);
+        \node <2> [draw, circle, fill=uofgcobalt, inner sep=4pt, font=\bfseries] (Na) at (1,  0) {1};
+        \node <2> [draw, circle, fill=uofgpumpkin, inner sep=4pt, font=\bfseries] (Nb) at (1, -1.5) {2};
+        \node <2> [draw, circle, fill=uofglawn, inner sep=4pt, font=\bfseries] (Nc) at (0, -3) {3};
+        \node <2> [draw, circle, fill=uofgthistle, inner sep=4pt, font=\bfseries] (Nd) at (2, -3) {4};
 
-        \node[draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N1) at (5.5,  0) {1};
-        \node[draw, circle, fill=uofgcobalt, inner sep=4pt, font=\bfseries] (N2) at (7.5,  0) {2};
-        \node[draw, circle, fill=uofgthistle, inner sep=4pt, font=\bfseries] (N3) at (5.5, -1.5) {3};
-        \node[draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N4) at (7.5, -1.5) {4};
-        \node[draw, circle, fill=uofglawn, inner sep=4pt, font=\bfseries] (N5) at (5.5, -3) {5};
-        \node[draw, circle, fill=uofgpumpkin, inner sep=4pt, font=\bfseries] (N6) at (7.5, -3) {6};
+        \draw <1> [thick, color=uofgsandstone!50] (Na) -- (Nb);
+        \draw <1> [thick, color=uofgsandstone!50] (Nb) -- (Nc);
+        \draw <1> [thick, color=uofgsandstone!50] (Nc) -- (Nd);
+        \draw <1> [thick, color=uofgsandstone!50] (Nb) -- (Nd);
 
-        \draw [thick, color=uofgsandstone!50] (N1) -- (N2);
-        \draw [thick, color=uofgsandstone!50] (N1) -- (N3);
-        \draw [thick, color=uofgsandstone!50] (N1) -- (N4);
-        \draw [thick, color=uofgsandstone!50] (N2) -- (N4);
-        \draw [ultra thick] (N3) -- (N5);
-        \draw [ultra thick] (N3) -- (N6);
-        \draw [thick, color=uofgsandstone!50] (N4) -- (N6);
-        \draw [ultra thick] (N5) -- (N6);
-        \draw [ultra thick] (N2) to [in=45, out=315] (N6);
-        \draw [thick, color=uofgsandstone!50] (N1) to [in=135, out=225] (N5);
+        \draw <2> [ultra thick] (Na) -- (Nb);
+        \draw <2> [ultra thick] (Nb) -- (Nc);
+        \draw <2> [ultra thick] (Nc) -- (Nd);
+        \draw <2> [ultra thick] (Nb) -- (Nd);
 
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N1) at (5.5,  0) {1};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N2) at (7.5,  0) {2};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N3) at (5.5, -1.5) {3};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N4) at (7.5, -1.5) {4};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N5) at (5.5, -3) {5};
+        \node <1> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N6) at (7.5, -3) {6};
+
+        \node <2> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N1) at (5.5,  0) {1};
+        \node <2> [draw, circle, fill=uofgcobalt, inner sep=4pt, font=\bfseries] (N2) at (7.5,  0) {2};
+        \node <2> [draw, circle, fill=uofgthistle, inner sep=4pt, font=\bfseries] (N3) at (5.5, -1.5) {3};
+        \node <2> [draw, circle, fill=white, inner sep=4pt, font=\bfseries] (N4) at (7.5, -1.5) {4};
+        \node <2> [draw, circle, fill=uofglawn, inner sep=4pt, font=\bfseries] (N5) at (5.5, -3) {5};
+        \node <2> [draw, circle, fill=uofgpumpkin, inner sep=4pt, font=\bfseries] (N6) at (7.5, -3) {6};
+
+        \draw <1> [thick, color=uofgsandstone!50] (N1) -- (N2);
+        \draw <1> [thick, color=uofgsandstone!50] (N1) -- (N3);
+        \draw <1> [thick, color=uofgsandstone!50] (N1) -- (N4);
+        \draw <1> [thick, color=uofgsandstone!50] (N2) -- (N4);
+        \draw <1> [thick, color=uofgsandstone!50] (N3) -- (N5);
+        \draw <1> [thick, color=uofgsandstone!50] (N3) -- (N6);
+        \draw <1> [thick, color=uofgsandstone!50] (N4) -- (N6);
+        \draw <1> [thick, color=uofgsandstone!50] (N5) -- (N6);
+        \draw <1> [thick, color=uofgsandstone!50] (N2) to [in=45, out=315] (N6);
+        \draw <1> [thick, color=uofgsandstone!50] (N1) to [in=135, out=225] (N5);
+
+        \draw <2> [thick, color=uofgsandstone!50] (N1) -- (N2);
+        \draw <2> [thick, color=uofgsandstone!50] (N1) -- (N3);
+        \draw <2> [thick, color=uofgsandstone!50] (N1) -- (N4);
+        \draw <2> [thick, color=uofgsandstone!50] (N2) -- (N4);
+        \draw <2> [ultra thick] (N3) -- (N5);
+        \draw <2> [ultra thick] (N3) -- (N6);
+        \draw <2> [thick, color=uofgsandstone!50] (N4) -- (N6);
+        \draw <2> [ultra thick] (N5) -- (N6);
+        \draw <2> [ultra thick] (N2) to [in=45, out=315] (N6);
+        \draw <2> [thick, color=uofgsandstone!50] (N1) to [in=135, out=225] (N5);
     \end{tikzpicture}\end{center}
 \end{frame}
 
@@ -295,7 +350,7 @@
 
 \end{frame}
 
-\begin{frame}[t,plain]{What About Induced?}
+\begin{frame}{What About Induced?}
 
     \only<1>{
         \input{gen-graph-induced-2d-1}
@@ -316,12 +371,15 @@
     \only<5>{
         \input{gen-graph-induced-2d-5}
     }
+\end{frame}
 
-    \only<6>{
+\begin{frame}[plain,t]{Induced in 3D?}
+
+    \only<1>{
         \input{gen-graph-induced-3d-1}
     }
 
-    \only<7>{
+    \only<2>{
         \input{gen-graph-induced-3d-2}
     }
 
