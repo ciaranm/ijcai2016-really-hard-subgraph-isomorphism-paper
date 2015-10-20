@@ -116,7 +116,7 @@ the 0.5 SAT mark.
 
 Some stuff about the complexity peak in the Glasgow solver. This looks remarkably similar to 3SAT.
 
-\begin{figure}[t]
+\begin{figure}[tb]
     \input{gen-graph-non-induced.tex}
     \caption{Behaviour of algorithms on the non-induced variant. Each point is the average of ten
         runs. For each plot, the x-axis is the pattern density and the y-axis is the target
@@ -145,6 +145,15 @@ Satisfiable is easy, until very close to the phase transition. Unsatisfiable is 
 satisfiable. This is solver-independent, although VF2 is terrible.
 
 ?? Are unsatisfiable instances on the phase transition much harder than satisfiable ones?
+
+In figure \cref{figure:phase-transition-bands} we show what happens for larger patterns.
+
+\begin{figure}[tb]
+    \input{gen-graph-phase-transition-bands.tex}
+    \caption{The location of the phase transition, as the pattern grows. Shown are points where
+    between 20\% and 80\% of instances are satisfiable.}
+    \label{figure:phase-transition-bands}
+\end{figure}
 
 \lipsum[4]
 
