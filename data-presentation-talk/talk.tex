@@ -61,7 +61,7 @@
 \setbeamerfont{section title}{size=\large,series=\mdseries}
 \setbeamerfont{author}{size=\normalsize,series=\mdseries}
 \setbeamercolor*{structure}{fg=uofguniversityblue}
-\setbeamercolor*{palette primary}{use=structure,fg=black,bg=white}
+\setbeamercolor*{palette primary}{use=structure,fg=black,bg=}
 \setbeamercolor*{palette secondary}{use=structure,fg=white,bg=uofgcobalt}
 \setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=uofguniversityblue}
 \setbeamercolor*{palette quaternary}{fg=white,bg=black}
@@ -123,6 +123,46 @@
     \end{beamercolorbox}%
     \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
     \end{beamercolorbox}
+}
+\makeatother
+
+\newenvironment{nearlyplainframe}[2][]{
+    \makeatletter
+    \def\beamer@entrycode{\vspace*{-\headheight}}
+
+    \setbeamertemplate{headline}
+    {%
+        \begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+        \end{beamercolorbox}
+        \begin{beamercolorbox}[ht=0.5ex,dp=0.125ex,%
+            leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[ht=0.5ex,dp=0.125ex,%
+            leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+        \end{beamercolorbox}
+        \vspace*{\headheight}
+    }
+
+    \setbeamertemplate{footline}
+    {%
+        \begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot}
+        \end{beamercolorbox}
+        \begin{beamercolorbox}[ht=0.5ex,dp=0.125ex,%
+            leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[ht=0.5ex,dp=0.125ex,%
+            leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+        \end{beamercolorbox}
+    }
+    \makeatother
+
+    \begin{frame}[#1]{#2}
+    }{
+    \end{frame}
 }
 
 % }}}
@@ -297,8 +337,7 @@
 
 \end{frame}
 
-\begin{frame}[plain,t]{A Phase Transition}
-
+\begin{nearlyplainframe}[t]{A Phase Transition}
     \only<1>{
         \input{gen-graph-phase-1}
     }
@@ -311,7 +350,7 @@
         \input{gen-graph-phase-3}
     }
 
-\end{frame}
+\end{nearlyplainframe}
 
 \begin{frame}{This Looks Familiar\ldots}
     \centering
@@ -338,7 +377,7 @@
 
 \end{frame}
 
-\begin{frame}[plain,t]{3D Phase Transitions?}
+\begin{nearlyplainframe}[t]{3D Phase Transitions?}
 
     \only<1>{
         \input{gen-graph-3d-1}
@@ -348,7 +387,7 @@
         \input{gen-graph-3d-2}
     }
 
-\end{frame}
+\end{nearlyplainframe}
 
 \begin{frame}{What About Induced?}
 
@@ -373,7 +412,7 @@
     }
 \end{frame}
 
-\begin{frame}[plain,t]{Induced in 3D?}
+\begin{nearlyplainframe}[t]{Induced in 3D?}
 
     \only<1>{
         \input{gen-graph-induced-3d-1}
@@ -383,7 +422,7 @@
         \input{gen-graph-induced-3d-2}
     }
 
-\end{frame}
+\end{nearlyplainframe}
 
 \begin{frame}{Other Solvers?}
 
