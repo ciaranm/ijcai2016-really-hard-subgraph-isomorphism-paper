@@ -126,10 +126,9 @@
 }
 \makeatother
 
+\makeatletter
 \newenvironment{nearlyplainframe}[2][]{
-    \makeatletter
     \def\beamer@entrycode{\vspace*{-\headheight}}
-
     \setbeamertemplate{headline}
     {%
         \begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
@@ -158,12 +157,12 @@
         \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
         \end{beamercolorbox}
     }
-    \makeatother
 
     \begin{frame}[#1]{#2}
     }{
     \end{frame}
 }
+\makeatother
 
 % }}}
 
