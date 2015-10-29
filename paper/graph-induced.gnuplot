@@ -25,7 +25,7 @@ unset colorbox
 
 set title "$G(10,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
-plot "ps10-ts150.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+plot "ps10-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 unset label 1
 unset label 2
@@ -35,25 +35,25 @@ unset label 5
 
 set title "$G(14,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
-plot "ps14-ts150.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+plot "ps14-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set title "$G(15,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
-plot "ps15-ts150.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+plot "ps15-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set title "$G(16,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
-plot "ps16-ts150.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+plot "ps16-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set title "$G(20,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
-plot "ps20-ts150.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+plot "ps20-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set colorbox
 
 set title "$G(30,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
-plot "ps30-ts150.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+plot "ps30-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 unset colorbox
 set cbrange [0:1]
@@ -61,24 +61,24 @@ set cbrange [0:1]
 set notitle
 
 set cbtics 0.5
-plot "ps10-ts150.induced.predicted-proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+plot "ps10-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set cbtics 0.5
-plot "ps14-ts150.induced.predicted-proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+plot "ps14-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set cbtics 0.5
-plot "ps15-ts150.induced.predicted-proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+plot "ps15-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set cbtics 0.5
-plot "ps16-ts150.induced.predicted-proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+plot "ps16-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set cbtics 0.5
-plot "ps20-ts150.induced.predicted-proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+plot "ps20-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set colorbox
 
 set cbtics 0.5
-plot "ps30-ts150.induced.predicted-proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
+plot "ps30-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 load "ylgnbu.pal"
 set format cb '$10^{%.0f}$'
@@ -87,28 +87,28 @@ set cbrange [2:8]
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
-plot "ps10-ts150.induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps10-ts150.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
-plot "ps14-ts150.induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps14-ts150.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
-plot "ps15-ts150.induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps15-ts150.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
-plot "ps16-ts150.induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps16-ts150.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{8}$' 8)
-plot "ps20-ts150.induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps20-ts150.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set colorbox
 
 set notitle
-plot "ps30-ts150.induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps30-ts150.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 unset colorbox
 set cbrange [2:8]
