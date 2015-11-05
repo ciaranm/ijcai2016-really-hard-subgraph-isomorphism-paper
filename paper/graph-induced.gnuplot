@@ -114,46 +114,46 @@ unset colorbox
 set cbrange [2:8]
 
 set notitle
-plot "ps10-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps10-ts150.lad-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps14-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps14-ts150.lad-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps15-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps15-ts150.lad-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps16-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps16-ts150.lad-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps20-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps20-ts150.lad-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set colorbox
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{8}$' 8)
-plot "ps30-ts150.lad-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps30-ts150.lad-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 unset colorbox
 set cbrange [2:8]
 
 set notitle
-plot "ps10-ts150.vf2-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps10-ts150.vf2-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps14-ts150.vf2-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps14-ts150.vf2-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps15-ts150.vf2-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps15-ts150.vf2-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps16-ts150.vf2-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps16-ts150.vf2-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps20-ts150.vf2-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps20-ts150.vf2-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set colorbox
 
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{8}$' 8)
-plot "ps30-ts150.vf2-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps30-ts150.vf2-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
