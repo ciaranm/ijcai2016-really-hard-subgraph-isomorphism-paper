@@ -12,6 +12,7 @@
 #include <thread>
 #include <mutex>
 #include <condition_variable>
+#include <algorithm>
 
 namespace po = boost::program_options;
 
@@ -19,19 +20,32 @@ using std::chrono::steady_clock;
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
 
-auto create_random_graph(int size, double density, int seed) -> Graph
+auto create_random_graph(int size, double density, int seed, bool edgemodel) -> Graph
 {
     std::mt19937 rand;
     rand.seed(seed);
-    std::uniform_real_distribution<double> dist(0.0, 1.0);
 
     Graph result;
     result.resize(size);
 
-    for (int e = 0 ; e < size ; ++e) {
-        for (int f = e + 1 ; f < size ; ++f) {
-            if (dist(rand) <= density)
-                result.add_edge(e, f);
+    if (edgemodel) {
+        std::vector<std::pair<int, int> > edges;
+        for (int e = 0 ; e < size ; ++e)
+            for (int f = e + 1 ; f < size ; ++f)
+                edges.emplace_back(e, f);
+
+        std::shuffle(edges.begin(), edges.end(), rand);
+
+        for (int i = 0 ; i < (size * (size - 1) * density / 2) ; ++i)
+            result.add_edge(edges.at(i).first, edges.at(i).second);
+    }
+    else {
+        std::uniform_real_distribution<double> dist(0.0, 1.0);
+        for (int e = 0 ; e < size ; ++e) {
+            for (int f = e + 1 ; f < size ; ++f) {
+                if (dist(rand) <= density)
+                    result.add_edge(e, f);
+            }
         }
     }
 
@@ -107,6 +121,7 @@ auto main(int argc, char * argv[]) -> int
             ("timeout",            po::value<int>(),  "Abort after this many seconds")
             ("induced",                               "Induced version")
             ("clique",                                "Use clique algorithm")
+            ("density",                               "Generate using density instead of probability")
             ;
 
         po::options_description all_options{ "All options" };
@@ -160,8 +175,10 @@ auto main(int argc, char * argv[]) -> int
 
         /* Create graphs */
         auto graphs = std::make_pair(
-                create_random_graph(options_vars["pattern-size"].as<int>(), options_vars["pattern-density"].as<double>(), options_vars["pattern-seed"].as<int>()),
-                create_random_graph(options_vars["target-size"].as<int>(), options_vars["target-density"].as<double>(), options_vars["target-seed"].as<int>()));
+                create_random_graph(options_vars["pattern-size"].as<int>(), options_vars["pattern-density"].as<double>(), options_vars["pattern-seed"].as<int>(),
+                    options_vars.count("density")),
+                create_random_graph(options_vars["target-size"].as<int>(), options_vars["target-density"].as<double>(), options_vars["target-seed"].as<int>(),
+                    options_vars.count("density")));
 
         /* Do the actual run. */
         bool aborted = false;
