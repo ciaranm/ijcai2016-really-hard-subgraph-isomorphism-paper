@@ -155,13 +155,12 @@ builds upon the phase transition phenomena observed in satisfiability and graph 
 first described by \citet{Cheeseman:1991} and \citet{Mitchell:1992}---?? cite later stuff and
 explain really hard.
 
-For subgraph isomorphism we have three relevant control parameters rather than one: we can
-independently alter the edge probability of the pattern graph, the edge probability of the target
-graph, and the relative orders (number of vertices) of the pattern and target graphs.  For
-non-induced isomorphisms, with the correct choice of parameters we see results very similar to those
-observed with boolean satisfiability problems: there is a phase transition from satisfiable to
-unsatisfiable, and we see a complexity peak occur (with three different solvers) near this phase
-transition.
+For subgraph isomorphism we have three relevant control parameters: we can independently alter the
+edge probability of the pattern graph, the edge probability of the target graph, and the relative
+orders (number of vertices) of the pattern and target graphs.  For non-induced isomorphisms, with
+the correct choice of parameters we see results very similar to those observed with boolean
+satisfiability problems: there is a phase transition from satisfiable to unsatisfiable, and we see a
+complexity peak occur (with three different solvers) near this phase transition.
 
 For certain choices of parameter for induced isomorphisms, there are two phase transitions, going
 from satisfiable to unsatisfiable, and then from unsatisfiable back to satisfiable. Again, when
@@ -204,20 +203,21 @@ looking for solver-independent behaviour.
 
 \begin{figure}[t]
     \input{gen-graph-phase-transition.tex}
-    \caption{With a fixed a pattern order of 20, a target order of 150, a target edge probability of 0.4, and
-    varying pattern edge probability, we observe a phase transition and complexity peak in the non-induced
-    variant. Each point represents one instance. The lines show mean search effort, and mean
-    proportion satisfiable, using a larger sample size.}
+    \caption{With a fixed a pattern graph order of 20, a target graph order of 150, a target edge
+        probability of 0.4, and varying pattern edge probability, we observe a phase transition and
+        complexity peak with the Glasgow solver in the non-induced variant. Each point represents
+        one instance. The lines show mean search effort, and mean proportion satisfiable, using a
+    larger sample size.}
     \label{figure:phase-transition}
 \end{figure}
 
-Suppose we arbitrarily decide upon a pattern order of 20, a target order of 150, and a fixed target
-edge probability of 0.40. As we vary the pattern edge probability from 0 to 1, we would expect to see a shift from
-entirely satisfiable instances (with no edges in the pattern, we can always find a match) to
-entirely unsatisfiable instances (a maximum clique in this order and edge probability of target graph will
-usually have between 9 and 12 vertices). Indeed, \cref{figure:phase-transition} shows that this is
-the case: the line (and the points show a subset of the samples) ?? describe this a bit more, find
-the 0.5 SAT mark.
+Suppose we arbitrarily decide upon a pattern graph order of 20, a target graph order of 150, and a
+fixed target edge probability of 0.40. As we vary the pattern edge probability from 0 to 1, we would
+expect to see a shift from entirely satisfiable instances (with no edges in the pattern, we can
+always find a match) to entirely unsatisfiable instances (a maximum clique in this order and edge
+probability of target graph will usually have between 9 and 12 vertices). Indeed,
+\cref{figure:phase-transition} shows that this is the case: the line (and the points show a subset
+of the samples) ?? describe this a bit more, find the 0.5 SAT mark.
 
 Some stuff about the complexity peak in the Glasgow solver. This looks remarkably similar to random
 3SAT problems---compare, for example, Figure 1 of \citet{LeytonBrown:2014}. In particular,
