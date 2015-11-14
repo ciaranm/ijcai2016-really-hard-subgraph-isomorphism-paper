@@ -21,7 +21,8 @@ set label 4 at screen 0.08, screen 0.41 'Glasgow' rotate by 90
 set label 5 at screen 0.08, screen 0.28 'LAD' rotate by 90
 set label 6 at screen 0.08, screen 0.14 'VF2' rotate by 90
 
-load "puor.pal"
+load "moreland.pal"
+set palette negative
 unset colorbox
 
 set title "$G(10,x) \\hookrightarrow G(150,y)$"
@@ -102,6 +103,7 @@ set cbtics 0.5
 plot "ps30-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 load "ylgnbu.pal"
+set palette positive
 set format cb '$10^{%.0f}$'
 unset colorbox
 set cbrange [2:8]

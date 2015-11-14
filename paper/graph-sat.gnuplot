@@ -14,7 +14,8 @@ set cbtics out scale 0.5 nomirror offset -1
 
 set multiplot layout 5,6 spacing 0.02, 0.02
 
-load "puor.pal"
+load "moreland.pal"
+set palette negative
 unset colorbox
 
 set label 1 at screen 0.08, screen 0.79 'Satisfiable' rotate by 90
@@ -56,6 +57,7 @@ set cbtics 0.5
 plot "ps25-ts75.induced.proportion-sat.plot" u ($2/25):($1/25):($3) matrix w image notitle
 
 load "ylgnbu.pal"
+set palette positive
 set format cb '$10^{%.0f}$'
 unset colorbox
 set cbrange [2:6]

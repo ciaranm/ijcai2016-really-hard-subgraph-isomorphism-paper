@@ -14,7 +14,8 @@ set cbtics out scale 0.5 nomirror offset -1
 
 set multiplot layout 5,3 spacing 0.03, 0.02
 
-load "puor.pal"
+load "moreland.pal"
+set palette negative
 unset colorbox
 
 set label 1 at screen 0.05, screen 0.79 'Satisfiable' rotate by 90
@@ -58,6 +59,7 @@ set cbtics 0 add ('unsat' 0) add ('sat' 1)
 plot "ps30-ts150.non-induced.predicted.plot" u ($1/50):($2/50):($3) matrix w image notitle
 
 load "ylgnbu.pal"
+set palette positive
 set format cb '$10^{%.0f}$'
 unset colorbox
 set cbrange [2:8]

@@ -39,6 +39,9 @@
 \definecolor{uofgpillarbox}{rgb}{0.701961, 0.047059, 0}
 \definecolor{uofglavendar}{rgb}{0.356863, 0.301961, 0.580392}
 
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+
 \title{Really Hard Instances for the Subgraph Isomorphism Problem}
 \author{Ciaran McCreesh\thanks{This work was supported by the Engineering and Physical Sciences
     Research Council [grant number EP/K503058/1]} \and Patrick Prossser \and James Trimble \\
@@ -51,9 +54,9 @@ c.mccreesh.1@research.gla.ac.uk}
 
 \begin{abstract}
     We show how to generate ``really hard'' random instances for variants of the subgraph
-    isomorphism problem. For the non-induced variant of the problem, we locate a phase transition
-    between satisfiable and unsatisfiable instances, with a corresponding complexity peak seen in
-    three different solvers. For the induced variant of the problem, the behaviour is more
+    isomorphism problem. For the non-induced variant of the problem, we predict and observe a phase
+    transition between satisfiable and unsatisfiable instances, with a corresponding complexity peak
+    seen in three different solvers. For the induced variant of the problem, the behaviour is more
     complicated, with two phase transitions and an unexpectedly hard region in between. We show that
     this region remains hard when using pseudo-boolean and mixed integer encodings, and under
     reduction to the clique problem.
@@ -159,10 +162,11 @@ For subgraph isomorphism we have three relevant control parameters: we can indep
 edge probability of the pattern graph, the edge probability of the target graph, and the relative
 orders (number of vertices) of the pattern and target graphs.  For non-induced isomorphisms, with
 the correct choice of parameters we see results very similar to those observed with boolean
-satisfiability problems: there is a phase transition from satisfiable to unsatisfiable, and we see a
-complexity peak occur (with three different solvers) near this phase transition.
+satisfiability problems: there is a phase transition from satisfiable to unsatisfiable (and we can
+predict its location), and we see a complexity peak occur (with three different solvers) near this
+phase transition.
 
-For certain choices of parameter for induced isomorphisms, there are two phase transitions, going
+For certain choices of parameters for induced isomorphisms, there are two phase transitions, going
 from satisfiable to unsatisfiable, and then from unsatisfiable back to satisfiable. Again, when
 going from satisfiable to unsatisfiable (from either direction), instances go from being trivial to
 really hard to solve. However, each of the three solvers we tested also finds the central
@@ -170,8 +174,6 @@ unsatisfiable region to be really hard---this may be unexpected, since this regi
 phase transition and is apparently over-constrained. To show that this is not a simple weakness of
 current subgraph isomorphism algorithms, we verify that this region is also hard when using use a
 pseudo-boolean encoding, a mixed integer model, and under reduction to the clique problem.
-
-?? We also explain why this behaviour is seen.
 
 \subsection{Definitions}
 
@@ -225,15 +227,15 @@ satisfiable instances tend to be easier but show greater variation than unsatisf
 there are exceptionally hard satisfiable instances. (The parallel version of the Glasgow solver is
 designed to eliminate these.)
 
-\begin{figure}[h]
+\begin{figure}[tb]
     \input{gen-graph-non-induced.tex}
     \caption{Behaviour of algorithms on the non-induced variant. Each point is the average of ten
         runs. For each plot, the x-axis is the pattern edge probability and the y-axis is the target
         edge probability, both from 0 to 1. Along the top row, we show the proportion of instances which are
-        satisfiable; the white bands shows the phase transitions. On the second row, we show the
-        number of search nodes used by the Glasgow algorithm, on the third row, the number of
-        search nodes used by the LAD algorithm, and the fourth, VF2; the dark regions indicate
-        ``really hard'' instances.}
+        satisfiable; the white bands shows the phase transitions. The second row is our prediction
+        of what the first row will look like. On the third row, we show the number of search nodes
+        used by the Glasgow algorithm, on the fourth row, the number of search nodes used by the LAD
+        algorithm, and the fifth, VF2; the dark regions indicate ``really hard'' instances.}
     \label{figure:non-induced}
 \end{figure}
 
@@ -266,9 +268,14 @@ In figure \cref{figure:phase-transition-bands} we show what happens for larger p
 
 \subsection{Locating the Phase Transition}
 
-?? Can we predict where that line is?
-
-\lipsum[6]
+To predict the location of the phase transition, we can calculate the expected number of solutions
+by making a few dubious assumptions involving rounding and independence. Since we are trying to find
+an \emph{injective} mapping from a pattern $P = G(p, d_p)$ to a target $T = G(t, d_t)$, there are
+$t^{\underline{p}} = t \cdot (t - 1)\cdots(t - p + 1)$ possible assignments of target vertices to
+pattern vertices.  We expect the pattern to have $d_p \cdot \binom{p}{2}$ edges, so we obtain the
+probability of all of these edges being mapped to edges in the target by raising $d_t$ to this
+power, giving an expected number of solutions of \[ t^{\underline{p}} \cdot {d_t}^{d_p \cdot
+\binom{p}{2}} \textnormal{,} \] which we plot in ?? somewhere.
 
 \section{Induced Isomorphisms}
 
@@ -283,7 +290,7 @@ clique. Glasgow looks at non-edges and can see immediately that no mapping is po
 
 Note that this is solver-independent.
 
-\begin{figure*}[t]
+\begin{figure*}[h]
     \input{gen-graph-induced.tex}
     \caption{Behaviour of algorithms on the induced variant, shown in the style
     of \cref{figure:non-induced}. The second row shows a bound on the satisfiable region, by
@@ -292,6 +299,11 @@ Note that this is solver-independent.
 \end{figure*}
 
 \subsection{Predicting Induced Behaviour}
+
+By repeating the argument for locating the non-induced phase transition and additionally considering
+non-edges, we get an expected number of solutions of \[t^{\underline{p}} \cdot {d_t}^{d_p \cdot
+\binom{p}{2}} \cdot {d_{\overline{t}}}^{d_{\overline{p}} \cdot \binom{p}{2}} \textnormal{,} \]
+where $d_{\overline{p}} = 1 - d_p$ and $d_{\overline{t}} = 1 - d_t$. We plot this ?? somewhere.
 
 ?? Graph showing the product of satisfiable with vertical flip, min (unsat) and max (sat) of search
 nodes with vertical flip.
