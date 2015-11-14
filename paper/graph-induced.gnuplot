@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz color size 7.8in,6.5in font '\scriptsize'
+set terminal tikz color size 7.8in,7.5in font '\scriptsize'
 set output "gen-graph-induced.tex"
 
 unset xlabel
@@ -12,13 +12,14 @@ set noytics
 set size square
 set cbtics out scale 0.5 nomirror offset -1
 
-set multiplot layout 5,6 spacing 0.02, 0.02
+set multiplot layout 6,6 spacing 0.02, 0.02
 
-set label 1 at screen 0.08, screen 0.79 'Satisfiable' rotate by 90
-set label 2 at screen 0.08, screen 0.63 'Bound' rotate by 90
-set label 3 at screen 0.08, screen 0.47 'Glasgow' rotate by 90
-set label 4 at screen 0.08, screen 0.31 'LAD' rotate by 90
-set label 5 at screen 0.08, screen 0.15 'VF2' rotate by 90
+set label 1 at screen 0.08, screen 0.81 'Satisfiable' rotate by 90
+set label 2 at screen 0.08, screen 0.68 'Predicted' rotate by 90
+set label 3 at screen 0.08, screen 0.55 'Bound' rotate by 90
+set label 4 at screen 0.08, screen 0.41 'Glasgow' rotate by 90
+set label 5 at screen 0.08, screen 0.28 'LAD' rotate by 90
+set label 6 at screen 0.08, screen 0.14 'VF2' rotate by 90
 
 load "puor.pal"
 unset colorbox
@@ -32,6 +33,7 @@ unset label 2
 unset label 3
 unset label 4
 unset label 5
+unset label 6
 
 set title "$G(14,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
@@ -59,6 +61,25 @@ unset colorbox
 set cbrange [0:1]
 
 set notitle
+
+plot "ps10-ts150.induced.predicted.plot" u ($1/50):($2/50):($3) matrix w image notitle
+
+plot "ps14-ts150.induced.predicted.plot" u ($1/50):($2/50):($3) matrix w image notitle
+
+plot "ps15-ts150.induced.predicted.plot" u ($1/50):($2/50):($3) matrix w image notitle
+
+plot "ps16-ts150.induced.predicted.plot" u ($1/50):($2/50):($3) matrix w image notitle
+
+plot "ps20-ts150.induced.predicted.plot" u ($1/50):($2/50):($3) matrix w image notitle
+
+set colorbox
+
+set cbtics 0 add ('unsat' 0) add ('sat' 1)
+plot "ps30-ts150.induced.predicted.plot" u ($1/50):($2/50):($3) matrix w image notitle
+
+unset colorbox
+set notitle
+set cbrange [0:1]
 
 set cbtics 0.5
 plot "ps10-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
