@@ -143,7 +143,7 @@ being in dealing with the size of the model.
             \node [anchor=center, font=\Large] (A1) at (-1.5, -1.5) { $\hookleftarrow$ };
             \node [anchor=center, font=\Large] (A2) at ( 3.5, -1.5) { $\rightarrowtail$ };
         \end{scope}
-    \end{tikzpicture}\\[0.5cm]
+    \end{tikzpicture}\\[0.75cm]
     \begin{tikzpicture}[scale=0.5]
         \begin{scope}
             \foreach \n in {1, ..., 6}{
@@ -284,8 +284,8 @@ being in dealing with the size of the model.
     isomorphism, since there is an edge between 1 and 5 in the target but not between 1 and 3 in the
     pattern. The mapping from the pattern to the (same) target on the left, sending 1 to 2, 2 to 6, 3 to
     5 and 4 to 3, is both non-induced and induced.
-    Below, the association graph encoding for the induced version. The bold clique of size
-    four corresponds to the same mapping.}
+    Below, the association graph encoding for the induced version: the highlighted clique
+    corresponds to the same mapping.}
     \label{figure:sip}
 \end{figure}
 
@@ -321,18 +321,17 @@ pseudo-boolean encoding, a mixed integer model, and under reduction to the cliqu
 \subsection{Definitions}
 
 Throughout, our graphs are unlabelled, undirected, and do not have any loops (vertices which are
-adjacent to themselves). We write $\operatorname{V}(G)$ for the vertex set of a graph $G$. A
-\emph{non-induced subgraph isomorphism} from a graph $P$ (called the \emph{pattern}) to a graph $T$
-(called the \emph{target}) is an injective mapping from $\operatorname{V}(P)$ to
+adjacent to themselves).  The \emph{order} of a graph is the cardinality of its vertex set. We write
+$\operatorname{V}(G)$ for the vertex set of a graph $G$.  We write $G(v, p)$ for a random graph with
+$v$ vertices, and an edge between each distinct pair of vertices with independent probability $p$.
+
+A \emph{non-induced subgraph isomorphism} from a graph $P$ (called the \emph{pattern}) to a graph
+$T$ (called the \emph{target}) is an injective mapping from $\operatorname{V}(P)$ to
 $\operatorname{V}(T)$ which preserves adjacency---that is, for every adjacent $v$ and $w$ in
 $\operatorname{V}(P)$, the vertices $i(v)$ and $i(w)$ are adjacent in $T$. An \emph{induced subgraph
 isomorphism} additionally preserves non-adjacency---that is, if $v$ and $w$ are not adjacent in $P$,
 then $i(v)$ and $i(w)$ must not be adjacent in $T$. We use the notation $i : P \rightarrowtail T$
 for a non-induced isomorphism, and $i : P \hookrightarrow T$ for an induced isomorphism.
-
-The \emph{order} of a graph is the cardinality of its vertex set.  We write $G(v, p)$ for a random
-graph with $v$ vertices, and an edge between each distinct pair of vertices with independent
-probability $p$.
 
 The \emph{association graph encoding} of a subgraph isomorphism problem is constructed by creating a
 new graph with a vertex for each pair $(p, t)$ of vertices from the pattern and target graphs
@@ -342,10 +341,8 @@ means either $p_1$ is not adjacent to $p_2$, or both $p_1$ and $p_2$, and $t_1$ 
 adjacent; for the induced problem, it means that $p_1$ is adjacent to $p_2$ if and only if $t_1$ is
 adjacent to $t_2$. Either way, it can be seen that a clique (a subset of vertices, each of which is
 adjacent to every other in the subset) of size equal to the order of the pattern graph exists in the
-association graph if and only if the problem is satisfiable (and the vertices selected correspond to
-the assignments of the solution).
-
-?? Cite max common subgraph.
+association graph if and only if the problem is satisfiable, and the vertices selected correspond to
+the assignments making the solution \citep{Levi:1973}.
 
 \subsection{Experimental Setup}
 
