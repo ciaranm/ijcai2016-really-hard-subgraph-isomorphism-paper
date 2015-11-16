@@ -21,8 +21,7 @@ set label 4 at screen 0.08, screen 0.41 'Glasgow' rotate by 90
 set label 5 at screen 0.08, screen 0.28 'LAD' rotate by 90
 set label 6 at screen 0.08, screen 0.14 'VF2' rotate by 90
 
-load "moreland.pal"
-set palette negative
+load "puor.pal"
 unset colorbox
 
 set title "$G(10,x) \\hookrightarrow G(150,y)$"

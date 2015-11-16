@@ -14,8 +14,7 @@ set cbtics out scale 0.5 nomirror offset -1
 
 set multiplot layout 5,3 spacing 0.03, 0.02
 
-load "moreland.pal"
-set palette negative
+load "puor.pal"
 unset colorbox
 
 set label 1 at screen 0.05, screen 0.79 'Satisfiable' rotate by 90
