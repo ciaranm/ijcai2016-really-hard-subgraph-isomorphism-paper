@@ -415,7 +415,7 @@ In figure \cref{figure:phase-transition-bands} we show what happens for larger p
 \begin{figure}[tb]
     \input{gen-graph-phase-transition-bands.tex}
     \caption{The location of the phase transition, as the pattern grows. Shown are points where
-    between 20\% and 80\% of instances are satisfiable.}
+    between 20\% and 80\% of instances are satisfiable. ?? Can we put predictions on here too?}
     \label{figure:phase-transition-bands}
 \end{figure}
 
@@ -433,6 +433,14 @@ solutions of \[ \langle Sol \rangle = t^{\underline{p}} \cdot {d_t}^{d_p \cdot \
 
 \section{Induced Isomorphisms}
 
+\begin{figure*}[tb]
+    \input{gen-graph-induced.tex}
+    \caption{Behaviour of algorithms on the induced variant, shown in the style
+    of \cref{figure:non-induced}. The second row shows a bound on the satisfiable region, by
+    considering where a \emph{non-}induced isomorphism may also be a non-induced isomorphism between
+    complement graphs.}\label{figure:induced}
+\end{figure*}
+
 In \cref{figure:induced} we show the induced behaviour (modified Glasgow to include the complement
 as a supplemental graph).
 
@@ -443,14 +451,6 @@ Odd unsat with LAD at the top right (not EHPs), trivial for Glasgow: mapping a n
 clique. Glasgow looks at non-edges and can see immediately that no mapping is possible.
 
 Note that this is solver-independent.
-
-\begin{figure*}[tb]
-    \input{gen-graph-induced.tex}
-    \caption{Behaviour of algorithms on the induced variant, shown in the style
-    of \cref{figure:non-induced}. The second row shows a bound on the satisfiable region, by
-    considering where a \emph{non-}induced isomorphism may also be a non-induced isomorphism between
-    complement graphs.}\label{figure:induced}
-\end{figure*}
 
 \subsection{Predicting Induced Behaviour}
 
