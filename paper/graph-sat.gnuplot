@@ -96,18 +96,18 @@ set notitle
 plot "ps12-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps14-ts75.clasp-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps14-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps16-ts75.clasp-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps16-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps18-ts75.clasp-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps18-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set colorbox
 
 set cbtics 1 add ('${\le}10^{3}$' 3) add ('${\ge}10^{8}$' 8)
-plot "ps25-ts75.clasp-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps25-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 unset colorbox
 set cbrange [3:9]
