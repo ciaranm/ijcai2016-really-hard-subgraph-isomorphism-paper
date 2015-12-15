@@ -142,16 +142,16 @@ set notitle
 plot "ps12-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps14-ts75.gurobi-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps14-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps16-ts75.gurobi-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps16-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps18-ts75.gurobi-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps18-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
 set colorbox
 set cbtics 1 add ('1' 0) add ('10' 1) add ('${\ge}10^{5}$' 5)
-plot "ps25-ts75.gurobi-induced.average-nodes.plot" u ($2/25):($1/25):(log10($3+1)) matrix w image notitle
+plot "ps25-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
