@@ -3,7 +3,7 @@ VARIANTS := induced glucose-induced clique-induced gurobi-induced clasp-induced
 RESULTS := results
 PATTERN_SIZES := 10 12 14 16 18 25
 TARGET_SIZES := 75
-PATTERN_DENSITIES := $(shell for a in `seq 0 4 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
+PATTERN_DENSITIES := $(shell for a in `seq 0 2 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
 TARGET_DENSITIES := $(PATTERN_DENSITIES)
 REPEATS := $(shell seq -w 01 10 )
 TIMEOUT := 1000
@@ -30,14 +30,13 @@ $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.glucose-induced.out : | dir-ps$(1)-ts$(
 	    $(2) $(4) `echo $(1)$(3)$(4)$$* 2 31 ^ % p | tr -d . | dc` \
 	    | ../sat/glucose-syrup/simp/glucose -cpu-lim=$(TIMEOUT) -model -vv=1000000 | tee $$@
 
-$(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.gurobi-induced.lp : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
+$(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.gurobi-induced.out : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
 	python ../mip/si_mip_cplex.py \
 	    <(../lad/lad_random_subgraph_isomorphism $(1) $(3) `echo $$*$(4)$(3)$(1) 2 31 ^ % p | tr -d . | dc` ) \
 	    <(../lad/lad_random_subgraph_isomorphism $(2) $(4) `echo $(1)$(3)$(4)$$* 2 31 ^ % p | tr -d . | dc` ) \
-	    induced > $$@
-
-$(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.gurobi-induced.out : $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.gurobi-induced.lp | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
-	gurobi_cl TimeLimit=$(TIMEOUT) Threads=1 $$< | tee $$@
+	    induced > $$@.lp
+	gurobi_cl TimeLimit=$(TIMEOUT) Threads=1 $$@.lp | tee $$@
+	rm -f $$@.lp
 
 $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.clasp-induced.out : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
 	python ../pb/si_pb.py \

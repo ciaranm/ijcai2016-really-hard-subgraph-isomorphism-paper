@@ -3,14 +3,15 @@ VARIANTS := induced glucose-induced clique-induced gurobi-induced clasp-induced
 RESULTS := results
 PATTERN_SIZES := 10 12 14 16 18 25
 TARGET_SIZES := 75
-PATTERN_DENSITIES := $(shell for a in `seq 0 4 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
+PATTERN_DENSITIES := $(shell for a in `seq 0 2 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
 TARGET_DENSITIES := $(PATTERN_DENSITIES)
 REPEATS := $(shell seq -w 01 10 )
 
 all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES),$(foreach v,$(VARIANTS),\
     $(RESULTS)/ps$(ps)-ts$(ts)/pd$(pd)-td$(td)/$(v).proportion-sat \
     $(RESULTS)/ps$(ps)-ts$(ts)/pd$(pd)-td$(td)/$(v).proportion-aborted \
-    $(RESULTS)/ps$(ps)-ts$(ts)/pd$(pd)-td$(td)/$(v).average-nodes )))))
+    $(RESULTS)/ps$(ps)-ts$(ts)/pd$(pd)-td$(td)/$(v).average-nodes \
+    $(RESULTS)/ps$(ps)-ts$(ts)/pd$(pd)-td$(td)/$(v).best-nodes )))))
 
 define INSTANCE_template
 $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.proportion-sat : $(foreach r,$(REPEATS), $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/$(r).%.out )
@@ -20,7 +21,11 @@ $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.proportion-aborted : $(foreach r,$(REPE
 	{ echo 3 k ; cat $(foreach r,$(REPEATS), $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/$(r).$$*.out ) | { if echo $$* | grep -q 'glucose\|clasp' ; then grep --count '^s \(INDETERMINATE\|UNKNOWN\)' ; elif echo $$* | grep -q gurobi ; then grep --count 'Time limit reached' ; else grep --count aborted ; fi ; } ; echo $(REPEATS) | wc -w ; echo / p ; } | xargs | dc | tee $$@
 
 $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.average-nodes : $(foreach r,$(REPEATS), $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/$(r).%.out )
-	{ echo 3 k 0 ; echo $(foreach r,$(REPEATS), $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/$(r).$$*.out )  | xargs -n1 bash -c "if grep -q '^s \(INDETERMINATE\|UNKNOWN\)' \$$$$1 || grep -q aborted \$$$$1 || grep -q 'Time limit reached' \$$$$1 ; then echo 100000000000 ; else cat \$$$$1 | if echo $$* | grep -q glucose ; then sed -n -e '/^c decisions/s/^.*: \\([^ ]\\+\\) .*/\\1 + /p' ; elif echo $$* | grep -q clasp ; then sed -n -e '/^c Choices/s/^.*: \\([^ ]\\+\\) .*/\\1 + /p' ; elif echo $$* | grep -q gurobi ; then sed -n -e '/^Explored /s/^Explored \\([^ ]\\+\\) nodes.*/\\1 + /p' ; else sed -n -e '1s/^[^ ]\\+ \\([^ ]\\+\\).*/\\1 + /p' ; fi ; fi ;" bash ; echo $(REPEATS) | wc -w ; echo / p ; } | xargs | dc | tee $$@
+	{ echo 3 k 0 ; echo $(foreach r,$(REPEATS), $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/$(r).$$*.out )  | xargs -n1 bash -c "if grep -q '^s \(INDETERMINATE\|UNKNOWN\)' \$$$$1 || grep -q aborted \$$$$1 || grep -q 'Time limit reached' \$$$$1 ; then echo 100000000000 + ; else cat \$$$$1 | if echo $$* | grep -q glucose ; then sed -n -e '/^c decisions/s/^.*: \\([^ ]\\+\\) .*/\\1 + /p' ; elif echo $$* | grep -q clasp ; then sed -n -e '/^c Choices/s/^.*: \\([^ ]\\+\\) .*/\\1 + /p' ; elif echo $$* | grep -q gurobi ; then sed -n -e '/^Explored /s/^Explored \\([^ ]\\+\\) nodes.*/\\1 + /p' ; else sed -n -e '1s/^[^ ]\\+ \\([^ ]\\+\\).*/\\1 + /p' ; fi ; fi ;" bash ; echo $(REPEATS) | wc -w ; echo / p ; } | xargs | dc | tee $$@
+
+$(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.best-nodes : $(foreach r,$(REPEATS), $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/$(r).%.out )
+	{ echo $(foreach r,$(REPEATS), $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/$(r).$$*.out )  | xargs -n1 bash -c "if grep -q '^s \(INDETERMINATE\|UNKNOWN\)' \$$$$1 || grep -q aborted \$$$$1 || grep -q 'Time limit reached' \$$$$1 ; then echo 100000000000 ; else cat \$$$$1 | if echo $$* | grep -q glucose ; then sed -n -e '/^c decisions/s/^.*: \\([^ ]\\+\\) .*/\\1 /p' ; elif echo $$* | grep -q clasp ; then sed -n -e '/^c Choices/s/^.*: \\([^ ]\\+\\) .*/\\1 /p' ; elif echo $$* | grep -q gurobi ; then sed -n -e '/^Explored /s/^Explored \\([^ ]\\+\\) nodes.*/\\1 /p' ; else sed -n -e '1s/^[^ ]\\+ \\([^ ]\\+\\).*/\\1 /p' ; fi ; fi ;" bash ; } | xargs -n1 | sort -n | head -n1 | tee $$@
+
 endef
 
 $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES),$(eval $(call INSTANCE_template,$(ps),$(ts),$(pd),$(td)))))))

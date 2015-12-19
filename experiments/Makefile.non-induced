@@ -1,9 +1,9 @@
 SHELL := /bin/bash
-VARIANTS := non-induced vf2-non-induced lad-non-induced
+VARIANTS := non-induced non-induced-rev-pattern non-induced-rev-target vf2-non-induced lad-non-induced
 RESULTS := results
 PATTERN_SIZES := 10 20 30
 TARGET_SIZES := 150
-PATTERN_DENSITIES := $(shell for a in `seq 0 4 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
+PATTERN_DENSITIES := $(shell for a in `seq 0 2 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
 TARGET_DENSITIES := $(PATTERN_DENSITIES)
 REPEATS := $(shell seq -w 01 10 )
 TIMEOUT := 1000
@@ -16,6 +16,16 @@ dir-ps$(1)-ts$(2)/pd$(3)-td$(4) :
 
 $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.non-induced.out : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
 	../code/random_subgraph_isomorphism --timeout $(TIMEOUT) \
+	    $(1) $(3) `echo $$*$(4)$(3)$(1) 2 31 ^ % p | tr -d . | dc` \
+	    $(2) $(4) `echo $(1)$(3)$(4)$$* 2 31 ^ % p | tr -d . | dc` | tee $$@
+
+$(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.non-induced-rev-pattern.out : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
+	../code/random_subgraph_isomorphism --timeout $(TIMEOUT) --invert-pattern-order \
+	    $(1) $(3) `echo $$*$(4)$(3)$(1) 2 31 ^ % p | tr -d . | dc` \
+	    $(2) $(4) `echo $(1)$(3)$(4)$$* 2 31 ^ % p | tr -d . | dc` | tee $$@
+
+$(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.non-induced-rev-target.out : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
+	../code/random_subgraph_isomorphism --timeout $(TIMEOUT) --invert-target-order \
 	    $(1) $(3) `echo $$*$(4)$(3)$(1) 2 31 ^ % p | tr -d . | dc` \
 	    $(2) $(4) `echo $(1)$(3)$(4)$$* 2 31 ^ % p | tr -d . | dc` | tee $$@
 
