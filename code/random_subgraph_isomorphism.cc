@@ -122,6 +122,8 @@ auto main(int argc, char * argv[]) -> int
             ("induced",                               "Induced version")
             ("clique",                                "Use clique algorithm")
             ("density",                               "Generate using density instead of probability")
+            ("invert-pattern-order",                  "Use reverse order for pattern degree value ordering")
+            ("invert-target-order",                   "Use reverse order for target degree value ordering")
             ;
 
         po::options_description all_options{ "All options" };
@@ -172,6 +174,9 @@ auto main(int argc, char * argv[]) -> int
         Params params;
 
         params.induced = options_vars.count("induced");
+
+        params.invert_pattern_order = options_vars.count("invert-pattern-order");
+        params.invert_target_order = options_vars.count("invert-target-order");
 
         /* Create graphs */
         auto graphs = std::make_pair(

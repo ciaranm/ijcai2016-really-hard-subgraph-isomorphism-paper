@@ -93,7 +93,7 @@ namespace
 
             // determine ordering for target graph vertices
             std::iota(target_order.begin(), target_order.end(), 0);
-            degree_sort(target, target_order, false);
+            degree_sort(target, target_order, params.invert_target_order);
 
             // recode target to a bit graph
             target_graphs.at(0).resize(target_size);
@@ -103,7 +103,7 @@ namespace
                         target_graphs.at(0).add_edge(i, j);
 
             for (unsigned j = 0 ; j < pattern_size ; ++j)
-                pattern_degree_tiebreak.at(j) = pattern_graphs.at(0).degree(j);
+                pattern_degree_tiebreak.at(j) = pattern_graphs.at(0).degree(j) * (params.invert_pattern_order ? -1 : 1);
         }
 
         auto build_supplemental_graphs() -> void
