@@ -47,7 +47,7 @@
 \renewcommand{\floatpagefraction}{0.85}
 \renewcommand{\dblfloatpagefraction}{0.85}
 
-\title{Really Hard Instances for the Subgraph Isomorphism Problem}
+\title{Heuristics and Really Hard Instances for Subgraph Isomorphism Problems}
 \author{Ciaran McCreesh\thanks{This work was supported by the Engineering and Physical Sciences
     Research Council [grant number EP/K503058/1]} \and Patrick Prossser \and James Trimble \\
 University of Glasgow, Glasgow, Scotland \\
@@ -64,7 +64,9 @@ c.mccreesh.1@research.gla.ac.uk}
     seen in three different solvers. For the induced variant of the problem, the behaviour is more
     complicated, with two phase transitions and an unexpectedly hard region in between. We show that
     this region remains hard when using pseudo-boolean and mixed integer encodings, and under
-    reduction to the clique problem.
+    reduction to the clique problem. Finally, we show that existing heuristics for the non-induced
+    variant can be recovered by determining how to maximise the expected number of solutions, and
+    that this technique gives new, better heuristics for the induced variant.
 \end{abstract}
 
 \section{Introduction}
@@ -419,7 +421,7 @@ In figure \cref{figure:phase-transition-bands} we show what happens for larger p
     \label{figure:phase-transition-bands}
 \end{figure}
 
-\subsection{Locating the Phase Transition}
+\subsection{Locating the Phase Transition, and Heuristics}
 
 To predict the location of the phase transition, we can calculate the expected number of solutions
 by making a few dubious assumptions involving rounding and independence, and drawing inspiration
@@ -464,6 +466,8 @@ non-edges, we get an expected number of solutions of \[ \langle Sol \rangle = t^
 nodes with vertical flip.
 
 This suggests that we're not able to make use of adjacency and non-adjacency simultaneously.
+
+\subsection{New Heuristics}
 
 \section{Other Encodings and Solvers}
 
