@@ -15,6 +15,7 @@ struct Params
     std::chrono::time_point<std::chrono::steady_clock> start_time;
 
     bool induced = false;
+    bool supplemental_induced = false;
 
     bool invert_pattern_order = false;
     bool invert_target_order = false;

@@ -17,7 +17,7 @@ namespace
         Satisfiable
     };
 
-    template <unsigned n_words_, int k_, int l_, bool induced_>
+    template <unsigned n_words_, int k_, int l_, bool induced_, bool supplemental_induced_>
     struct SequentialSubgraphIsomorphism
     {
         struct Domain
@@ -65,7 +65,7 @@ namespace
 
         const Params & params;
 
-        static constexpr int max_graphs = 1 + (l_ - 1) * k_ + (induced_ ? 1 : 0);
+        static constexpr int max_graphs = 1 + (((l_ - 1) * k_) * (induced_ && supplemental_induced_ ? 2 : 1)) + (induced_ ? 1 : 0);
         std::array<FixedBitGraph<n_words_>, max_graphs> target_graphs;
         std::array<FixedBitGraph<n_words_>, max_graphs> pattern_graphs;
 
@@ -216,6 +216,106 @@ namespace
 
                 target_graphs.at(1 + ((l_ - 1) * k_)) = target_graphs.at(0);
                 target_graphs.at(1 + ((l_ - 1) * k_)).complement();
+
+                if (supplemental_induced_) {
+                    constexpr unsigned start = 1 + ((l_ - 1) * k_);
+
+                    if (l_ >= 2) {
+                        for (unsigned v = 0 ; v < pattern_size ; ++v) {
+                            auto nv = pattern_graphs.at(start + 0).neighbourhood(v);
+                            for (int c = nv.first_set_bit() ; c != -1 ; c = nv.first_set_bit()) {
+                                nv.unset(c);
+                                auto nc = pattern_graphs.at(start + 0).neighbourhood(c);
+                                for (int w = nc.first_set_bit() ; w != -1 && unsigned(w) <= v ; w = nc.first_set_bit()) {
+                                    nc.unset(w);
+                                    if (k_ >= 3 && pattern_graphs.at(start + 2).adjacent(v, w))
+                                        pattern_graphs.at(start + 3).add_edge(v, w);
+                                    else if (k_ >= 2 && pattern_graphs.at(start + 1).adjacent(v, w))
+                                        pattern_graphs.at(start + 2).add_edge(v, w);
+                                    else if (k_ >= 1)
+                                        pattern_graphs.at(start + 1).add_edge(v, w);
+                                }
+                            }
+                        }
+                    }
+
+                    if (l_ >= 3) {
+                        for (unsigned v = 0 ; v < pattern_size ; ++v) {
+                            auto nv = pattern_graphs.at(start + 0).neighbourhood(v);
+                            for (int c = nv.first_set_bit() ; c != -1 ; c = nv.first_set_bit()) {
+                                nv.unset(c);
+                                auto nc = pattern_graphs.at(start + 0).neighbourhood(c);
+                                for (int d = nc.first_set_bit() ; d != -1 ; d = nc.first_set_bit()) {
+                                    nc.unset(d);
+                                    if (unsigned(d) == v)
+                                        continue;
+
+                                    auto nd = pattern_graphs.at(start + 0).neighbourhood(d);
+                                    for (int w = nd.first_set_bit() ; w != -1 && unsigned(w) <= v ; w = nd.first_set_bit()) {
+                                        nd.unset(w);
+                                        if (w == c)
+                                            continue;
+
+                                        if (k_ >= 3 && pattern_graphs.at(start + k_ + 2).adjacent(v, w))
+                                            pattern_graphs.at(start + k_ + 3).add_edge(v, w);
+                                        else if (k_ >= 2 && pattern_graphs.at(start + k_ + 1).adjacent(v, w))
+                                            pattern_graphs.at(start + k_ + 2).add_edge(v, w);
+                                        else if (k_ >= 1)
+                                            pattern_graphs.at(start + k_ + 1).add_edge(v, w);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (l_ >= 2) {
+                        for (unsigned v = 0 ; v < target_size ; ++v) {
+                            auto nv = target_graphs.at(start + 0).neighbourhood(v);
+                            for (int c = nv.first_set_bit() ; c != -1 ; c = nv.first_set_bit()) {
+                                nv.unset(c);
+                                auto nc = target_graphs.at(start + 0).neighbourhood(c);
+                                for (int w = nc.first_set_bit() ; w != -1 && unsigned(w) <= v ; w = nc.first_set_bit()) {
+                                    nc.unset(w);
+                                    if (k_ >= 3 && target_graphs.at(start + 2).adjacent(v, w))
+                                        target_graphs.at(start + 3).add_edge(v, w);
+                                    else if (k_ >= 2 && target_graphs.at(start + 1).adjacent(v, w))
+                                        target_graphs.at(start + 2).add_edge(v, w);
+                                    else if (k_ >= 1)
+                                        target_graphs.at(start + 1).add_edge(v, w);
+                                }
+                            }
+                        }
+                    }
+
+                    if (l_ >= 3) {
+                        for (unsigned v = 0 ; v < target_size ; ++v) {
+                            auto nv = target_graphs.at(start + 0).neighbourhood(v);
+                            for (int c = nv.first_set_bit() ; c != -1 ; c = nv.first_set_bit()) {
+                                nv.unset(c);
+                                auto nc = target_graphs.at(start + 0).neighbourhood(c);
+                                for (int d = nc.first_set_bit() ; d != -1 ; d = nc.first_set_bit()) {
+                                    nc.unset(d);
+                                    if (unsigned(d) == v)
+                                        continue;
+
+                                    auto nd = target_graphs.at(start + 0).neighbourhood(d);
+                                    for (int w = nd.first_set_bit() ; w != -1 && unsigned(w) <= v ; w = nd.first_set_bit()) {
+                                        nd.unset(w);
+                                        if (w == c)
+                                            continue;
+
+                                        if (k_ >= 3 && target_graphs.at(start + k_ + 2).adjacent(v, w))
+                                            target_graphs.at(start + k_ + 3).add_edge(v, w);
+                                        else if (k_ >= 2 && target_graphs.at(start + k_ + 1).adjacent(v, w))
+                                            target_graphs.at(start + k_ + 2).add_edge(v, w);
+                                        else if (k_ >= 1)
+                                            target_graphs.at(start + k_ + 1).add_edge(v, w);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -517,10 +617,10 @@ namespace
         }
     };
 
-    template <template <unsigned, int, int, bool> class SGI_, int n_, int m_, bool i_>
+    template <template <unsigned, int, int, bool, bool> class SGI_, int n_, int m_, bool i_, bool s_>
     struct Apply
     {
-        template <unsigned size_, typename> using Type = SGI_<size_, n_, m_, i_>;
+        template <unsigned size_, typename> using Type = SGI_<size_, n_, m_, i_, s_>;
     };
 }
 
@@ -528,11 +628,16 @@ auto sequential_subgraph_isomorphism(const std::pair<Graph, Graph> & graphs, con
 {
     if (graphs.first.size() > graphs.second.size())
         return Result{ };
-    if (params.induced)
-        return select_graph_size<Apply<SequentialSubgraphIsomorphism, 3, 3, true>::template Type, Result>(
-                AllGraphSizes(), graphs.second, graphs.first, params);
+    if (params.induced) {
+        if (params.supplemental_induced)
+            return select_graph_size<Apply<SequentialSubgraphIsomorphism, 3, 3, true, true>::template Type, Result>(
+                    AllGraphSizes(), graphs.second, graphs.first, params);
+        else
+            return select_graph_size<Apply<SequentialSubgraphIsomorphism, 3, 3, true, false>::template Type, Result>(
+                    AllGraphSizes(), graphs.second, graphs.first, params);
+    }
     else
-        return select_graph_size<Apply<SequentialSubgraphIsomorphism, 3, 3, false>::template Type, Result>(
+        return select_graph_size<Apply<SequentialSubgraphIsomorphism, 3, 3, false, false>::template Type, Result>(
                 AllGraphSizes(), graphs.second, graphs.first, params);
 }
 

@@ -120,6 +120,7 @@ auto main(int argc, char * argv[]) -> int
             ("help",                                  "Display help information")
             ("timeout",            po::value<int>(),  "Abort after this many seconds")
             ("induced",                               "Induced version")
+            ("supplemental-induced",                  "Use supplemental graphs on the compement")
             ("clique",                                "Use clique algorithm")
             ("density",                               "Generate using density instead of probability")
             ("invert-pattern-order",                  "Use reverse order for pattern degree value ordering")
@@ -174,6 +175,7 @@ auto main(int argc, char * argv[]) -> int
         Params params;
 
         params.induced = options_vars.count("induced");
+        params.supplemental_induced = options_vars.count("supplemental-induced");
 
         params.invert_pattern_order = options_vars.count("invert-pattern-order");
         params.invert_target_order = options_vars.count("invert-target-order");
