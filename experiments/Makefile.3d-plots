@@ -1,0 +1,24 @@
+SHELL := /bin/bash
+VARIANTS := non-induced
+RESULTS := results
+PATTERN_SIZES := 10 14 15 16 20 30 50 150 100
+TARGET_SIZES := 150
+PATTERN_DENSITIES := $(shell for a in `seq 0 2 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
+TARGET_DENSITIES := $(PATTERN_DENSITIES)
+
+all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach v,$(VARIANTS),\
+    $(RESULTS)/ps$(ps)-ts$(ts).$(v).phase-transition-points.plot \
+    $(RESULTS)/ps$(ps)-ts$(ts).$(v).hard-points.plot )))
+
+define INSTANCE_template
+
+$(RESULTS)/ps$(1)-ts$(2).%.phase-transition-points.plot : $(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES), $(RESULTS)/ps$(1)-ts$(2)/pd$(pd)-td$(td)/%.proportion-sat ))
+	for pd in $(PATTERN_DENSITIES) ; do { for td in $(TARGET_DENSITIES) ; do if grep -q '^\.[2345678]' $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/$$*.proportion-sat ; then echo $$$$pd $$$$td ; fi ; done ; } ; done | tee $$@
+
+$(RESULTS)/ps$(1)-ts$(2).%.hard-points.plot : $(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES), $(RESULTS)/ps$(1)-ts$(2)/pd$(pd)-td$(td)/%.average-nodes ))
+	for pd in $(PATTERN_DENSITIES) ; do { for td in $(TARGET_DENSITIES) ; do x=$$$$(<$(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/$$*.average-nodes ) ; if [[ $$$${x%.*} -ge 10000000 ]] ; then echo $$$$pd $$$$td ; fi ; done ; } ; done | tee $$@
+
+endef
+
+$(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(eval $(call INSTANCE_template,$(ps),$(ts)))))
+

@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-VARIANTS := non-induced vf2-non-induced lad-non-induced
+VARIANTS := non-induced non-induced-rev-pattern non-induced-rev-target vf2-non-induced lad-non-induced
 RESULTS := results
 PATTERN_SIZES := 10 20 30
 TARGET_SIZES := 150

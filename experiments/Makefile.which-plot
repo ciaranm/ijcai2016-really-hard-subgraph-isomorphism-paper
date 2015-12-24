@@ -1,0 +1,20 @@
+SHELL := /bin/bash
+VARIANTS := rev-pattern rev-target
+RESULTS := results
+PATTERN_SIZES := 10 20 30
+TARGET_SIZES := 150
+SKIP := 2
+PATTERN_DENSITIES := $(shell for a in `seq 0 $(SKIP) 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
+TARGET_DENSITIES := $(PATTERN_DENSITIES)
+TIMEOUT := 100
+
+all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach v,$(VARIANTS),$(RESULTS)/ps$(ps)-ts$(ts).non-induced-which-$(v).plot )))
+
+define INSTANCE_template
+$(RESULTS)/ps$(1)-ts$(2).non-induced-which-%.plot :
+	for pd in $(PATTERN_DENSITIES) ; do { for td in $(TARGET_DENSITIES) ; do { v1=$$$$(sed -e 's,1e8,100000000,' < $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/non-induced.average-nodes | sed -e 's,\..*,,' ) ; v2=$$$$(sed -e 's,1e8,100000000,' < $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/non-induced-$$*.average-nodes | sed -e 's,\..*,,' ) ; if [[ $$$$v1 -gt $$$$v2 ]] ; then echo 1 ; elif [[ $$$$v2 -gt $$$$v1 ]] ; then echo -1 ; else echo 0 ; fi ; } ; done ; } | xargs ; done | tee $$@
+endef
+
+$(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(eval $(call INSTANCE_template,$(ps),$(ts)))))
+
+

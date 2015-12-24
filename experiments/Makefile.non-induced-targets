@@ -1,0 +1,24 @@
+SHELL := /bin/bash
+VARIANTS := non-induced
+RESULTS := results
+PATTERN_SIZES := 20
+TARGET_SIZES := 50 100 150 200 250
+PATTERN_DENSITIES := $(shell for a in `seq 0 2 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
+TARGET_DENSITIES := $(PATTERN_DENSITIES)
+REPEATS := $(shell seq -w 01 10 )
+TIMEOUT := 1000
+
+all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES),$(foreach i,$(REPEATS),$(foreach v,$(VARIANTS),$(RESULTS)/ps$(ps)-ts$(ts)/pd$(pd)-td$(td)/$(i).$(v).out ))))))
+
+define INSTANCE_template
+dir-ps$(1)-ts$(2)/pd$(3)-td$(4) :
+	mkdir -p $(RESULTS) $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)
+
+$(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/%.non-induced.out : | dir-ps$(1)-ts$(2)/pd$(3)-td$(4)
+	../code/random_subgraph_isomorphism --timeout $(TIMEOUT) \
+	    $(1) $(3) `echo $$*$(4)$(3)$(1) 2 31 ^ % p | tr -d . | dc` \
+	    $(2) $(4) `echo $(1)$(3)$(4)$$* 2 31 ^ % p | tr -d . | dc` | tee $$@
+endef
+
+$(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES),$(eval $(call INSTANCE_template,$(ps),$(ts),$(pd),$(td)))))))
+

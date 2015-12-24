@@ -1,0 +1,20 @@
+SHELL := /bin/bash
+VARIANTS := induced-rev-dynamic
+RESULTS := results
+PATTERN_SIZES := 10 14 15 16 20 30
+TARGET_SIZES := 150
+SKIP := 2
+PATTERN_DENSITIES := $(shell for a in `seq 0 $(SKIP) 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
+TARGET_DENSITIES := $(PATTERN_DENSITIES)
+REPEATS := $(shell seq -w 01 10 )
+
+all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES),$(foreach v,$(VARIANTS),\
+    $(RESULTS)/ps$(ps)-ts$(ts)/pd$(pd)-td$(td)/$(v).average-nodes )))))
+
+define INSTANCE_template
+$(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/induced-rev-dynamic.average-nodes : $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/induced.average-nodes $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/induced-rev-pattern.average-nodes
+	{ if [[ `bc <<<"$(4)*100" | sed -e 's,\..*,,'` -ge 50 ]] ; then if [[ `bc <<<"$(3)*100" | sed -e 's,\..*,,'` -ge 50 ]] ; then cat $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/induced-rev-both.average-nodes ; else cat $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/induced-rev-pattern.average-nodes ; fi ; else if [[ `bc <<<"$(3)*100" | sed -e 's,\..*,,'` -ge 50 ]] ; then cat $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/induced-rev-target.average-nodes ; else cat $(RESULTS)/ps$(1)-ts$(2)/pd$(3)-td$(4)/induced.average-nodes ; fi ; fi ; } |  tee $$@
+endef
+
+$(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES),$(eval $(call INSTANCE_template,$(ps),$(ts),$(pd),$(td)))))))
+

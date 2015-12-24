@@ -1,9 +1,9 @@
 SHELL := /bin/bash
-VARIANTS := non-induced non-induced-rev-pattern non-induced-rev-target vf2-non-induced lad-non-induced
+VARIANTS := non-induced
 RESULTS := results
-PATTERN_SIZES := 10 20 30
-TARGET_SIZES := 150
-PATTERN_DENSITIES := $(shell for a in `seq 0 2 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
+PATTERN_SIZES := 20
+TARGET_SIZES := 50 100 150 200
+PATTERN_DENSITIES := $(shell for a in `seq 0 4 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
 TARGET_DENSITIES := $(PATTERN_DENSITIES)
 REPEATS := $(shell seq -w 01 10 )
 

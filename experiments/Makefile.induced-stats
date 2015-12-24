@@ -1,9 +1,10 @@
 SHELL := /bin/bash
-VARIANTS := induced vf2-induced lad-induced
+VARIANTS := induced vf2-induced lad-induced induced-rev-pattern induced-rev-target induced-rev-both
 RESULTS := results
 PATTERN_SIZES := 10 14 15 16 20 30
 TARGET_SIZES := 150
-PATTERN_DENSITIES := $(shell for a in `seq 0 2 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
+SKIP := 2
+PATTERN_DENSITIES := $(shell for a in `seq 0 $(SKIP) 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
 TARGET_DENSITIES := $(PATTERN_DENSITIES)
 REPEATS := $(shell seq -w 01 10 )
 

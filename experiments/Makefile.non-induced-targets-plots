@@ -1,21 +1,15 @@
 SHELL := /bin/bash
-VARIANTS := induced vf2-induced lad-induced induced-rev-pattern induced-rev-target induced-rev-both
-EXTRA_VARIANTS := induced-rev-dynamic
+VARIANTS := non-induced
 RESULTS := results
-PATTERN_SIZES := 10 14 15 16 20 30
-TARGET_SIZES := 150
-SKIP := 2
-PATTERN_DENSITIES := $(shell for a in `seq 0 $(SKIP) 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
+PATTERN_SIZES := 20
+TARGET_SIZES := 50 100 150 200
+PATTERN_DENSITIES := $(shell for a in `seq 0 4 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
 TARGET_DENSITIES := $(PATTERN_DENSITIES)
-TIMEOUT := 100
 
 all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach v,$(VARIANTS),\
-	$(RESULTS)/ps$(ps)-ts$(ts).$(v).proportion-sat.plot \
-	$(RESULTS)/ps$(ps)-ts$(ts).$(v).proportion-aborted.plot \
-	$(RESULTS)/ps$(ps)-ts$(ts).$(v).average-nodes.plot ))) \
-    $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach v,$(EXTRA_VARIANTS),\
-	$(RESULTS)/ps$(ps)-ts$(ts).$(v).average-nodes.plot )))
-
+    $(RESULTS)/ps$(ps)-ts$(ts).$(v).proportion-sat.plot \
+    $(RESULTS)/ps$(ps)-ts$(ts).$(v).proportion-aborted.plot \
+    $(RESULTS)/ps$(ps)-ts$(ts).$(v).average-nodes.plot )))
 
 define INSTANCE_template
 $(RESULTS)/ps$(1)-ts$(2).%.proportion-sat.plot : $(foreach pd,$(PATTERN_DENSITIES),$(foreach td,$(TARGET_DENSITIES), $(RESULTS)/ps$(1)-ts$(2)/pd$(pd)-td$(td)/%.proportion-sat ))
