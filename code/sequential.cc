@@ -70,7 +70,7 @@ namespace
         std::array<FixedBitGraph<n_words_>, max_graphs> pattern_graphs;
 
         std::vector<int> pattern_order, target_order;
-        std::array<int, n_words_ * bits_per_word> pattern_degree_tiebreak;
+        std::array<int, n_words_ * bits_per_word> pattern_degree_tiebreak, all_diff_tiebreak;
 
         unsigned pattern_size, full_pattern_size, target_size;
 
@@ -102,8 +102,10 @@ namespace
                     if (target.adjacent(target_order.at(i), target_order.at(j)))
                         target_graphs.at(0).add_edge(i, j);
 
-            for (unsigned j = 0 ; j < pattern_size ; ++j)
+            for (unsigned j = 0 ; j < pattern_size ; ++j) {
                 pattern_degree_tiebreak.at(j) = pattern_graphs.at(0).degree(j) * (params.invert_pattern_order ? -1 : 1);
+                all_diff_tiebreak.at(j) = pattern_graphs.at(0).degree(j);
+            }
         }
 
         auto build_supplemental_graphs() -> void
@@ -530,7 +532,7 @@ namespace
             std::sort(domains_order.begin(), domains_order.begin() + domains.size(),
                     [&] (int a, int b) {
                     return (domains.at(a).popcount < domains.at(b).popcount) ||
-                    (domains.at(a).popcount == domains.at(b).popcount && pattern_degree_tiebreak.at(domains.at(a).v) > pattern_degree_tiebreak.at(domains.at(b).v));
+                    (domains.at(a).popcount == domains.at(b).popcount && all_diff_tiebreak.at(domains.at(a).v) > all_diff_tiebreak.at(domains.at(b).v));
                     });
 
             // counting all-different
