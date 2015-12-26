@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-VARIANTS := induced vf2-induced lad-induced induced-rev-pattern induced-rev-target induced-rev-both
+VARIANTS := induced vf2-induced lad-induced induced-rev-pattern induced-rev-target induced-rev-both supinduced supinduced-rev-pattern supinduced-rev-target supinduced-rev-both
 EXTRA_VARIANTS := induced-rev-dynamic
 RESULTS := results
 PATTERN_SIZES := 10 14 15 16 20 30
