@@ -407,8 +407,9 @@ namespace
                     case Search::Unsatisfiable:  break;
                 }
 
-                if (search_result.second.independent_of(domains, new_domains))
-                    return search_result;
+                if (! params.no_backjumping)
+                    if (search_result.second.independent_of(domains, new_domains))
+                        return search_result;
 
                 shared_failed_variables.add(search_result.second);
             }

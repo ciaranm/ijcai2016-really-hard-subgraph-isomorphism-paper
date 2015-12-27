@@ -16,6 +16,7 @@ struct Params
 
     bool induced = false;
     bool supplemental_induced = false;
+    bool no_backjumping = false;
 
     bool invert_pattern_order = false;
     bool invert_target_order = false;
