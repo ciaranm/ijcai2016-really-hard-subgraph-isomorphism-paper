@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz color size 7.8in,7.5in font '\scriptsize'
+set terminal tikz color size 7.8in,8.5in font '\scriptsize'
 set output "gen-graph-induced.tex"
 
 unset xlabel
@@ -12,21 +12,22 @@ set noytics
 set size square
 set cbtics out scale 0.5 nomirror offset -1
 
-set multiplot layout 6,6 spacing 0.02, 0.02
+set multiplot layout 7,6 spacing 0.02, 0.02
 
-set label 1 at screen 0.08, screen 0.81 'Satisfiable' rotate by 90
-set label 2 at screen 0.08, screen 0.68 'Predicted' rotate by 90
-set label 3 at screen 0.08, screen 0.55 'Bound' rotate by 90
-set label 4 at screen 0.08, screen 0.41 'Glasgow' rotate by 90
-set label 5 at screen 0.08, screen 0.28 'LAD' rotate by 90
-set label 6 at screen 0.08, screen 0.14 'VF2' rotate by 90
+set label 1 at screen 0.08, screen 0.85 'Satisfiable' rotate by 90
+set label 2 at screen 0.08, screen 0.72 'Predicted' rotate by 90
+set label 3 at screen 0.08, screen 0.65 'Bound' rotate by 90
+set label 4 at screen 0.08, screen 0.51 'Glasgow' rotate by 90
+set label 5 at screen 0.08, screen 0.38 'LAD' rotate by 90
+set label 6 at screen 0.08, screen 0.24 'VF2' rotate by 90
+set label 7 at screen 0.08, screen 0.10 'Improvement' rotate by 90
 
 load "puor.pal"
 unset colorbox
 
 set title "$G(10,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
-plot "ps10-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "ps10-ts150.supinduced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 unset label 1
 unset label 2
@@ -34,6 +35,7 @@ unset label 3
 unset label 4
 unset label 5
 unset label 6
+unset label 7
 
 set title "$G(14,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
@@ -109,7 +111,7 @@ set cbrange [2:8]
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
-plot "ps10-ts150.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "ps10-ts150.supinduced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
@@ -178,4 +180,29 @@ set colorbox
 
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{8}$' 8)
 plot "ps30-ts150.vf2-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+
+load "moreland.pal"
+
+unset colorbox
+set cbrange [-1:1]
+
+set notitle
+plot "ps10-ts150.supinduced-which-rev-target.plot" u ($2/50):($1/50):($3) matrix w image notitle
+
+set notitle
+plot "ps14-ts150.supinduced-which-rev-target.plot" u ($2/50):($1/50):($3) matrix w image notitle
+
+set notitle
+plot "ps15-ts150.supinduced-which-rev-target.plot" u ($2/50):($1/50):($3) matrix w image notitle
+
+set notitle
+plot "ps16-ts150.supinduced-which-rev-target.plot" u ($2/50):($1/50):($3) matrix w image notitle
+
+set notitle
+plot "ps20-ts150.supinduced-which-rev-target.plot" u ($2/50):($1/50):($3) matrix w image notitle
+
+set colorbox
+
+set cbtics 1
+plot "ps30-ts150.induced-which-rev-target.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
