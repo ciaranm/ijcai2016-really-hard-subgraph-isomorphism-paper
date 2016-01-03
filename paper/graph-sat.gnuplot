@@ -25,7 +25,7 @@ set label 5 at screen 0.08, screen 0.12 'Gurobi (MIP)' rotate by 90
 
 set title "$G(10,x) \\hookrightarrow G(75,y)$"
 set cbtics 0.5
-plot "ps10-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps10-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 unset label 1
 unset label 2
@@ -35,25 +35,25 @@ unset label 5
 
 set title "$G(12,x) \\hookrightarrow G(75,y)$"
 set cbtics 0.5
-plot "ps12-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps12-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set title "$G(14,x) \\hookrightarrow G(75,y)$"
 set cbtics 0.5
-plot "ps14-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps14-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set title "$G(16,x) \\hookrightarrow G(75,y)$"
 set cbtics 0.5
-plot "ps16-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps16-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set title "$G(18,x) \\hookrightarrow G(75,y)$"
 set cbtics 0.5
-plot "ps18-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps18-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set colorbox
 
 set title "$G(25, x) \\hookrightarrow G(75,y)$"
 set cbtics 0.5
-plot "ps25-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps25-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 load "ylgnbu.pal"
 set palette positive
@@ -63,95 +63,95 @@ set cbrange [2:6]
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
-plot "ps10-ts75.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps10-ts75.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
-plot "ps12-ts75.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps12-ts75.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
-plot "ps14-ts75.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps14-ts75.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
-plot "ps16-ts75.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps16-ts75.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
-plot "ps18-ts75.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps18-ts75.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set colorbox
 
 set notitle
-plot "ps25-ts75.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps25-ts75.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 unset colorbox
 set cbrange [3:7]
 
 set notitle
-plot "ps10-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps10-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps12-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps12-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps14-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps14-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps16-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps16-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps18-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps18-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set colorbox
 
 set cbtics 1 add ('${\le}10^{3}$' 3) add ('${\ge}10^{8}$' 8)
-plot "ps25-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps25-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 unset colorbox
 set cbrange [3:9]
 
 set notitle
-plot "ps10-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps10-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps12-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps12-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps14-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps14-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps16-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps16-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps18-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps18-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set colorbox
 
 set cbtics 1 add ('${\le}10^{3}$' 3) add ('${\ge}10^{9}$' 9)
-plot "ps25-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps25-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 unset colorbox
 set cbrange [0:5]
 
 set notitle
-plot "ps10-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps10-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps12-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps12-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps14-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps14-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps16-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps16-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
-plot "ps18-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps18-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set notitle
 set colorbox
 set cbtics 1 add ('1' 0) add ('10' 1) add ('${\ge}10^{5}$' 5)
-plot "ps25-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+plot "data/ps25-ts75.gurobi-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
