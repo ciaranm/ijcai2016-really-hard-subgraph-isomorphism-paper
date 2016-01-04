@@ -186,22 +186,22 @@ set cbrange [-1:1]
 load "moreland.pal"
 
 set notitle
-plot "data/ps10-ts150.supinduced-which-rev-pattern.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps10-ts150.supinduced-which-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set notitle
-plot "data/ps14-ts150.supinduced-which-rev-pattern.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps14-ts150.supinduced-which-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set notitle
-plot "data/ps15-ts150.supinduced-which-rev-pattern.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps15-ts150.supinduced-which-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set notitle
-plot "data/ps16-ts150.supinduced-which-rev-pattern.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps16-ts150.supinduced-which-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set notitle
-plot "data/ps20-ts150.supinduced-which-rev-pattern.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps20-ts150.supinduced-which-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set colorbox
 
 set cbtics 1
-plot "data/ps30-ts150.supinduced-which-rev-pattern.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps30-ts150.supinduced-which-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
