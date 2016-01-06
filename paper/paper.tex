@@ -15,7 +15,7 @@
 \usepackage{natbib}
 \usepackage{dblfloatfix}
 
-\usepackage{showframe}
+% \usepackage{showframe}
 
 \usetikzlibrary{decorations, decorations.pathreplacing, calc, backgrounds}
 
@@ -320,6 +320,8 @@ phase transition and is apparently over-constrained. To show that this is not a 
 current subgraph isomorphism algorithms, we verify that this region is also hard when using use a
 pseudo-boolean encoding, a mixed integer model, and under reduction to the clique problem.
 
+?? Heuristics
+
 \subsection{Definitions}
 
 Throughout, our graphs are unlabelled, undirected, and do not have any loops (vertices which are
@@ -379,8 +381,7 @@ of the samples) ?? describe this a bit more, find the 0.5 SAT mark.
 Some stuff about the complexity peak in the Glasgow solver. This looks remarkably similar to random
 3SAT problems---compare, for example, Figure 1 of \citet{LeytonBrown:2014}. In particular,
 satisfiable instances tend to be easier but show greater variation than unsatisfiable instances, and
-there are exceptionally hard satisfiable instances. (The parallel version of the Glasgow solver is
-designed to eliminate these.)
+there are exceptionally hard satisfiable instances \citep{Smith:1997}.
 
 \begin{figure}[tb]
     \input{gen-graph-non-induced.tex}
@@ -394,9 +395,10 @@ designed to eliminate these.)
     \label{figure:non-induced}
 \end{figure}
 
-In the top row of \cref{figure:non-induced} we show the phase transition for the non-induced
-variant, for patterns of order 10, 20 and 30, a target of order 150, and varying pattern (x-axis)
-and target (y-axis) densities. Inside the orange region, at the bottom right of each plot, every
+What if we alter the edge probabilities for both the pattern graph and the target graph?  In the top
+row of \cref{figure:non-induced} we show the phase transition for the non-induced variant, for
+patterns of order 10, 20 and 30, a target of order 150, and varying pattern (x-axis) and target
+(y-axis) edge probabilities. Inside the orange region, at the bottom right of each plot, every
 instance is unsatisfiable---here we are trying to find a dense pattern in a sparse target. In the
 purple region, at the top left, every instance is satisfiable---we are looking for a sparse pattern
 in a dense target (which is easy, since we only have to preserve adjacency, not non-adjacency). The
@@ -405,21 +407,11 @@ instances are satisfiable.
 
 On subsequent rows, we show the average difficulty of different algorithms.  We measure search
 nodes. Cannot be used to compare performance of algorithms directly, but this does show that each
-solver found the same set of instances difficult.
-
-Satisfiable is easy, until very close to the phase transition. Unsatisfiable is much harder than
-satisfiable. This is solver-independent, although VF2 is terrible.
+solver found the same set of instances difficult.  Satisfiable is easy, until very close to the
+phase transition. Unsatisfiable is much harder than satisfiable. This is solver-independent,
+although VF2 is terrible.
 
 ?? Are unsatisfiable instances on the phase transition much harder than satisfiable ones?
-
-In figure \cref{figure:phase-transition-bands} we show what happens for larger patterns.
-
-\begin{figure}[tb]
-    \input{gen-graph-phase-transition-bands.tex}
-    \caption{The location of the phase transition, as the pattern grows. Shown are points where
-    between 20\% and 80\% of instances are satisfiable. ?? Can we put predictions on here too?}
-    \label{figure:phase-transition-bands}
-\end{figure}
 
 \subsection{Locating the Phase Transition, and Heuristics}
 
@@ -427,11 +419,18 @@ To predict the location of the phase transition, we can calculate the expected n
 by making a few dubious assumptions involving rounding and independence, and drawing inspiration
 from the association graph encoding. Since we are trying to find an \emph{injective} mapping from a
 pattern $P = G(p, d_p)$ to a target $T = G(t, d_t)$, there are $t^{\underline{p}} = t \cdot (t -
-1)\cdots(t - p + 1)$ possible assignments of target vertices to pattern vertices.  We expect the
+1) \cdot \ldots \cdot (t - p + 1)$ possible assignments of target vertices to pattern vertices.  We expect the
 pattern to have $d_p \cdot \binom{p}{2}$ edges, so we obtain the probability of all of these edges
 being mapped to edges in the target by raising $d_t$ to this power, giving an expected number of
 solutions of \[ \langle Sol \rangle = t^{\underline{p}} \cdot {d_t}^{d_p \cdot \binom{p}{2}}
-\textnormal{,} \] which we plot in ?? somewhere.
+\textnormal{,} \] which we plot in the second row of \cref{figure:non-induced}.
+
+We can see that this prediction is generally accurate, except that for very low and very high
+pattern densities, we overestimate the satisfiable region slightly. This is because although an
+expected number of solutions much below one implies a high likelihood of unsatisfiability, it is not
+true that a high expected number of solutions implies that any particular instance is likely to be
+satisfiable---a similar behaviour is seen with random constraint satisfaction problems
+\citep{Smith:1994,Smith:1996}.
 
 \section{Induced Isomorphisms}
 
@@ -454,11 +453,6 @@ clique. Glasgow looks at non-edges and can see immediately that no mapping is po
 
 Note that this is solver-independent.
 
-\begin{figure*}[tb]
-    \input{gen-graph-which.tex}
-    \caption{When to switch heuristics.}\label{figure:which}
-\end{figure*}
-
 \subsection{Predicting Induced Behaviour}
 
 By repeating the argument for locating the non-induced phase transition and additionally considering
@@ -473,6 +467,10 @@ nodes with vertical flip.
 This suggests that we're not able to make use of adjacency and non-adjacency simultaneously.
 
 \subsection{New Heuristics}
+
+?? Note that it is always best to try to move towards the satisfiable region, even for unsatisfiable
+instances. This contradicts the suggestion by \citet{Walsh:1998} that switching heuristics based
+upon an estimate of the solubility of the problem may offer good performance.
 
 \section{Other Encodings and Solvers}
 
@@ -507,6 +505,12 @@ MIP encoding with Gurobi.
 ?? \citep{Lipets:2009}
 
 \section{Conclusion}
+
+Dynamic heuristics
+
+Other random models and non-random
+
+Does not give hard instances for graph isomorphism
 
 \bibliographystyle{named}
 \bibliography{paper}

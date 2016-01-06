@@ -4,7 +4,7 @@ all : tables graphs
 TABLES =
 
 GRAPHS = gen-graph-sat.tex gen-graph-non-induced.tex gen-graph-induced.tex gen-graph-phase-transition.tex \
-	 gen-graph-phase-transition-bands.tex gen-graph-which.tex
+	 gen-graph-phase-transition-bands.tex
 
 tables : $(TABLES)
 
