@@ -80,4 +80,3 @@ set colorbox
 set title "$G(30,x){\\hookrightarrow}G(150,y)$"
 plot "data/ps30-ts150.induced-which-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
-
