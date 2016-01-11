@@ -15,7 +15,7 @@
 \usepackage{natbib}
 \usepackage{dblfloatfix}
 
-% \usepackage{showframe}
+\usepackage{showframe}
 
 \usetikzlibrary{decorations, decorations.pathreplacing, calc, backgrounds}
 
@@ -434,7 +434,7 @@ satisfiable---a similar behaviour is seen with random constraint satisfaction pr
 
 \section{Induced Isomorphisms}
 
-\begin{figure*}[tb]
+\begin{figure*}[p]
     \input{gen-graph-induced.tex}
     \caption{Behaviour of algorithms on the induced variant, shown in the style
     of \cref{figure:non-induced}. The second row shows a bound on the satisfiable region, by
@@ -478,10 +478,10 @@ upon an estimate of the solubility of the problem may offer good performance.
 \begin{figure*}[t]
     \input{gen-graph-sat.tex}
     \caption{Behaviour of other solvers on the induced variant on smaller graphs, shown in the style of
-        \cref{figure:non-induced}. The second row shows the number of search nodes used by the Glasgow
-        algorithm, the third row shows the number of decisions made by the Clasp pseudo-boolean solver,
-        the fourth row shows the number of search nodes used by a clique encoding, and the fifth a mixed
-        integer encoding with Gurobi.}\label{figure:alt}
+        \cref{figure:non-induced}. The second row shows the number of search nodes used by the
+    Glasgow algorithm, the third row shows the number of decisions made by the Clasp pseudo-boolean
+solver, and the fourth row shows the number of search nodes used by a clique
+encoding.}\label{figure:alt}
 \end{figure*}
 
 Is this just a weakness of current subgraph isomorphism solvers? In \cref{figure:alt} we repeat the
@@ -495,15 +495,21 @@ inside the central region, and that the easy satisfiable instances remain easy. 
 presented here, we also tried an equivalent SAT encoding with the Glucose solver, and saw very
 similar performance.)
 
+We also tried using a mixed integer encoding along similar lines. Gurobi was only able to solve some
+of the trivial satisfiable instances, and was almost never able to prove unsatisfiability within the
+time limit. We do not plot these results.
+
 Clique encoding: association graph, a version of BBMC modified to solve the decision problem. The
 hard instances in the central region remain hard. Additionally, some of the easy satisfiable
-instances become hard. Possible weakness of clique algorithms for this kind of input.
+instances become hard. Possible weakness in variable ordering heuristics.
 
-MIP encoding with Gurobi.
+Some easy instances become hard, here, but hard instances remain hard. In particular, the large
+central region for the larger pattern graphs which is not near the phase transitions is still
+relatively difficult in all encodings. This suggests that these instances may genuinely be hard,
+despite not being near a phase transition, and that this does not indicate a weakness in subgraph
+isomorphism solvers.
 
 ?? \citep{Anton:2009}
-
-?? \citep{Lipets:2009}
 
 \section{Conclusion}
 
@@ -512,6 +518,8 @@ Dynamic heuristics
 Other random models and non-random
 
 Does not give hard instances for graph isomorphism
+
+?? \citep{Lipets:2009} inexact solutions?
 
 \bibliographystyle{named}
 \bibliography{paper}

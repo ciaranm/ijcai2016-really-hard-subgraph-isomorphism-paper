@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz color size 7.8in,8.5in font '\scriptsize'
+set terminal tikz color size 7.8in,9.0in font '\scriptsize'
 set output "gen-graph-induced.tex"
 
 unset xlabel
@@ -20,7 +20,7 @@ set label 3 at screen 0.08, screen 0.60 'Bound' rotate by 90
 set label 4 at screen 0.08, screen 0.46 'Glasgow' rotate by 90
 set label 5 at screen 0.08, screen 0.36 'LAD' rotate by 90
 set label 6 at screen 0.08, screen 0.25 'VF2' rotate by 90
-set label 7 at screen 0.08, screen 0.12 'Heuristic' rotate by 90
+set label 7 at screen 0.08, screen 0.095 'Complement Better?' rotate by 90
 
 load "puor.pal"
 unset colorbox
@@ -182,7 +182,7 @@ set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{8}$' 8)
 plot "data/ps30-ts150.vf2-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 set cbrange [-10:10]
-set cbtics 10 add ("$\\overline{G}$" 10) ("$G$" -10) ("neutral" 0)
+set cbtics 10 add ("always" 10) ("never" -10) ("neutral" 0)
 
 load "puor.pal"
 unset colorbox
