@@ -326,8 +326,11 @@ pseudo-boolean encoding, a mixed integer model, and under reduction to the cliqu
 
 Throughout, our graphs are unlabelled, undirected, and do not have any loops (vertices which are
 adjacent to themselves).  The \emph{order} of a graph is the cardinality of its vertex set. We write
-$\operatorname{V}(G)$ for the vertex set of a graph $G$.  We write $G(v, p)$ for a random graph with
-$v$ vertices, and an edge between each distinct pair of vertices with independent probability $p$.
+$\operatorname{V}(G)$ for the vertex set of a graph $G$. The \emph{complement} of a graph $G$,
+denoted $\overline{G}$, is the
+graph with the same vertex set as $G$, and with an edge between distinct vertices $v$ and $w$ iff
+$v$ and $w$ are not adjacent in $G$. We write $G(v, p)$ for a ?? ER random graph with $v$ vertices,
+and an edge between each distinct pair of vertices with independent probability $p$.
 
 A \emph{non-induced subgraph isomorphism} from a graph $P$ (called the \emph{pattern}) to a graph
 $T$ (called the \emph{target}) is an injective mapping from $\operatorname{V}(P)$ to
@@ -335,7 +338,10 @@ $\operatorname{V}(T)$ which preserves adjacency---that is, for every adjacent $v
 $\operatorname{V}(P)$, the vertices $i(v)$ and $i(w)$ are adjacent in $T$. An \emph{induced subgraph
 isomorphism} additionally preserves non-adjacency---that is, if $v$ and $w$ are not adjacent in $P$,
 then $i(v)$ and $i(w)$ must not be adjacent in $T$. We use the notation $i : P \rightarrowtail T$
-for a non-induced isomorphism, and $i : P \hookrightarrow T$ for an induced isomorphism.
+for a non-induced isomorphism, and $i : P \hookrightarrow T$ for an induced isomorphism. Observe
+that an induced isomorphism $i : P \hookrightarrow T$ is a non-induced isomorphism $i : P
+\rightarrowtail T$ which is also a non-induced isomorphism $\overline{i} : \overline{P}
+\rightarrowtail \overline{T}$.
 
 The \emph{association graph encoding} of a subgraph isomorphism problem is constructed by creating a
 new graph with a vertex for each pair $(p, t)$ of vertices from the pattern and target graphs
