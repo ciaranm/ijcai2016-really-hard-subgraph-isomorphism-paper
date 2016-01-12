@@ -25,7 +25,8 @@ set label 5 at screen 0.05, screen 0.15 'VF2' rotate by 90
 
 set title "$G(10,x){\\rightarrowtail}G(150,y)$" offset character -1.5
 set cbtics 0.5
-plot "data/ps10-ts150.non-induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps10-ts150.non-induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps10-ts150.non-induced.predicted-line.plot" u 1:2 w line notitle lc "black"
 
 unset label 1
 unset label 2
@@ -35,12 +36,14 @@ unset label 5
 
 set title "$G(20,x){\\rightarrowtail}G(150,y)$" offset character 0
 set cbtics 0.5
-plot "data/ps20-ts150.non-induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps20-ts150.non-induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps20-ts150.non-induced.predicted-line.plot" u 1:2 w line notitle lc "black"
 
 set colorbox
 
 set title "$G(30,x){\\rightarrowtail}G(150,y)$" offset character 1.5
-plot "data/ps30-ts150.non-induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps30-ts150.non-induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps30-ts150.non-induced.predicted-line.plot" u 1:2 w line notitle lc "black"
 
 unset colorbox
 

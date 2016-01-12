@@ -27,7 +27,9 @@ unset colorbox
 
 set title "$G(10,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
-plot "data/ps10-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps10-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps10-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
+    "data/ps10-ts150.induced.predicted-line.plot" u 1:4 w line notitle lc "black"
 
 unset label 1
 unset label 2
@@ -39,25 +41,35 @@ unset label 7
 
 set title "$G(14,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
-plot "data/ps14-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps14-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps14-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
+    "data/ps14-ts150.induced.predicted-line.plot" u 1:4 w line notitle lc "black"
 
 set title "$G(15,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
-plot "data/ps15-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps15-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps15-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
+    "data/ps15-ts150.induced.predicted-line.plot" u 1:4 w line notitle lc "black"
 
 set title "$G(16,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
-plot "data/ps16-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps16-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps16-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
+    "data/ps16-ts150.induced.predicted-line.plot" u 1:4 w line notitle lc "white"
 
 set title "$G(20,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
-plot "data/ps20-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps20-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps20-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
+    "data/ps20-ts150.induced.predicted-line.plot" u 1:4 w line notitle lc "white"
 
 set colorbox
 
 set title "$G(30,x) \\hookrightarrow G(150,y)$"
 set cbtics 0.5
-plot "data/ps30-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps30-ts150.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps30-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
+    "data/ps30-ts150.induced.predicted-line.plot" u 1:4 w line notitle lc "white"
 
 unset colorbox
 set cbrange [0:1]

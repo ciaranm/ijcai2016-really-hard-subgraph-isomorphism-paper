@@ -4,12 +4,15 @@ PATTERN_SIZES := 10 20 30
 TARGET_SIZES := 150
 
 all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),\
-    $(RESULTS)/ps$(ps)-ts$(ts).non-induced.predicted.plot ))
+    $(RESULTS)/ps$(ps)-ts$(ts).non-induced.predicted.plot \
+    $(RESULTS)/ps$(ps)-ts$(ts).non-induced.predicted-line.plot ))
 
 define INSTANCE_template
 $(RESULTS)/ps$(1)-ts$(2).non-induced.predicted.plot :
 	ruby ../prediction/noninduced.rb $(1) $(2) | tee $$@
 
+$(RESULTS)/ps$(1)-ts$(2).non-induced.predicted-line.plot :
+	ruby ../prediction/noninduced-line.rb $(1) $(2) | tee $$@
 endef
 
 $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(eval $(call INSTANCE_template,$(ps),$(ts)))))

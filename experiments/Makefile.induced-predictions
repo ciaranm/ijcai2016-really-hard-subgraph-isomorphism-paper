@@ -4,11 +4,15 @@ PATTERN_SIZES := 10 14 15 16 20 30
 TARGET_SIZES := 150
 
 all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),\
-    $(RESULTS)/ps$(ps)-ts$(ts).induced.predicted.plot ))
+    $(RESULTS)/ps$(ps)-ts$(ts).induced.predicted.plot \
+    $(RESULTS)/ps$(ps)-ts$(ts).induced.predicted-line.plot ))
 
 define INSTANCE_template
 $(RESULTS)/ps$(1)-ts$(2).induced.predicted.plot :
 	ruby ../prediction/induced.rb $(1) $(2) | tee $$@
+
+$(RESULTS)/ps$(1)-ts$(2).induced.predicted-line.plot :
+	ruby ../prediction/induced-line.rb $(1) $(2) `if [[ $(1) -le 15 ]] ; then echo false ; else echo true ; fi ` | tee $$@
 
 endef
 
