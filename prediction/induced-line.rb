@@ -5,28 +5,42 @@ require 'bigdecimal'
 
 ps = ARGV[0].to_i
 ts = ARGV[1].to_i
-flip = ARGV[2].to_i == "true"
+flip = (ARGV[2] == "true")
 
-0.step(500, 1) do | x |
-    pd = BigDecimal.new(x) / 500;
-
-    results = [0, 0]
+0.step(500, 10) do | x |
+    pdresult = [0, 0]
+    tdresult = [0, 0]
     expsols = [0, 0]
+    pd, td = 0, 0
 
     [0, 1].each do | pass |
 
-        if 0 == pass
-            tdupper = x + 10
-            tdlower = 0
+        if flip then
+            if 0 == pass
+                lower = 250
+                upper = 500
+            else
+                lower = 0
+                upper = 250
+            end
         else
-            tdupper = 500
-            tdlower = x + 10
+            if 0 == pass then
+                upper = x + 10
+                lower = 0
+            else
+                upper = 500
+                lower = x + 10
+            end
         end
 
         0.upto(100) do
-            td = BigDecimal.new(tdupper + tdlower) / 1000;
-
-            if flip then pd, td = td, pd end
+            if flip then
+                td = BigDecimal.new(x) / 500;
+                pd = BigDecimal.new(upper + lower) / 1000;
+            else
+                pd = BigDecimal.new(x) / 500;
+                td = BigDecimal.new(upper + lower) / 1000;
+            end
 
             cliqueedges = BigDecimal.new(ps * (ps - 1) / 2);
             nedges = pd * cliqueedges;
@@ -45,15 +59,23 @@ flip = ARGV[2].to_i == "true"
             expsols[pass] = nstates * solprob;
 
             if ((expsols[pass] < 1) ^ (pass == 1))
-                tdlower = (tdupper + tdlower) / 2
+                lower = (upper + lower) / 2
             elsif ((expsols[pass] > 1) ^ (pass == 1))
-                tdupper = (tdupper + tdlower) / 2
+                upper = (upper + lower) / 2
             else
                 break
             end
         end
-        results[pass] = (tdupper + tdlower) / 1000.0
+
+        if flip then
+            pdresult[pass] = (upper + lower) / 1000.0
+            tdresult[pass] = td
+        else
+            pdresult[pass] = pd
+            tdresult[pass] = (upper + lower) / 1000.0
+        end
     end
 
-    puts(pd.to_f.to_s + " " + results[0].to_s + " " + expsols[0].to_f.to_s + " " + results[1].to_s + " " + expsols[1].to_f.to_s + " " + (x + 10).to_s)
+    puts(pdresult[0].to_f.to_s + " " + tdresult[0].to_f.to_s + " " + expsols[0].to_f.to_s + " " +
+         pdresult[1].to_f.to_s + " " + tdresult[1].to_f.to_s + " " + expsols[1].to_f.to_s + " ")
 end
