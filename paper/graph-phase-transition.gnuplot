@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz color size 3.3in,2.6in font '\scriptsize'
+set terminal tikz color size 3.4in,2.6in font '\tiny'
 set output "gen-graph-phase-transition.tex"
 
 load "puor.pal"

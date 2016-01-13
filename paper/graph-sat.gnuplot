@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz color size 7.8in,5.5in font '\scriptsize'
+set terminal tikz color size 7.8in,5.6in font '\tiny'
 set output "gen-graph-sat.tex"
 
 unset xlabel
@@ -17,39 +17,33 @@ set multiplot layout 4,6 spacing 0.02, 0.02
 load "puor.pal"
 unset colorbox
 
-set label 1 at screen 0.08, screen 0.75 'Satisfiable' rotate by 90
-set label 2 at screen 0.08, screen 0.55 'Glasgow' rotate by 90
-set label 3 at screen 0.08, screen 0.34 'Clasp (PB)' rotate by 90
-set label 4 at screen 0.08, screen 0.12 'BBMC (Clique)' rotate by 90
+set label 1 at screen 0.07, graph 0.5 center 'Satisfiable?' rotate by 90
 
-set title "$G(10,x) \\hookrightarrow G(75,y)$"
+set title "$G(10,x){\\hookrightarrow}G(75,y)$"
 set cbtics 0.5
 plot "data/ps10-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 unset label 1
-unset label 2
-unset label 3
-unset label 4
 
-set title "$G(12,x) \\hookrightarrow G(75,y)$"
+set title "$G(12,x){\\hookrightarrow}G(75,y)$"
 set cbtics 0.5
 plot "data/ps12-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
-set title "$G(14,x) \\hookrightarrow G(75,y)$"
+set title "$G(14,x){\\hookrightarrow}G(75,y)$"
 set cbtics 0.5
 plot "data/ps14-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
-set title "$G(16,x) \\hookrightarrow G(75,y)$"
+set title "$G(16,x){\\hookrightarrow}G(75,y)$"
 set cbtics 0.5
 plot "data/ps16-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
-set title "$G(18,x) \\hookrightarrow G(75,y)$"
+set title "$G(18,x){\\hookrightarrow}G(75,y)$"
 set cbtics 0.5
 plot "data/ps18-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 set colorbox
 
-set title "$G(25, x) \\hookrightarrow G(75,y)$"
+set title "$G(25, x){\\hookrightarrow}G(75,y)$"
 set cbtics 0.5
 plot "data/ps25-ts75.induced.proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
@@ -59,9 +53,13 @@ set format cb '$10^{%.0f}$'
 unset colorbox
 set cbrange [2:6]
 
+set label 1 at screen 0.07, graph 0.5 center 'Glasgow' rotate by 90
+
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
 plot "data/ps10-ts75.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+
+unset label 1
 
 set notitle
 set cbtics 1 add ('${\le}10^{2}$' 2) add ('${\ge}10^{6}$' 6)
@@ -85,10 +83,14 @@ set notitle
 plot "data/ps25-ts75.induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 unset colorbox
-set cbrange [3:7]
+set cbrange [2:8]
+
+set label 1 at screen 0.07, graph 0.5 center 'Clasp (PB)' rotate by 90
 
 set notitle
 plot "data/ps10-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+
+unset label 1
 
 set notitle
 plot "data/ps12-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
@@ -104,14 +106,18 @@ plot "data/ps18-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10(
 
 set colorbox
 
-set cbtics 1 add ('${\le}10^{3}$' 3) add ('${\ge}10^{8}$' 8)
+set cbtics 2 add ('${\le}10^{2}$' 2) add ('${\ge}10^{8}$' 8)
 plot "data/ps25-ts75.clasp-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
 
 unset colorbox
-set cbrange [3:9]
+set cbrange [2:8]
+
+set label 1 at screen 0.07, graph 0.5 center 'BBMC (Clique)' rotate by 90
 
 set notitle
 plot "data/ps10-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
+
+unset label 1
 
 set notitle
 plot "data/ps12-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
@@ -127,7 +133,6 @@ plot "data/ps18-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10
 
 set colorbox
 
-set cbtics 1 add ('${\le}10^{3}$' 3) add ('${\ge}10^{9}$' 9)
+set cbtics 2 add ('${\le}10^{2}$' 2) add ('${\ge}10^{8}$' 8)
 plot "data/ps25-ts75.clique-induced.average-nodes.plot" u ($2/50):($1/50):(log10($3+1)) matrix w image notitle
-
 
