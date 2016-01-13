@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 RESULTS := results
-PATTERN_SIZES := 10 14 15 16 20 30
+PATTERN_SIZES := 5 10 14 15 16 20 30 50
 TARGET_SIZES := 150
 
 all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),\

@@ -1,18 +1,28 @@
 SHELL := /bin/bash
 VARIANTS := rev-pattern rev-target rev-both
 RESULTS := results
-PATTERN_SIZES := 10 14 15 16 20 30
+PATTERN_SIZES := 5 8 10 14 15 16 20 30 50
 TARGET_SIZES := 150
 SKIP := 2
 PATTERN_DENSITIES := $(shell for a in `seq 0 $(SKIP) 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
 TARGET_DENSITIES := $(PATTERN_DENSITIES)
 TIMEOUT := 100
 
-all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach v,$(VARIANTS),$(RESULTS)/ps$(ps)-ts$(ts).supinduced-which-$(v).plot )))
+all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach v,$(VARIANTS),\
+    $(RESULTS)/ps$(ps)-ts$(ts).supinduced-which-$(v).plot \
+    $(RESULTS)/ps$(ps)-ts$(ts).supinduced-isbest-$(v).plot ) \
+    $(RESULTS)/ps$(ps)-ts$(ts).supinduced-isbest.plot \
+    ))
 
 define INSTANCE_template
 $(RESULTS)/ps$(1)-ts$(2).supinduced-which-%.plot :
-	for pd in $(PATTERN_DENSITIES) ; do { for td in $(TARGET_DENSITIES) ; do { v1=$$$$(cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/supinduced.average-nodes | sed -e 's,\..*,,' ) ; v2=$$$$(cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/supinduced-$$*.average-nodes | sed -e 's,\..*,,' ) ; if [[ $$$$v1 -ge 1000000000 ]] || [[ $$$$v2 -ge 1000000000 ]] ; then echo 0.5 ; elif [[ $$$$v1 -gt $$$$v2 ]] ; then echo 1 ; elif [[ $$$$v2 -gt $$$$v1 ]] ; then echo -1 ; else echo 0 ; fi ; } ; done ; } | xargs ; done | tee $$@
+	for pd in $(PATTERN_DENSITIES) ; do { for td in $(TARGET_DENSITIES) ; do { v1=$$$$(cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/supinduced.average-nodes | sed -e 's,\..*,,' ) ; v2=$$$$(cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/supinduced-$$*.average-nodes | sed -e 's,\..*,,' ) ; if [[ $$$$v1 -gt $$$$v2 ]] ; then echo 1 ; elif [[ $$$$v2 -gt $$$$v1 ]] ; then echo -1 ; else echo 0 ; fi ; } ; done ; } | xargs ; done | tee $$@
+
+$(RESULTS)/ps$(1)-ts$(2).supinduced-isbest-%.plot :
+	for pd in $(PATTERN_DENSITIES) ; do { for td in $(TARGET_DENSITIES) ; do { v1=$$$$(cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/supinduced.average-nodes | sed -e 's,\..*,,' ) ; v2=$$$$(cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/supinduced-rev-pattern.average-nodes | sed -e 's,\..*,,' ) ; v3=$$$$(cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/supinduced-rev-target.average-nodes | sed -e 's,\..*,,' ) ; v4=$$$$(cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/supinduced-rev-both.average-nodes | sed -e 's,\..*,,' ) ;  vme=$$$$(cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/supinduced-$$*.average-nodes | sed -e 's,\..*,,' ) ; if [[ $$$$vme -eq $$$$v1 ]] && [[ $$$$vme -eq $$$$v2 ]] && [[ $$$$vme -eq $$$$v3 ]] && [[ $$$$vme -eq $$$$v4 ]] ; then echo 0.5 ; elif [[ $$$$vme -le $$$$v1 ]] && [[ $$$$vme -le $$$$v2 ]] && [[ $$$$vme -le v3 ]] && [[ $$$$vme -le v4 ]] ; then echo 1 ; else echo 0 ; fi ; } ; done ; } | xargs ; done | tee $$@
+
+$(RESULTS)/ps$(1)-ts$(2).supinduced-isbest.plot :
+	for pd in $(PATTERN_DENSITIES) ; do { for td in $(TARGET_DENSITIES) ; do { v1=$$$$(cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/supinduced.average-nodes | sed -e 's,\..*,,' ) ; v2=$$$$(cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/supinduced-rev-pattern.average-nodes | sed -e 's,\..*,,' ) ; v3=$$$$(cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/supinduced-rev-target.average-nodes | sed -e 's,\..*,,' ) ; v4=$$$$(cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/supinduced-rev-both.average-nodes | sed -e 's,\..*,,' ) ;  vme=$$$$(cat $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/supinduced.average-nodes | sed -e 's,\..*,,' ) ; if [[ $$$$vme -eq $$$$v1 ]] && [[ $$$$vme -eq $$$$v2 ]] && [[ $$$$vme -eq $$$$v3 ]] && [[ $$$$vme -eq $$$$v4 ]] ; then echo 0.5 ; elif [[ $$$$vme -le $$$$v1 ]] && [[ $$$$vme -le $$$$v2 ]] && [[ $$$$vme -le v3 ]] && [[ $$$$vme -le v4 ]] ; then echo 1 ; else echo 0 ; fi ; } ; done ; } | xargs ; done | tee $$@
 endef
 
 $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(eval $(call INSTANCE_template,$(ps),$(ts)))))

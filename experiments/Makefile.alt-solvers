@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-VARIANTS := induced glucose-induced clique-induced gurobi-induced clasp-induced
+VARIANTS := induced clique-induced gurobi-induced clasp-induced # glucose-induced
 RESULTS := results
 PATTERN_SIZES := 10 12 14 16 18 25
 TARGET_SIZES := 75

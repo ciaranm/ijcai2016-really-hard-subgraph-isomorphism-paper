@@ -1,0 +1,23 @@
+SHELL := /bin/bash
+VARIANTS := rev-both
+RESULTS := results
+PATTERN_SIZES := 10 14 15 16 20 30
+TARGET_SIZES := 150
+SKIP := 2
+PATTERN_DENSITIES := $(shell for a in `seq 0 $(SKIP) 100 ` ; do printf '%0.02f\n' `bc <<<"$$a*0.01" ` ; done)
+TARGET_DENSITIES := $(PATTERN_DENSITIES)
+TIMEOUT := 100
+REPEATS := $(shell seq -w 01 10 )
+
+all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(foreach v,$(VARIANTS),\
+    $(RESULTS)/ps$(ps)-ts$(ts).induced-which-counts-$(v).plot \
+    )))
+
+define INSTANCE_template
+$(RESULTS)/ps$(1)-ts$(2).induced-which-counts-%.plot :
+	for pd in $(PATTERN_DENSITIES) ; do { for td in $(TARGET_DENSITIES) ; do { count=0 ; for r in $(REPEATS) ; do vkeep=$$$$(if grep -q 'aborted\|exceeded' $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/$$$${r}.induced.out ; then echo 10000000000 ; else sed -n -e '1s/^[^ ]\+ \([^ ]\+\).*/\1/p' < $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/$$$${r}.induced.out ; fi ) ; vflip=$$$$(if grep -q 'aborted\|exceeded' $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/$$$${r}.induced-$$*.out ; then echo 10000000000 ; else sed -n -e '1s/^[^ ]\+ \([^ ]\+\).*/\1/p' < $(RESULTS)/ps$(1)-ts$(2)/pd$$$${pd}-td$$$${td}/$$$${r}.induced-$$*.out ; fi ) ; if [[ $$$$vkeep -gt $$$$vflip ]] ; then count=$$$$(( count + 1 )) ; elif [[ $$$$vflip -gt $$$$vkeep ]] ; then count=$$$$(( count - 1 )) ; fi ; done ; echo $$$$count ; } ; done | xargs ; } ; done | tee $$@
+endef
+
+$(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),$(eval $(call INSTANCE_template,$(ps),$(ts)))))
+
+
