@@ -1,2 +1,4 @@
 intermediate/
 random_subgraph_isomorphism
+solve_subgraph_isomorphism
+*.a
