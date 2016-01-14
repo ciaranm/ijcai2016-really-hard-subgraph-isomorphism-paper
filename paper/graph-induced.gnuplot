@@ -16,7 +16,7 @@ set multiplot layout 6,6 spacing 0.02, 0.02
 
 set label 1 at screen 0.07, graph 0.5 center 'Satisfiable?' rotate by 90
 
-load "puor.pal"
+load "puyl.pal"
 unset colorbox
 
 set title "$G(10,x){\\hookrightarrow}G(150,y)$"
@@ -148,7 +148,7 @@ plot "data/ps30-ts150.vf2-induced.average-nodes.plot" u ($2/50):($1/50):(log10($
 set cbrange [-10:10]
 set cbtics 10 add ("always" 10) ("never" -10) ("neutral" 0)
 
-load "puor.pal"
+load "puyl.pal"
 unset colorbox
 set notitle
 set cbrange [0:1]
@@ -183,6 +183,8 @@ set notitle
 
 set cbrange [-10:10]
 set cbtics 10 add ("always" 10) ("never" -10) ("neutral" 0)
+
+load "puyl.pal"
 
 set label 1 at screen 0.07, graph 0.5 center 'Complement Better?' rotate by 90
 

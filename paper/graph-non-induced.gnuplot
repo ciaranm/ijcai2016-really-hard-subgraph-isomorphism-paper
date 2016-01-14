@@ -14,7 +14,7 @@ set cbtics out scale 0.5 nomirror offset -1
 
 set multiplot layout 4,3 spacing 0.03, 0.02
 
-load "puor.pal"
+load "puyl.pal"
 unset colorbox
 
 set label 1 at screen 0.05, graph 0.5 center 'Satisfiable?' rotate by 90
