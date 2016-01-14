@@ -556,23 +556,29 @@ solver, and the fourth row shows the number of search nodes used by BBMC on the 
 encoding.}\label{figure:alt}
 \end{figure*}
 
-?? We're looking at the odd stuff in the middle, which isn't near a phase transition, but is hard.
-
-Is this just a weakness of current subgraph isomorphism solvers? In \cref{figure:alt} we repeat the
+The region in the parameter space where both pattern and target have medium density is far from a
+phase transition, but nevertheless contains instances that are hard for current subgraph isomorphism
+solvers. We would like to know whether this is due to a weakness in current solvers, or whether
+instances in this region are inherently difficult to solve. In \cref{figure:alt} we repeat the
 induced experiments on smaller pattern and target graphs, using different solving techniques.
 Although these techniques are not competitive in absolute terms, we wish to see if the same pattern
 of behaviour occurs.
 
-Direct pseudo-boolean encoding: variables for each assignment, cardinality constraints, edge and
-non-edge constraints. We use the Clasp solver. We see that hard instances remain hard, including
-inside the central region, and that the easy satisfiable instances remain easy. ?? Nag James to
-write this bit, and possibly kidnap his baby if he isn't cooperative.
+We create a pseudo-boolean (PB) encoding as follows. For each pattern vertex $v$ and each target
+vertex $w$, create a binary variable which takes the value 1 if and only if that $v$ is mapped to
+$w$.  Constraints are added to ensure that each pattern vertex maps to exactly one target vertex,
+that each target vertex is mapped to by at most one pattern vertex, and that adjacent edges are
+mapped to adjacent edges. Because we are solving the induced problem, we also add constraints to
+ensure that non-adjacent edges are mapped to non-adjacent edges. We used the Clasp
+solver~\citep{gekakaosscsc11a} to solve the pseudo-boolean instances. The instances that are hard
+for the Glasgow solver remain hard for the PB solver, including instances inside the central region,
+and the easy satisfiable instances remain easy.
 
-Although not presented here, we tried an equivalent SAT encoding with direct encoding of the
-cardinality constraints using the Glucose solver, and saw very similar performance.  We also tried
-using a mixed integer encoding along similar lines---Gurobi was only able to solve some of the
-trivial satisfiable instances, and was almost never able to prove unsatisfiability within the time
-limit. We do not plot these results.
+We implemented an equivalent SAT encoding with direct encoding of the cardinality constraints. Using
+the Glucose solver, we saw very similar performance to the PB encoding. We also implemented a
+similar integer program encoding; the Gurobi solver was only able to solve some of the trivial
+satisfiable instances, and was almost never able to prove unsatisfiability within the time limit. We
+do not plot the results for either of these solvers.
 
 ?? Clique encoding: association graph, a version of BBMC \citep{SanSegundo:2011} modified to solve the
 decision problem. The hard instances in the central region remain hard. Additionally, some of the
