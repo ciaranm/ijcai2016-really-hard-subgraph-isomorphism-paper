@@ -566,14 +566,13 @@ Although these techniques are not competitive in absolute terms, we wish to see 
 of behaviour occurs.
 
 We create a pseudo-boolean (PB) encoding as follows. For each pattern vertex $v$ and each target
-vertex $w$, create a binary variable which takes the value 1 if and only if that $v$ is mapped to
+vertex $w$, we have a binary variable which takes the value 1 if and only if that $v$ is mapped to
 $w$.  Constraints are added to ensure that each pattern vertex maps to exactly one target vertex,
-that each target vertex is mapped to by at most one pattern vertex, and that adjacent edges are
-mapped to adjacent edges. Because we are solving the induced problem, we also add constraints to
-ensure that non-adjacent edges are mapped to non-adjacent edges. We used the Clasp
-solver~\citep{gekakaosscsc11a} to solve the pseudo-boolean instances. The instances that are hard
-for the Glasgow solver remain hard for the PB solver, including instances inside the central region,
-and the easy satisfiable instances remain easy.
+that each target vertex is mapped to by at most one pattern vertex, that adjacent vertices are
+mapped to adjacent vertices, and that non-adjacent vertices are mapped to non-adjacent vertices. We
+used the Clasp solver~\citep{gekakaosscsc11a} to solve the pseudo-boolean instances. The instances
+that are hard for the Glasgow solver remain hard for the PB solver, including instances inside the
+central region, and the easy satisfiable instances remain easy.
 
 We implemented an equivalent SAT encoding with direct encoding of the cardinality constraints. Using
 the Glucose solver, we saw very similar performance to the PB encoding. We also implemented a
@@ -581,16 +580,16 @@ similar integer program encoding; the Gurobi solver was only able to solve some 
 satisfiable instances, and was almost never able to prove unsatisfiability within the time limit. We
 do not plot the results for either of these solvers.
 
-?? Clique encoding: association graph, a version of BBMC \citep{SanSegundo:2011} modified to solve the
-decision problem. The hard instances in the central region remain hard. Additionally, some of the
-easy satisfiable instances become hard. Possible weakness in variable ordering heuristics. The
-interesting thing is here that clique knows nothing about adjacency or non-adjacency.
+We also reduced the problem to the clique problem via the association graph encoding show in
+\cref{figure:sip}, and solved the instances using a version of BBMC \citep{SanSegundo:2011} modified
+to solve the decision problem. Again, the instances in the central region remain hard, and
+additionally, some of the easy satisfiable instances become hard.
 
-?? Some easy instances become hard, here, but hard instances remain hard. In particular, the large
-central region for the larger pattern graphs which is not near the phase transitions is still
-relatively difficult in all encodings. This suggests that these instances may genuinely be hard,
-despite not being near a phase transition, and that this does not indicate a weakness in subgraph
-isomorphism solvers.
+These results suggest that the central region may be genuinely hard, despite not being near a phase
+transition.  The clique encoding in particular rules out the hypothesis that subgraph isomorphism
+solvers only find this region hard due to not reasoning simultaneously about adjacency and
+non-adjacency, since the association graph encoding constraints consider compatibility rather than
+adjacency and non-adjacency.
 
 \section{Conclusion}
 
