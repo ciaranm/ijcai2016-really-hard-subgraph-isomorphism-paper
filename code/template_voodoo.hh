@@ -54,7 +54,7 @@ auto select_graph_size(const NoMoreGraphSizes &, const Graph_ &, Params_ && ...)
     throw GraphTooBig();
 }
 
-using AllGraphSizes = GraphSizes<1, 2, 3, 4, 5, 6, 7, 8>;
+using AllGraphSizes = GraphSizes<1, 2, 3, 4, 5, 6, 7, 8, 16, 20, 24, 28, 32, 64, 128, 256, 512, 1024>;
 
 using AllProductGraphSizes = GraphSizes<1, 2, 3, 4, 5, 6, 7, 8, 12, 14, 16, 18, 24, 32>;
 
