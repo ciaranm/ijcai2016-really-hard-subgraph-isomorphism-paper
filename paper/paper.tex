@@ -47,6 +47,13 @@
 \renewcommand{\floatpagefraction}{0.85}
 \renewcommand{\dblfloatpagefraction}{0.85}
 
+% cref style
+\crefname{figure}{Figure}{Figures}
+\Crefname{figure}{Figure}{Figures}
+
+% http://tex.stackexchange.com/questions/22100/the-bar-and-overline-commands
+\newcommand{\shortoverline}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
 \title{Heuristics and Really Hard Instances for Subgraph Isomorphism Problems}
 \author{Ciaran McCreesh\thanks{This work was supported by the Engineering and Physical Sciences
     Research Council [grant number EP/K503058/1]} \and Patrick Prosser \and James Trimble \\
@@ -59,14 +66,13 @@ c.mccreesh.1@research.gla.ac.uk}
 
 \begin{abstract}
     We show how to generate ``really hard'' random instances for variants of the subgraph
-    isomorphism problem. For the non-induced variant of the problem, we predict and observe a phase
+    isomorphism problem. For the non-induced variant, we predict and observe a phase
     transition between satisfiable and unsatisfiable instances, with a corresponding complexity peak
-    seen in three different solvers. For the induced variant of the problem, the behaviour is more
-    complicated, with two phase transitions and an unexpectedly hard region in between. We show that
-    this region remains hard when using pseudo-boolean and mixed integer encodings, and under
-    reduction to the clique problem. Finally, we show that existing heuristics for the non-induced
-    variant can be recovered by determining how to maximise the expected number of solutions, and
-    that this technique gives new, better heuristics for the induced variant.
+    in three different solvers. For the induced variant, much richer behaviour is observed, and we
+    see evidence that constrainedness is a better measure of difficulty than proximity to a phase
+    transition. Finally, we show that existing heuristics for the non-induced variant can be
+    recovered by determining how to maximise the expected number of solutions, and that this
+    technique gives new, better heuristics for the induced variant.
 \end{abstract}
 
 \section{Introduction}
@@ -136,149 +142,13 @@ vision \citep{Damiand:2011,Solnon:2015}, biochemistry \citep{Giugno:2013}, and p
             \node [anchor=center, font=\Large] (A1) at (-1.5, -1.5) { $\hookleftarrow$ };
             \node [anchor=center, font=\Large] (A2) at ( 3.5, -1.5) { $\rightarrowtail$ };
         \end{scope}
-    \end{tikzpicture}\\[0.75cm]
-    \begin{tikzpicture}[scale=0.5]
-        \begin{scope}
-            \foreach \n in {1, ..., 6}{
-                \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (N1\n) at (\n, 0) {\n};
-            }
-
-            \draw [decorate, decoration={brace, raise=0.2cm}, very thick] (N11.north west) -- (N16.north
-                east) node [midway, above=0.3cm] { $1 \mapsto$ };
-
-            \foreach \n in {1, ..., 6}{
-                \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (N2\n) at (0, -\n) {\n};
-            }
-
-            \draw [decorate, decoration={brace, raise=0.2cm, mirror}, very thick] (N21.north west) --
-                (N26.south west) node [midway, left=0.3cm] { $2 \mapsto$ };
-
-            \foreach \n in {1, ..., 6}{
-                \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (N3\n) at (7, -\n) {\n};
-            }
-
-            \draw [decorate, decoration={brace, raise=0.2cm}, very thick] (N31.north east) -- (N36.south
-                east) node [midway, right=0.3cm] { $3 \mapsto$ };
-
-            \foreach \n in {1, ..., 6}{
-                \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (N4\n) at (\n, -7) {\n};
-            }
-
-            \draw [decorate, decoration={brace, raise=0.2cm, mirror}, very thick] (N41.south west) --
-                (N46.south east) node [midway, below=0.3cm] { $4 \mapsto$ };
-
-            \begin{scope}[on background layer]
-                \draw [color=uofgsandstone!50] ($(N11)!0.8!(N11.south)$) -- ($(N22)!0.8!(N22.east)$);
-                \draw [color=uofgsandstone!50] ($(N11)!0.8!(N11.south)$) -- ($(N23)!0.8!(N23.east)$);
-                \draw [color=uofgsandstone!50] ($(N11)!0.8!(N11.south)$) -- ($(N24)!0.8!(N24.east)$);
-                \draw [color=uofgsandstone!50] ($(N11)!0.8!(N11.south)$) -- ($(N25)!0.8!(N25.east)$);
-                \draw [color=uofgsandstone!50] ($(N11)!0.8!(N11.south)$) -- ($(N36)!0.8!(N36.west)$);
-                \draw [color=uofgsandstone!50] ($(N11)!0.8!(N11.south)$) -- ($(N46)!0.8!(N46.north)$);
-                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N12)!0.8!(N12.south)$);
-                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N32)!0.8!(N32.west)$);
-                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N42)!0.8!(N42.north)$);
-                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N13)!0.8!(N13.south)$);
-                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N33)!0.8!(N33.west)$);
-                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N43)!0.8!(N43.north)$);
-                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N14)!0.8!(N14.south)$);
-                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N34)!0.8!(N34.west)$);
-                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N44)!0.8!(N44.north)$);
-                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N15)!0.8!(N15.south)$);
-                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N35)!0.8!(N35.west)$);
-                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N45)!0.8!(N45.north)$);
-                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N22)!0.8!(N22.east)$);
-                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N42)!0.8!(N42.north)$);
-                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N23)!0.8!(N23.east)$);
-                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N43)!0.8!(N43.north)$);
-                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N24)!0.8!(N24.east)$);
-                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N44)!0.8!(N44.north)$);
-                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N25)!0.8!(N25.east)$);
-                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N45)!0.8!(N45.north)$);
-                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N16)!0.8!(N16.south)$);
-                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N22)!0.8!(N22.east)$);
-                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N32)!0.8!(N32.west)$);
-                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N23)!0.8!(N23.east)$);
-                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N33)!0.8!(N33.west)$);
-                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N24)!0.8!(N24.east)$);
-                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N34)!0.8!(N34.west)$);
-                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N25)!0.8!(N25.east)$);
-                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N35)!0.8!(N35.west)$);
-                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N16)!0.8!(N16.south)$);
-                \draw [color=uofgsandstone!50] ($(N12)!0.8!(N12.south)$) -- ($(N33)!0.8!(N33.west)$);
-                \draw [color=uofgsandstone!50] ($(N12)!0.8!(N12.south)$) -- ($(N24)!0.8!(N24.east)$);
-                \draw [color=uofgsandstone!50] ($(N12)!0.8!(N12.south)$) -- ($(N45)!0.8!(N45.north)$);
-                \draw [color=uofgsandstone!50] ($(N22)!0.8!(N22.east)$) -- ($(N14)!0.8!(N14.south)$);
-                \draw [color=uofgsandstone!50] ($(N22)!0.8!(N22.east)$) -- ($(N34)!0.8!(N34.west)$);
-                \draw [color=uofgsandstone!50] ($(N22)!0.8!(N22.east)$) -- ($(N44)!0.8!(N44.north)$);
-                \draw [color=uofgsandstone!50] ($(N22)!0.8!(N22.east)$) -- ($(N16)!0.8!(N16.south)$);
-                \draw [color=uofgsandstone!50] ($(N22)!0.8!(N22.east)$) -- ($(N36)!0.8!(N36.west)$);
-                \draw [color=uofgsandstone!50] ($(N22)!0.8!(N22.east)$) -- ($(N46)!0.8!(N46.north)$);
-                \draw [color=uofgsandstone!50] ($(N32)!0.8!(N32.west)$) -- ($(N13)!0.8!(N13.south)$);
-                \draw [color=uofgsandstone!50] ($(N32)!0.8!(N32.west)$) -- ($(N24)!0.8!(N24.east)$);
-                \draw [color=uofgsandstone!50] ($(N32)!0.8!(N32.west)$) -- ($(N44)!0.8!(N44.north)$);
-                \draw [color=uofgsandstone!50] ($(N32)!0.8!(N32.west)$) -- ($(N15)!0.8!(N15.south)$);
-                \draw [color=uofgsandstone!50] ($(N32)!0.8!(N32.west)$) -- ($(N26)!0.8!(N26.east)$);
-                \draw [color=uofgsandstone!50] ($(N32)!0.8!(N32.west)$) -- ($(N46)!0.8!(N46.north)$);
-                \draw [color=uofgsandstone!50] ($(N42)!0.8!(N42.north)$) -- ($(N13)!0.8!(N13.south)$);
-                \draw [color=uofgsandstone!50] ($(N42)!0.8!(N42.north)$) -- ($(N24)!0.8!(N24.east)$);
-                \draw [color=uofgsandstone!50] ($(N42)!0.8!(N42.north)$) -- ($(N34)!0.8!(N34.west)$);
-                \draw [color=uofgsandstone!50] ($(N42)!0.8!(N42.north)$) -- ($(N15)!0.8!(N15.south)$);
-                \draw [color=uofgsandstone!50] ($(N42)!0.8!(N42.north)$) -- ($(N26)!0.8!(N26.east)$);
-                \draw [color=uofgsandstone!50] ($(N42)!0.8!(N42.north)$) -- ($(N36)!0.8!(N36.west)$);
-                \draw [color=uofgsandstone!50] ($(N13)!0.8!(N13.south)$) -- ($(N34)!0.8!(N34.west)$);
-                \draw [color=uofgsandstone!50] ($(N13)!0.8!(N13.south)$) -- ($(N44)!0.8!(N44.north)$);
-                \draw [color=uofgsandstone!50] ($(N13)!0.8!(N13.south)$) -- ($(N25)!0.8!(N25.east)$);
-                \draw [color=uofgsandstone!50] ($(N13)!0.8!(N13.south)$) -- ($(N26)!0.8!(N26.east)$);
-                \draw [color=uofgsandstone!50] ($(N23)!0.8!(N23.east)$) -- ($(N15)!0.8!(N15.south)$);
-                \draw [color=uofgsandstone!50] ($(N23)!0.8!(N23.east)$) -- ($(N35)!0.8!(N35.west)$);
-                \draw [color=uofgsandstone!50] ($(N23)!0.8!(N23.east)$) -- ($(N45)!0.8!(N45.north)$);
-                \draw [color=uofgsandstone!50] ($(N23)!0.8!(N23.east)$) -- ($(N16)!0.8!(N16.south)$);
-                \draw [color=uofgsandstone!50] ($(N23)!0.8!(N23.east)$) -- ($(N36)!0.8!(N36.west)$);
-                \draw [color=uofgsandstone!50] ($(N23)!0.8!(N23.east)$) -- ($(N46)!0.8!(N46.north)$);
-                \draw [color=uofgsandstone!50] ($(N33)!0.8!(N33.west)$) -- ($(N14)!0.8!(N14.south)$);
-                \draw [color=uofgsandstone!50] ($(N33)!0.8!(N33.west)$) -- ($(N25)!0.8!(N25.east)$);
-                \draw [color=uofgsandstone!50] ($(N33)!0.8!(N33.west)$) -- ($(N45)!0.8!(N45.north)$);
-                \draw [color=uofgsandstone!50] ($(N33)!0.8!(N33.west)$) -- ($(N26)!0.8!(N26.east)$);
-                \draw [color=uofgsandstone!50] ($(N33)!0.8!(N33.west)$) -- ($(N46)!0.8!(N46.north)$);
-                \draw [color=uofgsandstone!50] ($(N43)!0.8!(N43.north)$) -- ($(N14)!0.8!(N14.south)$);
-                \draw [color=uofgsandstone!50] ($(N43)!0.8!(N43.north)$) -- ($(N25)!0.8!(N25.east)$);
-                \draw [color=uofgsandstone!50] ($(N43)!0.8!(N43.north)$) -- ($(N36)!0.8!(N36.west)$);
-                \draw [color=uofgsandstone!50] ($(N14)!0.8!(N14.south)$) -- ($(N35)!0.8!(N35.west)$);
-                \draw [color=uofgsandstone!50] ($(N14)!0.8!(N14.south)$) -- ($(N45)!0.8!(N45.north)$);
-                \draw [color=uofgsandstone!50] ($(N14)!0.8!(N14.south)$) -- ($(N26)!0.8!(N26.east)$);
-                \draw [color=uofgsandstone!50] ($(N24)!0.8!(N24.east)$) -- ($(N16)!0.8!(N16.south)$);
-                \draw [color=uofgsandstone!50] ($(N24)!0.8!(N24.east)$) -- ($(N36)!0.8!(N36.west)$);
-                \draw [color=uofgsandstone!50] ($(N24)!0.8!(N24.east)$) -- ($(N46)!0.8!(N46.north)$);
-                \draw [color=uofgsandstone!50] ($(N34)!0.8!(N34.west)$) -- ($(N15)!0.8!(N15.south)$);
-                \draw [color=uofgsandstone!50] ($(N34)!0.8!(N34.west)$) -- ($(N26)!0.8!(N26.east)$);
-                \draw [color=uofgsandstone!50] ($(N34)!0.8!(N34.west)$) -- ($(N46)!0.8!(N46.north)$);
-                \draw [color=uofgsandstone!50] ($(N44)!0.8!(N44.north)$) -- ($(N15)!0.8!(N15.south)$);
-                \draw [color=uofgsandstone!50] ($(N44)!0.8!(N44.north)$) -- ($(N26)!0.8!(N26.east)$);
-                \draw [color=uofgsandstone!50] ($(N44)!0.8!(N44.north)$) -- ($(N36)!0.8!(N36.west)$);
-                \draw [color=uofgsandstone!50] ($(N15)!0.8!(N15.south)$) -- ($(N26)!0.8!(N26.east)$);
-                \draw [color=uofgsandstone!50] ($(N25)!0.8!(N25.east)$) -- ($(N16)!0.8!(N16.south)$);
-                \draw [color=uofgsandstone!50] ($(N25)!0.8!(N25.east)$) -- ($(N36)!0.8!(N36.west)$);
-                \draw [color=uofgsandstone!50] ($(N25)!0.8!(N25.east)$) -- ($(N46)!0.8!(N46.north)$);
-                \draw [color=uofgsandstone!50] ($(N35)!0.8!(N35.west)$) -- ($(N46)!0.8!(N46.north)$);
-                \draw [color=uofgsandstone!50] ($(N45)!0.8!(N45.north)$) -- ($(N26)!0.8!(N26.east)$);
-                \draw [color=uofgsandstone!50] ($(N45)!0.8!(N45.north)$) -- ($(N36)!0.8!(N36.west)$);
-                \draw [ultra thick] ($(N12)!0.8!(N12.south)$) -- ($(N43)!0.8!(N43.north)$);
-                \draw [ultra thick] ($(N12)!0.8!(N12.south)$) -- ($(N35)!0.8!(N35.west)$);
-                \draw [ultra thick] ($(N12)!0.8!(N12.south)$) -- ($(N26)!0.8!(N26.east)$);
-                \draw [ultra thick] ($(N43)!0.8!(N43.north)$) -- ($(N35)!0.8!(N35.west)$);
-                \draw [ultra thick] ($(N43)!0.8!(N43.north)$) -- ($(N26)!0.8!(N26.east)$);
-                \draw [ultra thick] ($(N35)!0.8!(N35.west)$) -- ($(N26)!0.8!(N26.east)$);
-            \end{scope}
-        \end{scope}
     \end{tikzpicture}
 
-    \caption{On top, there is a non-induced isomorphism from the pattern graph, in the center, to the target
+    \caption{There is a non-induced isomorphism from the pattern graph, in the center, to the target
     on the right, mapping vertex 1 to 1, 2 to 3, 3 to 5 and 4 to 6. This is not an induced
     isomorphism, since there is an edge between 1 and 5 in the target but not between 1 and 3 in the
-    pattern. The mapping from the pattern to the (same) target on the left, sending 1 to 2, 2 to 6, 3 to
-    5 and 4 to 3, is both non-induced and induced.
-    Below, the association graph encoding for the induced version: the highlighted clique
-    corresponds to the same mapping.}
+    pattern. The mapping from the pattern to the (same) target on the left, sending 1 to 2, 2 to 6,
+    3 to 5 and 4 to 3, is both non-induced and induced.}
     \label{figure:sip}
 \end{figure}
 
@@ -289,16 +159,16 @@ instances to evaluate algorithm behaviour can be beneficial, because it provides
 many instances cheaply, and reduces the risk of over-fitting when tuning design parameters. The
 random instances used in each case came from common datasets \citep{DeSanto:2003,Zampelli:2010},
 which were generated by taking a random subgraph of a random graph (using various models, including
-Erd\H{o}s-R\'enyi, scale-free, bounded degree, and meshes) and permuting the vertices.  This is not
-ideal: such instances are guaranteed to be satisfiable (?? mention \citep{Anton:2009}), and so
-existing benchmark suites contain relatively few non-trivial unsatisfiable instances. These
-instances also tend to be computationally fairly easy, with most of the difficulty being in dealing
-with the size of the model.
-
-Generating non-trivial unsatisfiable random instances is not straightforward. Using a
-pattern graph from one of the random suites with the ``wrong'' target graph tends to give either a
-trivially unsatisfiable instance, or a satisfiable instance. (In particular, it is \emph{not} the
-case that a relatively small random graph is unlikely to appear in a larger random graph.)
+Erd\H{o}s-R\'enyi, scale-free, bounded degree, and meshes) and permuting the vertices. Such
+instances are guaranteed to be satisfiable---\citet{Anton:2009} exploited this property to create
+large sets of random satisfiable SAT instances.  However, since this has been the only approach used
+to generate random subgraph isomorphism instances, existing benchmark suites contain relatively few
+non-trivial unsatisfiable instances, and the satisfiable instances tend to be computationally fairly
+easy, with most of the difficulty being in dealing with the size of the model.  This problem cannot
+be addressed by using a pattern graph from one of the random suites with the ``wrong'' target graph:
+this tends to give either a trivially unsatisfiable instance, or a satisfiable instance. (In
+particular, it is \emph{not} the case that a relatively small random graph is unlikely to appear in
+a larger random graph.)
 
 Here we present and evaluate a new method for creating random pattern/target pairs. This method
 generates both satisfiable and unsatisfiable instances, and can produce computationally challenging
@@ -307,42 +177,39 @@ builds upon the phase transition phenomena observed in satisfiability and graph 
 first described by \citet{Cheeseman:1991} and \citet{Mitchell:1992}---?? cite later stuff and
 explain really hard.
 
-?? Maybe introduce \cref{figure:phase-transition} here instead of at the start of the next section?
-
-For subgraph isomorphism we have three relevant control parameters: we can independently alter the
+For subgraph isomorphism we identify relevant control parameters: we can independently alter the
 edge probability of the pattern graph, the edge probability of the target graph, and the relative
 orders (number of vertices) of the pattern and target graphs.  For non-induced isomorphisms, with
 the correct choice of parameters we see results very similar to those observed with boolean
 satisfiability problems: there is a phase transition from satisfiable to unsatisfiable (and we can
-predict its location), and we see a complexity peak occur (with three different solvers) near this
+predict its location), and we see a complexity peak occur with three different solvers near this
 phase transition.
-
-?? Actually, it's not necessarily obvious that these are the right parameters to use... For example,
-mean degree is a meaningful parameter for random graphs... Also, the formula shows it's not exactly
-the ``relative'' order, but some other function of the two orders.
 
 For certain choices of parameters for induced isomorphisms, there are two phase transitions, going
 from satisfiable to unsatisfiable, and then from unsatisfiable back to satisfiable. Again, when
 going from satisfiable to unsatisfiable (from either direction), instances go from being trivial to
 really hard to solve. However, each of the three solvers we tested also finds the central
 unsatisfiable region to be really hard---this may be unexpected, since this region is not near a
-phase transition and is apparently over-constrained. To show that this is not a simple weakness of
-current subgraph isomorphism algorithms, we verify that this region is also hard when using use a
-pseudo-boolean encoding, a mixed integer model, and under reduction to the clique problem.
+phase transition. To show that this is not a simple weakness of current subgraph isomorphism
+algorithms, we verify that this region is also hard when using use a pseudo-boolean encoding, and
+under reduction to the clique problem. Interestingly, the constrainedness measure
+\citep{Gent:1996:Kappa} \emph{does} predict this difficult region---these instances provide (?? the
+first??) evidence in favour of constrainedness, rather than proximity to a phase transition, being
+an accurate predictor of difficulty.
 
-?? Also there's heuristics. Figure out how to work this smoothly into the intro.
+?? Finally, we discuss the relationship between heuristics and the expected number of solutions,
+recovering existing heuristics for the non-induced variant, and introducing new heuristics for the
+induced variant. I have failed miserably at integrating this paragraph smoothly.
 
 \subsection{Definitions}
 
 Throughout, our graphs are unlabelled, undirected, and do not have any loops (vertices which are
 adjacent to themselves).  The \emph{order} of a graph is the cardinality of its vertex set. We write
 $\operatorname{V}(G)$ for the vertex set of a graph $G$. The \emph{complement} of a graph $G$,
-denoted $\overline{G}$, is the
+denoted $\shortoverline{G}$, is the
 graph with the same vertex set as $G$, and with an edge between distinct vertices $v$ and $w$ iff
 $v$ and $w$ are not adjacent in $G$. We write $G(v, p)$ for an Erd\H{o}s-R\'enyi random graph with
 $v$ vertices, and an edge between each distinct pair of vertices with independent probability $p$.
-
-?? I'm sure I figured out how to make overlines typeset better. Remember to look this up.
 
 A \emph{non-induced subgraph isomorphism} from a graph $P$ (called the \emph{pattern}) to a graph
 $T$ (called the \emph{target}) is an injective mapping from $\operatorname{V}(P)$ to
@@ -352,21 +219,8 @@ isomorphism} additionally preserves non-adjacency---that is, if $v$ and $w$ are 
 then $i(v)$ and $i(w)$ must not be adjacent in $T$. We use the notation $i : P \rightarrowtail T$
 for a non-induced isomorphism, and $i : P \hookrightarrow T$ for an induced isomorphism. Observe
 that an induced isomorphism $i : P \hookrightarrow T$ is a non-induced isomorphism $i : P
-\rightarrowtail T$ which is also a non-induced isomorphism $\overline{i} : \overline{P}
-\rightarrowtail \overline{T}$.
-
-The \emph{association graph encoding} of a subgraph isomorphism problem is constructed by creating a
-new graph with a vertex for each pair $(p, t)$ of vertices from the pattern and target graphs
-respectively. There is an edge between vertex $(p_1, t_1)$ and vertex $(p_2, t_2)$ if mapping $p_1$
-to $t_1$ and $p_2$ to $t_2$ simultaneously is permitted. For the non-induced problem, permitted
-means either $p_1$ is not adjacent to $p_2$, or both $p_1$ and $p_2$, and $t_1$ and $t_2$, are
-adjacent; for the induced problem, it means that $p_1$ is adjacent to $p_2$ if and only if $t_1$ is
-adjacent to $t_2$. Either way, it can be seen that a clique (a subset of vertices, each of which is
-adjacent to every other in the subset) of size equal to the order of the pattern graph exists in the
-association graph if and only if the problem is satisfiable, and the vertices selected correspond to
-the assignments making the solution \citep{Levi:1973}. We illustrate this in
-\cref{figure:sip}. ?? Can we move this to section 4? I thought we'd need this for the sol formulae,
-but it appears not.
+\rightarrowtail T$ which is also a non-induced isomorphism $\shortoverline{i} : \shortoverline{P}
+\rightarrowtail \shortoverline{T}$.
 
 \subsection{Experimental Setup}
 
@@ -376,19 +230,19 @@ versions: Clasp 3.1.3, Gurobi 6.0.5, Glasgow, LAD version 2, VFLib. Software was
 4.9.
 
 ?? Stuff about runtimes and recursive calls. We are not aiming to compare solvers; rather, we are
-looking for solver-independent behaviour.
+looking for solver-independent behaviour. We need a quick note on the models used here too.
 
 ?? Timeouts
 
 \section{Non-Induced Subgraph Isomorphisms}
 
 \begin{figure}[tb]
+    \setlength{\abovecaptionskip}{6pt}
     \input{gen-graph-phase-transition.tex}
     \caption{With a fixed a pattern graph order of 20, a target graph order of 150, a target edge
         probability of 0.4, and varying pattern edge probability, we observe a phase transition and
         complexity peak with the Glasgow solver in the non-induced variant. Each point represents
-        one instance. The lines show mean search effort, and mean proportion satisfiable, using a
-    larger sample size.}
+        one instance. The lines show mean search effort, and mean proportion satisfiable.}
     \label{figure:phase-transition}
 \end{figure}
 
@@ -405,7 +259,10 @@ of the samples) ?? describe this a bit more, find the 0.5 SAT mark.
 satisfiable instances tend to be easier but show greater variation than unsatisfiable instances, and
 there are exceptionally hard satisfiable instances \citep{Smith:1997}.
 
+?? Are unsatisfiable instances on the phase transition much harder than satisfiable ones?
+
 \begin{figure}[tb]
+    \setlength{\abovecaptionskip}{0pt}
     \input{gen-graph-non-induced.tex}
     \caption{Behaviour of algorithms on the non-induced variant. Each point is the average of ten
         runs. For each plot, the x-axis is the pattern edge probability and the y-axis is the target
@@ -436,9 +293,7 @@ phase transition and move into the unsatisfiable region, we see a complexity inc
 we pass the phase transition and move deeper into the unsatisfiable region, instances become easier
 again. This behaviour is largely solver-independent, although VF2 has a larger hard region than
 Glasgow or LAD. Thus, although we have moved away from the single control parameter typically
-studied, ?? I guess we want to say it's not that surprising?
-
-?? Are unsatisfiable instances on the phase transition much harder than satisfiable ones?
+studied, we observe similar behaviour to other \NP-complete problems.
 
 \subsection{Locating the Phase Transition}
 
@@ -464,33 +319,40 @@ satisfiable---a similar behaviour is seen with random constraint satisfaction pr
 
 ?? Note that the size of the state space is defined differently to in binary CSPs: we're using the
 all diff constraint to determine the size of the state space, and are not treating it as a
-constraint. In other words, our generate-and-test approach is alldiff-aware. There are probably five
-people in the world who care about this and would have seen it as very interesting twenty years ago.
+constraint. In other words, our generate-and-test approach is alldiff-aware. This matters for kappa.
 
 \subsection{Variable and Value Ordering Heuristics}
 
-?? Point out how the value ordering heuristics, which were developed empirically, can be recovered
-just by using this formula.  Note that the Glasgow heuristics are moving us towards the satisfiable
-region, or increasing the expected number of solutions \citep{Gent:1996:EN}. LAD does SDF with no
-tiebreaking, no value ordering heuristic.
+When designing variable and value ordering heuristics for backtracking search algorithms, there are
+various general principles which appear to be effective---one of these is to try to maximise the
+expected number of solutions inside any subproblem considered during search \citep{Gent:1996:EN}.
+This is usually done by cheaper surrogates, rather than direct calculation. When branching, both LAD
+and Glasgow will pick a variable with fewest remaining values in its domain: doing this will
+generally reduce the first part of the $\langle Sol \rangle$ equation by as little as possible. When
+two or domains are of equal size, LAD simply breaks ties lexicographically. Glasgow, however, will
+pick a variable corresponding to a pattern vertex of highest degree. This strategy was determined
+empirically, but could have been derived from the $\langle Sol \rangle$ formula: picking a
+pattern vertex of high degree will make the remaining pattern subgraph sparser, which will decrease
+the exponent in the second half of the formula, maximising the overall value. LAD does not apply a
+value ordering heuristic, but Glasgow does: it prefers target vertices of lowest degree. Again, this
+was determined empirically, but it has the effect of increasing $\langle Sol \rangle$ by increasing
+the remaining target density.
 
-?? In contrast, VF2 heuristics work by selecting vertices adjacent to vertices already selected.
-
-?? I suppose we should mention kappa \citep{Gent:1996:Kappa}, etc, here (or possibly in the
-conclusion?). This whole thing is a bit subtle: maximising E(N) or Kappa as a principle is
-encoding-independent, but whether this is done by SDF, deg, etc, is encoding-dependent. This seems
-to be known by these same five people, but maybe isn't in the literature anywhere.
+The VF2 heuristics, in contrast, are based around preserving connectivity. This perhaps explains
+some of VF2's weakness on graphs that are not extremely sparse.
 
 \section{Induced Isomorphisms}
 
 \begin{figure*}[tb]
+    \setlength{\abovecaptionskip}{0pt}
     \input{gen-graph-induced.tex}
     \caption{Behaviour of algorithms on the induced variant, shown in the style
     of \cref{figure:non-induced}. The second, third and fourth rows show the number of search nodes used by the
     Glasgow, LAD and VF2 algorithms. The fifth row shows a bound on the satisfiable region, by
     considering where a \emph{non-}induced isomorphism may also be a non-induced isomorphism between
     complement graphs. The final row shows when the Glasgow algorithm performs better when given the
-    complements of the pattern and target graphs as inputs.}\label{figure:induced}
+    complements of the pattern and target graphs as inputs. ?? Also plot constrainedness
+here.}\label{figure:induced}
 \end{figure*}
 
 In \cref{figure:induced} we repeat our experiments, finding induced isomorphisms. With a pattern of
@@ -503,20 +365,6 @@ but these remain hard.
 
 Pattern orders 14, 15 and 16 show the transition between the two styles.
 
-?? Explain the flip bound on row 5, and note that the difficult region is roughly near the phase
-transitions in the original graphs.
-
-?? Note that the large unexpectedly hard region in the middle is solver-independent. Perhaps
-subgraph isomorphism algorithms are not able to make use of adjacency and non-adjacency
-simultaneously, and this is a weakness in how all three are designed? In the following section we
-debunk this wonderful hypothesis.
-
-?? Does kappa predict the hard region in the middle?
-
-?? Maybe note a few solver-dependent hard instances.  There's odd unsat with LAD at the top right
-(not EHPs), trivial for Glasgow: mapping a non-clique into a clique. Glasgow looks at non-edges and
-can see immediately that no mapping is possible, but LAD doesn't do degree filtering on complements.
-
 \subsection{Predicting Induced Behaviour}
 
 By repeating the argument for locating the non-induced phase transition and additionally considering
@@ -525,6 +373,23 @@ non-edges, we get an expected number of solutions of \[ \langle Sol \rangle = t^
 \textnormal{.} \] We plot this
 using black lines on \cref{figure:induced}---again, our prediction is accurate except for very
 sparse or very dense patterns.
+
+\subsection{Why is the Central Region Hard?}
+
+?? Explain the flip bound on row 5, and note that the difficult region is roughly near the phase
+transitions in the original graphs.
+
+?? Note that the large unexpectedly hard region in the middle is solver-independent. Perhaps
+subgraph isomorphism algorithms are not able to make use of adjacency and non-adjacency
+simultaneously, and this is a weakness in how all three are designed? In the following section we
+debunk this wonderful hypothesis.
+
+?? Constrainedness predicts the hard region in the middle \citep{Gent:1996:Kappa}! Add a two line
+description of kappa, the slightly modified way we calculated it, and plot it on the graph.
+
+?? Maybe note a few solver-dependent hard instances.  There's odd unsat with LAD at the top right
+(not EHPs), trivial for Glasgow: mapping a non-clique into a clique. Glasgow looks at non-edges and
+can see immediately that no mapping is possible, but LAD doesn't do degree filtering on complements.
 
 \subsection{New Heuristics}
 
@@ -538,17 +403,19 @@ Note how sharp and well-defined this is.
 ?? Possibly send the data to Lars, and get him to run his portfolios stuff on it, and then make fun
 of machine learning?
 
-?? Note that it is always best to try to move towards the satisfiable region, even for unsatisfiable
-instances. This contradicts the suggestion by \citet{Walsh:1998} that switching heuristics based
-upon an estimate of the solubility of the problem may offer good performance.
+?? Note that when the pattern is small, it is always best to try to move towards the satisfiable
+region, even for unsatisfiable instances. It's not clear what's going on when the pattern is large.
+Note the suggestion by \citet{Walsh:1998} that switching heuristics based upon an estimate of the
+solubility of the problem may offer good performance.
 
-\subsection{Non-Random Instances}
-
-?? Is this heuristic better in general, on non-random instances?
+?? Is this heuristic better in general, on non-random instances? Unfortunately most of the instances
+in the standard benchmark set are too sparse for it to kick in. However, it provides a justification
+for reusing the non-induced heuristics.
 
 \section{Other Encodings and Solvers}
 
 \begin{figure*}[t]
+    \setlength{\abovecaptionskip}{0pt}
     \input{gen-graph-sat.tex}
     \caption{Behaviour of other solvers on the induced variant on smaller graphs, shown in the style of
         \cref{figure:non-induced}. The second row shows the number of search nodes used by the
@@ -560,10 +427,10 @@ encoding.}\label{figure:alt}
 The region in the parameter space where both pattern and target have medium density is far from a
 phase transition, but nevertheless contains instances that are hard for current subgraph isomorphism
 solvers. We would like to know whether this is due to a weakness in current solvers, or whether
-instances in this region are inherently difficult to solve. In \cref{figure:alt} we repeat the
-induced experiments on smaller pattern and target graphs, using different solving techniques.
-Although these techniques are not competitive in absolute terms, we wish to see if the same pattern
-of behaviour occurs.
+instances in this region are inherently difficult to solve, as constrainedness suggests. In
+\cref{figure:alt} we repeat the induced experiments on smaller pattern and target graphs, using
+different solving techniques.  Although these techniques are not competitive in absolute terms, we
+wish to see if the same pattern of behaviour occurs.
 
 We create a pseudo-boolean (PB) encoding as follows. For each pattern vertex $v$ and each target
 vertex $w$, we have a binary variable which takes the value 1 if and only if that $v$ is mapped to
@@ -580,16 +447,23 @@ similar integer program encoding; the Gurobi solver was only able to solve some 
 satisfiable instances, and was almost never able to prove unsatisfiability within the time limit. We
 do not plot the results for either of these solvers.
 
-We also reduced the problem to the clique problem via the association graph encoding show in
-\cref{figure:sip}, and solved the instances using a version of BBMC \citep{SanSegundo:2011} modified
-to solve the decision problem. Again, the instances in the central region remain hard, and
-additionally, some of the easy satisfiable instances become hard.
+The \emph{association graph encoding} of a subgraph isomorphism problem is constructed by creating a
+new graph with a vertex for each pair $(p, t)$ of vertices from the pattern and target graphs
+respectively. There is an edge between vertex $(p_1, t_1)$ and vertex $(p_2, t_2)$ if mapping $p_1$
+to $t_1$ and $p_2$ to $t_2$ simultaneously is permitted, i.e.\ $p_1$ is adjacent to $p_2$ if and
+only if $t_1$ is adjacent to $t_2$. A clique of size equal to the order of the pattern graph exists
+in the association graph if and only if the problem is satisfiable \citep{Levi:1973}.  We used this
+encoding with a version of the BBMC clique algorithm \citep{SanSegundo:2011} modified to solve the
+decision problem. Again, the instances in the central region remain hard, and additionally, some of
+the easy satisfiable instances become hard.
 
 These results suggest that the central region may be genuinely hard, despite not being near a phase
-transition.  The clique encoding in particular rules out the hypothesis that subgraph isomorphism
-solvers only find this region hard due to not reasoning simultaneously about adjacency and
-non-adjacency, since the association graph encoding constraints consider compatibility rather than
-adjacency and non-adjacency.
+transition, and that constrainedness is the better measure of difficulty. The clique encoding in
+particular rules out the hypothesis that subgraph isomorphism solvers only find this region hard due
+to not reasoning simultaneously about adjacency and non-adjacency, since the association graph
+encoding constraints consider compatibility rather than adjacency and non-adjacency.
+
+?? Lends weight to kappa
 
 \section{Conclusion}
 
