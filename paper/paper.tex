@@ -264,13 +264,13 @@ there are exceptionally hard satisfiable instances \citep{Smith:1997}.
 \begin{figure}[tb]
     \setlength{\abovecaptionskip}{0pt}
     \input{gen-graph-non-induced.tex}
-    \caption{Behaviour of algorithms on the non-induced variant. Each point is the average of ten
-        runs. For each plot, the x-axis is the pattern edge probability and the y-axis is the target
-        edge probability, both from 0 to 1. Along the top row, we show the proportion of instances which are
-        satisfiable; the white bands shows the phase transitions, and the black lines are our
-        predictions of where the phase transition will occur. On the second row, we show the number
-    of search nodes used by the Glasgow algorithm, on the third row, the number of search nodes used
-by the LAD algorithm, and the fourth, VF2; the dark regions indicate ``really hard'' instances.}
+    \caption{Behaviour of algorithms on the non-induced variant. For each plot, the x-axis is the
+        pattern edge probability and the y-axis is the target edge probability, both from 0 to 1.
+        Along the top row, we show the proportion of instances which are satisfiable; the white
+        bands shows the phase transitions, and the black lines are our predictions of where the
+        phase transition will occur. On the second row, we show the number of search nodes used by the
+        Glasgow algorithm, on the third row, the number of search nodes used by the LAD algorithm, and the
+        fourth, VF2; the dark regions indicate ``really hard'' instances.}
     \label{figure:non-induced}
 \end{figure}
 
@@ -343,16 +343,17 @@ some of VF2's weakness on graphs that are not extremely sparse.
 
 \section{Induced Isomorphisms}
 
-\begin{figure*}[tb]
-    \setlength{\abovecaptionskip}{0pt}
+\begin{figure*}[p]
     \input{gen-graph-induced.tex}
     \caption{Behaviour of algorithms on the induced variant, shown in the style
     of \cref{figure:non-induced}. The second, third and fourth rows show the number of search nodes used by the
     Glasgow, LAD and VF2 algorithms. The fifth row shows a bound on the satisfiable region, by
     considering where a \emph{non-}induced isomorphism may also be a non-induced isomorphism between
-    complement graphs. The final row shows when the Glasgow algorithm performs better when given the
-    complements of the pattern and target graphs as inputs. ?? Also plot constrainedness
-here.}\label{figure:induced}
+    complement graphs. The sixth row plots constrainedness: the darkest region is where
+    constrainedness is exactly one, and the lighter regions show where the problem is either over-
+    or under-constrained. The final row shows when the Glasgow algorithm performs better when given
+    the complements of the pattern and target graphs as
+inputs.}\label{figure:induced}
 \end{figure*}
 
 In \cref{figure:induced} we repeat our experiments, finding induced isomorphisms. With a pattern of
@@ -385,7 +386,8 @@ simultaneously, and this is a weakness in how all three are designed? In the fol
 debunk this wonderful hypothesis.
 
 ?? Constrainedness predicts the hard region in the middle \citep{Gent:1996:Kappa}! Add a two line
-description of kappa, the slightly modified way we calculated it, and plot it on the graph.
+description of kappa, the slightly modified way we calculated it. We plot this on the sixth row of
+\cref{figure:induced}.
 
 ?? Maybe note a few solver-dependent hard instances.  There's odd unsat with LAD at the top right
 (not EHPs), trivial for Glasgow: mapping a non-clique into a clique. Glasgow looks at non-edges and
