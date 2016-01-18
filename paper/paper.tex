@@ -177,19 +177,19 @@ builds upon the phase transition phenomena observed in satisfiability and graph 
 first described by \citet{Cheeseman:1991} and \citet{Mitchell:1992}---?? cite later stuff and
 explain really hard.
 
-For subgraph isomorphism we identify relevant control parameters: we can independently alter the
-edge probability of the pattern graph, the edge probability of the target graph, and the relative
-orders (number of vertices) of the pattern and target graphs.  For non-induced isomorphisms, with
-the correct choice of parameters we see results very similar to those observed with boolean
-satisfiability problems: there is a phase transition from satisfiable to unsatisfiable (and we can
-predict its location), and we see a complexity peak occur with three different solvers near this
-phase transition.
+For subgraph isomorphism we identify three relevant control parameters: we can independently alter
+the edge probability of the pattern graph, the edge probability of the target graph, and the
+relative orders (number of vertices) of the pattern and target graphs.  For non-induced
+isomorphisms, with the correct choice of parameters we see results very similar to those observed
+with boolean satisfiability problems: there is a phase transition from satisfiable to unsatisfiable
+(and we can predict its location), and we see a complexity peak occur with three different solvers
+near this phase transition.
 
 For certain choices of parameters for induced isomorphisms, there are two phase transitions, going
 from satisfiable to unsatisfiable, and then from unsatisfiable back to satisfiable. Again, when
 going from satisfiable to unsatisfiable (from either direction), instances go from being trivial to
 really hard to solve. However, each of the three solvers we tested also finds the central
-unsatisfiable region to be really hard---this may be unexpected, since this region is not near a
+unsatisfiable region to be hard---this may be unexpected, since this region is not near a
 phase transition. To show that this is not a simple weakness of current subgraph isomorphism
 algorithms, we verify that this region is also hard when using use a pseudo-boolean encoding, and
 under reduction to the clique problem. Interestingly, the constrainedness measure
