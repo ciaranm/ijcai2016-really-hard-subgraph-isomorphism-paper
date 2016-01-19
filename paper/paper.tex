@@ -191,7 +191,7 @@ going from satisfiable to unsatisfiable (from either direction), instances go fr
 really hard to solve. However, each of the three solvers we tested also finds the central
 unsatisfiable region to be hard---this may be unexpected, since this region is not near a
 phase transition. To show that this is not a simple weakness of current subgraph isomorphism
-algorithms, we verify that this region is also hard when using use a pseudo-boolean encoding, and
+algorithms, we verify that this region is also hard when using a pseudo-boolean encoding, and
 under reduction to the clique problem. Interestingly, the constrainedness measure
 \citep{Gent:1996:Kappa} \emph{does} predict this difficult region---these instances provide (?? the
 first??) evidence in favour of constrainedness, rather than proximity to a phase transition, being
@@ -207,7 +207,8 @@ Throughout, our graphs are unlabelled, undirected, and do not have any loops (ve
 adjacent to themselves).  The \emph{order} of a graph is the cardinality of its vertex set. We write
 $\operatorname{V}(G)$ for the vertex set of a graph $G$. The \emph{complement} of a graph $G$,
 denoted $\shortoverline{G}$, is the
-graph with the same vertex set as $G$, and with an edge between distinct vertices $v$ and $w$ iff
+graph with the same vertex set as $G$, and with an edge between distinct vertices $v$ and $w$ if and
+only if
 $v$ and $w$ are not adjacent in $G$. We write $G(v, p)$ for an Erd\H{o}s-R\'enyi random graph with
 $v$ vertices, and an edge between each distinct pair of vertices with independent probability $p$.
 
@@ -329,7 +330,7 @@ expected number of solutions inside any subproblem considered during search \cit
 This is usually done by cheaper surrogates, rather than direct calculation. When branching, both LAD
 and Glasgow will pick a variable with fewest remaining values in its domain: doing this will
 generally reduce the first part of the $\langle Sol \rangle$ equation by as little as possible. When
-two or domains are of equal size, LAD simply breaks ties lexicographically. Glasgow, however, will
+two or more domains are of equal size, LAD simply breaks ties lexicographically. Glasgow, however, will
 pick a variable corresponding to a pattern vertex of highest degree. This strategy was determined
 empirically, but could have been derived from the $\langle Sol \rangle$ formula: picking a
 pattern vertex of high degree will make the remaining pattern subgraph sparser, which will decrease
