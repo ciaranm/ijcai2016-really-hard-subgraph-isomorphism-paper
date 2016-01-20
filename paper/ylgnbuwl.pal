@@ -23,5 +23,5 @@ set palette defined ( 0 '#FFFFD9',\
 		      5 '#1D91C0',\
 		      6 '#225EA8',\
 		      7 '#0C2C84',\
-                      8 '#bcbddc',\
-                      9 '#fcfbfd' )
+                      8 '#C6DBEF',\
+                      9 '#f7fbff' )

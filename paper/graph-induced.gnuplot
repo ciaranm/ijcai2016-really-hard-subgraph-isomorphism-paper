@@ -213,19 +213,37 @@ set palette positive
 
 set label 1 at screen 0.07, graph 0.5 center 'Complement Better?' rotate by 90
 
-plot "data/ps10-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps10-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps10-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
+    "data/ps10-ts150.induced.predicted-line.plot" u 4:5 w line notitle lc "black", \
+    x w l notitle lc "black", 0.5 w line notitle lc "black"
 
 unset label 1
 
-plot "data/ps14-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps14-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps14-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
+    "data/ps14-ts150.induced.predicted-line.plot" u 4:5 w line notitle lc "black", \
+    x w l notitle lc "black", 0.5 w line notitle lc "black"
 
-plot "data/ps15-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps15-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps15-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
+    "data/ps15-ts150.induced.predicted-line.plot" u 4:5 w line notitle lc "black", \
+    x w l notitle lc "black", 0.5 w line notitle lc "black"
 
-plot "data/ps16-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps16-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps16-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
+    "data/ps16-ts150.induced.predicted-line.plot" u 4:5 w line notitle lc "black", \
+    x w l notitle lc "black", 0.5 w line notitle lc "black"
 
-plot "data/ps20-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps20-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps20-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
+    "data/ps20-ts150.induced.predicted-line.plot" u 4:5 w line notitle lc "black", \
+    x w l notitle lc "black", 0.5 w line notitle lc "black"
 
 set colorbox
 
-plot "data/ps30-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle
+plot "data/ps30-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
+    "data/ps30-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
+    "data/ps30-ts150.induced.predicted-line.plot" u 4:5 w line notitle lc "black", \
+    x w l notitle lc "black", 0.5 w line notitle lc "black"
 
