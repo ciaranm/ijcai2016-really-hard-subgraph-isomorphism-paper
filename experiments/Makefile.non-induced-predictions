@@ -4,10 +4,17 @@ PATTERN_SIZES := 10 20 30
 TARGET_SIZES := 150
 
 all : $(foreach ps,$(PATTERN_SIZES),$(foreach ts,$(TARGET_SIZES),\
+    $(RESULTS)/ps$(ps)-ts$(ts).non-induced.kappa.plot \
     $(RESULTS)/ps$(ps)-ts$(ts).non-induced.predicted.plot \
     $(RESULTS)/ps$(ps)-ts$(ts).non-induced.predicted-line.plot ))
 
 define INSTANCE_template
+$(RESULTS)/ps$(1)-ts$(2).non-induced.kappa.plot :
+	ruby ../prediction/noninduced-kappa.rb $(1) $(2) | tee $$@
+
+$(RESULTS)/ps$(1)-ts$(2).induced.kappa.plot :
+	ruby ../prediction/induced-kappa.rb $(1) $(2) | tee $$@
+
 $(RESULTS)/ps$(1)-ts$(2).non-induced.predicted.plot :
 	ruby ../prediction/noninduced.rb $(1) $(2) | tee $$@
 
