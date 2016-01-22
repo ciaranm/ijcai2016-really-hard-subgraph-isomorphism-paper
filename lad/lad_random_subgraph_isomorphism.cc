@@ -9,7 +9,7 @@
 
 namespace po = boost::program_options;
 
-auto create_random_graph(int size, double density, int seed) -> std::vector<std::vector<uint8_t>>
+auto create_random_graph(int size, double density, int seed, bool complement) -> std::vector<std::vector<uint8_t>>
 {
     std::mt19937 rand;
     rand.seed(seed);
@@ -20,8 +20,11 @@ auto create_random_graph(int size, double density, int seed) -> std::vector<std:
     for (int e = 0 ; e < size ; ++e) {
         for (int f = e + 1 ; f < size ; ++f) {
             if (dist(rand) <= density) {
-                result[e][f] = 1;
-                result[f][e] = 1;
+                result[e][f] = complement ? 0 : 1;
+                result[f][e] = complement ? 0 : 1;
+            } else {
+                result[e][f] = complement ? 1 : 0;
+                result[f][e] = complement ? 1 : 0;
             }
         }
     }
@@ -47,6 +50,7 @@ auto main(int argc, char * argv[]) -> int
             ("size",    po::value<int>(),     "Number of vertices")
             ("density", po::value<double>(),  "Density")
             ("seed",    po::value<int>(),     "Seed")
+            ("complement",                    "Take the complement")
             ;
 
         all_options.add(display_options);
@@ -80,7 +84,8 @@ auto main(int argc, char * argv[]) -> int
         }
 
         /* Create graphs */
-        auto graph = create_random_graph(options_vars["size"].as<int>(), options_vars["density"].as<double>(), options_vars["seed"].as<int>());
+        auto graph = create_random_graph(options_vars["size"].as<int>(), options_vars["density"].as<double>(), options_vars["seed"].as<int>(),
+                options_vars.count("complement"));
 
         std::cout << graph.size() << std::endl;
 
