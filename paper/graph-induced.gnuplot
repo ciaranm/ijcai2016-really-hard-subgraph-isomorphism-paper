@@ -151,12 +151,14 @@ set notitle
 set cbrange [0:1]
 unset format cb
 
-set label 1 at screen 0.07, graph 0.5 center 'Complement Bound' rotate by 90
+set label 1 at screen 0.07, graph 0.5 center 'Non-induced satisfiability' rotate by 90
+set label 2 at screen 0.07, graph 0.5 center 'mirrored along $p_d=t_d$' rotate by 90 offset character 1.2, character 0
 
 set cbtics 0.5
 plot "data/ps10-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 unset label 1
+unset label 2
 
 set cbtics 0.5
 plot "data/ps14-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
@@ -211,39 +213,41 @@ set cbtics 10 add ("always" 10) ("never" -10) ("neutral" 0)
 load "puyl.pal"
 set palette positive
 
-set label 1 at screen 0.07, graph 0.5 center 'Complement Better?' rotate by 90
+set label 1 at screen 0.07, graph 0.5 center 'Complement better' rotate by 90
+set label 2 at screen 0.07, graph 0.5 center 'for Glasgow?' rotate by 90 offset character 1.2, character 0
 
 plot "data/ps10-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
-    "data/ps10-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
-    "data/ps10-ts150.induced.predicted-line.plot" u 4:5 w line notitle lc "black", \
-    x w l notitle lc "black", 0.5 w line notitle lc "black"
+    "data/ps10-ts150.induced.actual-line.plot" u ($1/50):($2/50) w line notitle lc "black", \
+    "data/ps10-ts150.induced.actual-line.plot" u ($4/50):($5/50) w line notitle lc "black", \
+    x w l notitle lc "black" dt ".", 0.5 w line notitle lc "black" dt "."
 
 unset label 1
+unset label 2
 
 plot "data/ps14-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
-    "data/ps14-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
-    "data/ps14-ts150.induced.predicted-line.plot" u 4:5 w line notitle lc "black", \
-    x w l notitle lc "black", 0.5 w line notitle lc "black"
+    "data/ps14-ts150.induced.actual-line.plot" u ($1/50):($2/50) w line notitle lc "black", \
+    "data/ps14-ts150.induced.actual-line.plot" u ($4/50):($5/50) w line notitle lc "black", \
+    x w l notitle lc "black" dt ".", 0.5 w line notitle lc "black" dt "."
 
 plot "data/ps15-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
-    "data/ps15-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
-    "data/ps15-ts150.induced.predicted-line.plot" u 4:5 w line notitle lc "black", \
-    x w l notitle lc "black", 0.5 w line notitle lc "black"
+    "data/ps15-ts150.induced.actual-line.plot" u ($1/50):($2/50) w line notitle lc "black", \
+    "data/ps15-ts150.induced.actual-line.plot" u ($4/50):($5/50) w line notitle lc "black", \
+    x w l notitle lc "black" dt ".", 0.5 w line notitle lc "black" dt "."
 
 plot "data/ps16-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
-    "data/ps16-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
-    "data/ps16-ts150.induced.predicted-line.plot" u 4:5 w line notitle lc "black", \
-    x w l notitle lc "black", 0.5 w line notitle lc "black"
+    "data/ps16-ts150.induced.actual-line.plot" u ($1/50):($2/50) w line notitle lc "black", \
+    "data/ps16-ts150.induced.actual-line.plot" u ($4/50):($5/50) w line notitle lc "black", \
+    x w l notitle lc "black" dt ".", 0.5 w line notitle lc "black" dt "."
 
 plot "data/ps20-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
-    "data/ps20-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
-    "data/ps20-ts150.induced.predicted-line.plot" u 4:5 w line notitle lc "black", \
-    x w l notitle lc "black", 0.5 w line notitle lc "black"
+    "data/ps20-ts150.induced.actual-line.plot" u ($1/50):($2/50) w line notitle lc "black", \
+    "data/ps20-ts150.induced.actual-line.plot" u ($4/50):($5/50) w line notitle lc "black", \
+    x w l notitle lc "black" dt ".", 0.5 w line notitle lc "black" dt "."
 
 set colorbox
 
 plot "data/ps30-ts150.induced-which-counts-rev-both.plot" u ($2/50):($1/50):($3) matrix w image notitle, \
-    "data/ps30-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
-    "data/ps30-ts150.induced.predicted-line.plot" u 4:5 w line notitle lc "black", \
-    x w l notitle lc "black", 0.5 w line notitle lc "black"
+    "data/ps30-ts150.induced.actual-line.plot" u ($1/50):($2/50) w line notitle lc "black", \
+    "data/ps30-ts150.induced.actual-line.plot" u ($4/50):($5/50) w line notitle lc "black", \
+    x w l notitle lc "black" dt ".", 0.5 w line notitle lc "black" dt "."
 
