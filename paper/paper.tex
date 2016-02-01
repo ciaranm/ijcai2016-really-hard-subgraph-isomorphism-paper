@@ -15,7 +15,7 @@
 \usepackage{natbib}
 \usepackage{dblfloatfix}
 
-\usepackage{showframe}
+% \usepackage{showframe}
 
 \usetikzlibrary{decorations, decorations.pathreplacing, calc, backgrounds}
 
@@ -173,10 +173,10 @@ computationally fairly easy, with most of the difficulty being in dealing with t
 model. This has lead to bias in algorithm design, to the extent that some proposed techniques will
 \emph{only} work on satisfiable instances \citet{Battiti:2007}.
 
-The lack of unsatisfiable instances cannot be addressed by using a pattern graph from one of the
-random suites with the ``wrong'' target graph: this tends to give either a trivially unsatisfiable
-instance, or a satisfiable instance. (In particular, it is \emph{not} the case that a relatively
-small random graph is unlikely to appear in a larger random graph.)
+%%% The lack of unsatisfiable instances cannot be addressed by using a pattern graph from one of the
+%%% random suites with the ``wrong'' target graph: this tends to give either a trivially unsatisfiable
+%%% instance, or a satisfiable instance. (In particular, it is \emph{not} the case that a relatively
+%%% small random graph is unlikely to appear in a larger random graph.)
 
 Here we present and evaluate a new method for creating random pattern/target pairs. This method
 generates both satisfiable and unsatisfiable instances, and can produce computationally challenging
@@ -187,23 +187,20 @@ identify three relevant control parameters: we can independently alter the edge 
 pattern graph, the edge probability of the target graph, and the relative orders (number of
 vertices) of the pattern and target graphs.  For non-induced isomorphisms, with the correct choice
 of parameters we see results very similar to those observed with boolean satisfiability problems:
-there is a phase transition from satisfiable to unsatisfiable (and we can predict its location), and
-we see a complexity peak occur with three different solvers near this phase transition.
+there is a phase transition (whose location we can predict) from satisfiable to unsatisfiable,
+we see a solver-independent complexity peak occur near this phase transition, and understanding this
+behaviour helps us to select variable and value ordering heuristics.
 
 For certain choices of parameters for induced isomorphisms, there are two phase transitions, going
 from satisfiable to unsatisfiable, and then from unsatisfiable back to satisfiable. Again, when
 going from satisfiable to unsatisfiable (from either direction), instances go from being trivial to
 really hard to solve. However, each of the three solvers we tested also finds the central
-unsatisfiable region to be hard---this may be unexpected, since this region is not near a phase
-transition. To show that this is not a simple weakness of current subgraph isomorphism algorithms,
-we verify that this region is also hard when using a pseudo-boolean encoding, and under reduction to
-the clique problem. Interestingly, the constrainedness measure \citep{Gent:1996:Kappa} \emph{does}
-predict this difficult region---these instances provide evidence in favour of constrainedness,
-rather than proximity to a phase transition, being an accurate predictor of difficulty.
-
-?? Finally, we discuss the relationship between heuristics and the expected number of solutions,
-recovering existing heuristics for the non-induced variant, and introducing new heuristics for the
-induced variant. I have failed miserably at integrating this paragraph smoothly.
+unsatisfiable region to be hard, despite it not being near a phase transition. To show that this is
+not a simple weakness of current subgraph isomorphism algorithms, we verify that this region is also
+hard when using a pseudo-boolean encoding, and under reduction to the clique problem. Interestingly,
+the constrainedness measure proposed by \citet{Gent:1996:Kappa} \emph{does} predict this difficult
+region---these instances provide evidence in favour of constrainedness, rather than proximity to a
+phase transition, being an accurate predictor of difficulty.
 
 \subsection{Definitions}
 
@@ -271,8 +268,8 @@ is trivial, for dense patterns proving unsatisfiability is not particularly diff
 complexity peak around the point where half the instances are satisfiable.  We also plot the search
 cost of individual instances, as points. The behaviour we observe looks remarkably similar to random
 3SAT problems---compare, for example, Figure 1 of \citet{LeytonBrown:2014}. In particular,
-satisfiable instances tend to be easier but show greater variation than unsatisfiable instances, and
-there are exceptionally hard satisfiable instances \citep{Smith:1997}.
+satisfiable instances tend to be easier, but show greater variation than unsatisfiable instances. % , and
+% there are exceptionally hard satisfiable instances \citep{Smith:1997}.
 
 \begin{figure}[tb]
     \setlength{\abovecaptionskip}{0pt}
@@ -302,7 +299,7 @@ black line below.)
 
 On subsequent rows, we show the average number of search nodes used by the different algorithms. In
 general, satisfiable instances are easy, until very close to the phase transition. As we hit the
-phase transition and move into the unsatisfiable region, we see a complexity increase. Finally, as
+phase transition and move into the unsatisfiable region, we see complexity increase. Finally, as
 we pass through the phase transition and move deeper into the unsatisfiable region, instances become
 easier again. This behaviour is largely solver-independent, although VF2 has a larger hard region
 than Glasgow or LAD. Thus, although we have moved away from a single control parameter, we still
@@ -327,7 +324,9 @@ densities, we overestimate the satisfiable region. This is due to variance: alth
 number of solutions much below one implies a high likelihood of unsatisfiability, it is not true
 that a high expected number of solutions implies that any particular instance is likely to be
 satisfiable---a similar behaviour is seen with random constraint satisfaction problems
-\citep{Smith:1994,Smith:1996}.
+\citep{Smith:1996}.
+
+% \citep{Smith:1994}
 
 \subsection{Variable and Value Ordering Heuristics}
 
@@ -335,19 +334,18 @@ When designing variable and value ordering heuristics for backtracking search al
 various general principles which appear to be effective---one of these is to try to maximise the
 expected number of solutions inside any subproblem considered during search \citep{Gent:1996:EN}.
 This is usually done by cheaper surrogates, rather than direct calculation. When branching, both LAD
-and Glasgow will pick a variable with fewest remaining values in its domain: doing this will
-generally reduce the first part of the $\langle Sol \rangle$ equation by as little as possible. When
-two or more domains are of equal size, LAD simply breaks ties lexicographically. Glasgow, however, will
-pick a variable corresponding to a pattern vertex of highest degree. This strategy was apparently
+and Glasgow pick a variable with fewest remaining values in its domain: doing this will generally
+reduce the first part of the $\langle Sol \rangle$ equation by as little as possible. When two or
+more domains are of equal size, LAD simply breaks ties lexicographically, whereas Glasgow will pick
+a variable corresponding to a pattern vertex of highest degree. This strategy was apparently
 determined empirically, but could have been derived from the $\langle Sol \rangle$ formula: picking
 a pattern vertex of high degree will make the remaining pattern subgraph sparser, which will
 decrease the exponent in the second half of the formula, maximising the overall value. LAD does not
 apply a value ordering heuristic, but Glasgow does: it prefers target vertices of lowest degree.
 Again, this appears to have been determined empirically, but it has the effect of increasing
-$\langle Sol \rangle$ by increasing the remaining target density.
-
-The VF2 heuristics, in contrast, are based around preserving connectivity. This perhaps explains
-some of VF2's weakness on graphs that are not extremely sparse.
+$\langle Sol \rangle$ by increasing the remaining target density. The VF2 heuristics, in contrast,
+are based around preserving connectivity, which gives very little discrimination except on the
+sparsest of inputs.
 
 \section{Induced Subgraph Isomorphisms}
 
@@ -397,11 +395,11 @@ towards the top right), and if we are in the top left we should use the compleme
 goes against a suggestion by \citet{Walsh:1998} that switching heuristics based upon an estimate of
 the solubility of the problem may offer good performance.
 
-For larger patterns, more complex behaviour emerges. If we are the intersection of the bottom half
+For larger patterns, more complex behaviour emerges. If we are in the intersection of the bottom half
 and the bottom right diagonal of the search space, we should always retain the original heuristic,
 and if we are in the intersection of the top half and the top left diagonal, we should always use
 the complements. This behaviour can be predicted by taking the partial derivatives of $\langle Sol
-\rangle$ in the $-p_d$ and $t_d$ directions.  However, when inside the remaining two eights of the
+\rangle$ in the $-p_d$ and $t_d$ directions.  However, when inside the remaining two eighths of the
 parameter space, the partial derivatives of $\langle Sol \rangle$ disagree on which heuristic to
 use, and using directional derivatives is not enough to resolve the problem. A close observation of
 the data suggests that the actual location of the phase transition may be involved (and perhaps
@@ -416,13 +414,13 @@ non-induced heuristics on induced problems.
 \subsection{Why is the Central Region Hard?}
 
 The region in the parameter space where both pattern and target have medium density is far from a
-phase transition, but nevertheless contains instances that are hard for all three of our subgraph
-isomorphism solvers. We would like to know whether this is due to a weakness in current solvers
-(perhaps our solvers cannot region about adjacency and non-adjacency simultaneously?), or whether
-instances in this region are inherently difficult to solve.  Thus we repeat the induced experiments
-on smaller pattern and target graphs, using different solving techniques.  Although these techniques
-are not competitive in absolute terms, we wish to see if the same pattern of behaviour occurs. The
-results are plotted in \cref{figure:alt}.
+phase transition, but nevertheless contains instances that are hard for all three solvers. We would
+like to know whether this is due to a weakness in current solvers (perhaps our solvers cannot region
+about adjacency and non-adjacency simultaneously?), or whether instances in this region are
+inherently difficult to solve.  Thus we repeat the induced experiments on smaller pattern and target
+graphs, using different solving techniques.  Although these techniques are not competitive in
+absolute terms, we wish to see if the same pattern of behaviour occurs. The results are plotted in
+\cref{figure:alt}.
 
 \begin{figure*}[t]
     \setlength{\abovecaptionskip}{0pt}
