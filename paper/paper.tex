@@ -15,7 +15,7 @@
 \usepackage{natbib}
 \usepackage{dblfloatfix}
 
-% \usepackage{showframe}
+\usepackage{showframe}
 
 \usetikzlibrary{decorations, decorations.pathreplacing, calc, backgrounds}
 
@@ -76,7 +76,7 @@ anonymous@example.com}
     the non-induced variant, we predict and observe a phase transition between satisfiable and
     unsatisfiable instances, with a corresponding complexity peak seen in three different solvers. For
     the induced variant, much richer behaviour is observed, and constrainedness gives
-    a better measure of difficulty than proximity to a phase transition. We also discuss variable
+    a better measure of difficulty than does proximity to a phase transition. We also discuss variable
     and value ordering heuristics, and their relationship to the expected number of solutions.
 \end{abstract}
 
@@ -86,7 +86,7 @@ The \emph{non-induced subgraph isomorphism problem} is to find an injective mapp
 pattern graph to a given target graph which preserves adjacency---in essence, we are ``finding a
 copy of'' the pattern inside the target. The \emph{induced} variant of the problem additionally
 requires that the mapping preserve non-adjacency, so there are no ``extra edges'' in the copy of the
-pattern that we find. % We illustrate both variants in \cref{figure:sip}.
+pattern that we find. We illustrate both variants in \cref{figure:sip}.
 Despite these problems being \NP-complete, modern practical subgraph isomorphism algorithms can
 handle problem instances with many hundreds of vertices in the pattern graph, and up to ten thousand
 vertices in the target graph \citep{Cordella:2004,Solnon:2010,Audemard:2014,McCreesh:2015}, leading
@@ -94,68 +94,68 @@ to successful application in areas such as computer
 vision \citep{Damiand:2011,Solnon:2015}, biochemistry \citep{Giugno:2013,Carletti:2015}, and pattern
 recognition \citep{Conte:2004}.
 
-%%% \begin{figure}[b]
-%%%     \centering
-%%%     \begin{tikzpicture}[scale=0.5]
-%%%         \begin{scope}
-%%%             \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (Na) at (1,  0) {1};
-%%%             \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (Nb) at (1, -1.5) {2};
-%%%             \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (Nc) at (0, -3) {3};
-%%%             \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (Nd) at (2, -3) {4};
-%%% 
-%%%             \draw [ultra thick] (Na) -- (Nb);
-%%%             \draw [ultra thick] (Nb) -- (Nc);
-%%%             \draw [ultra thick] (Nc) -- (Nd);
-%%%             \draw [ultra thick] (Nb) -- (Nd);
-%%% 
-%%%             \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (N1) at (5.5,  0) {1};
-%%%             \node [draw, circle, fill=white, inner sep=1.5pt] (N2) at (7.5,  0) {2};
-%%%             \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (N3) at (5.5, -1.5) {3};
-%%%             \node [draw, circle, fill=white, inner sep=1.5pt] (N4) at (7.5, -1.5) {4};
-%%%             \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (N5) at (5.5, -3) {5};
-%%%             \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (N6) at (7.5, -3) {6};
-%%% 
-%%%             \draw [thick, color=uofgsandstone!50] (N1) -- (N2);
-%%%             \draw [ultra thick] (N1) -- (N3);
-%%%             \draw [thick, color=uofgsandstone!50] (N1) -- (N4);
-%%%             \draw [thick, color=uofgsandstone!50] (N2) -- (N4);
-%%%             \draw [ultra thick] (N3) -- (N5);
-%%%             \draw [ultra thick] (N3) -- (N6);
-%%%             \draw [thick, color=uofgsandstone!50] (N4) -- (N6);
-%%%             \draw [ultra thick] (N5) -- (N6);
-%%%             \draw [thick, color=uofgsandstone!50] (N2) to [in=45, out=315] (N6);
-%%%             \draw [thick, color=uofgsandstone!50] (N1) to [in=135, out=225] (N5);
-%%% 
-%%%             \node [draw, circle, fill=white, inner sep=1.5pt] (M1) at (-5.5,  0) {1};
-%%%             \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (M2) at (-3.5,  0) {2};
-%%%             \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (M3) at (-5.5, -1.5) {3};
-%%%             \node [draw, circle, fill=white, inner sep=1.5pt] (M4) at (-3.5, -1.5) {4};
-%%%             \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (M5) at (-5.5, -3) {5};
-%%%             \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (M6) at (-3.5, -3) {6};
-%%% 
-%%%             \draw [thick, color=uofgsandstone!50] (M1) -- (M2);
-%%%             \draw [thick, color=uofgsandstone!50] (M1) -- (M3);
-%%%             \draw [thick, color=uofgsandstone!50] (M1) -- (M4);
-%%%             \draw [thick, color=uofgsandstone!50] (M2) -- (M4);
-%%%             \draw [ultra thick] (M3) -- (M5);
-%%%             \draw [ultra thick] (M3) -- (M6);
-%%%             \draw [thick, color=uofgsandstone!50] (M4) -- (M6);
-%%%             \draw [ultra thick] (M5) -- (M6);
-%%%             \draw [ultra thick] (M2) to [in=45, out=315] (M6);
-%%%             \draw [thick, color=uofgsandstone!50] (M1) to [in=135, out=225] (M5);
-%%% 
-%%%             \node [anchor=center, font=\Large] (A1) at (-1.5, -1.5) { $\hookleftarrow$ };
-%%%             \node [anchor=center, font=\Large] (A2) at ( 3.5, -1.5) { $\rightarrowtail$ };
-%%%         \end{scope}
-%%%     \end{tikzpicture}
-%%% 
-%%%     \caption{There is a non-induced isomorphism from the pattern graph, in the centre, to the target
-%%%     on the right, mapping vertex 1 to 1, 2 to 3, 3 to 5 and 4 to 6. This is not an induced
-%%%     isomorphism, since there is an edge between 1 and 5 in the target but not between 1 and 3 in the
-%%%     pattern. The mapping from the pattern to the (same) target on the left, sending 1 to 2, 2 to 6,
-%%%     3 to 5 and 4 to 3, is both non-induced and induced.}
-%%%     \label{figure:sip}
-%%% \end{figure}
+\begin{figure}[b]
+    \centering
+    \begin{tikzpicture}[scale=0.5]
+        \begin{scope}
+            \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (Na) at (1,  0) {1};
+            \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (Nb) at (1, -1.5) {2};
+            \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (Nc) at (0, -3) {3};
+            \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (Nd) at (2, -3) {4};
+
+            \draw [ultra thick] (Na) -- (Nb);
+            \draw [ultra thick] (Nb) -- (Nc);
+            \draw [ultra thick] (Nc) -- (Nd);
+            \draw [ultra thick] (Nb) -- (Nd);
+
+            \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (N1) at (5.5,  0) {1};
+            \node [draw, circle, fill=white, inner sep=1.5pt] (N2) at (7.5,  0) {2};
+            \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (N3) at (5.5, -1.5) {3};
+            \node [draw, circle, fill=white, inner sep=1.5pt] (N4) at (7.5, -1.5) {4};
+            \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (N5) at (5.5, -3) {5};
+            \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (N6) at (7.5, -3) {6};
+
+            \draw [thick, color=uofgsandstone!50] (N1) -- (N2);
+            \draw [ultra thick] (N1) -- (N3);
+            \draw [thick, color=uofgsandstone!50] (N1) -- (N4);
+            \draw [thick, color=uofgsandstone!50] (N2) -- (N4);
+            \draw [ultra thick] (N3) -- (N5);
+            \draw [ultra thick] (N3) -- (N6);
+            \draw [thick, color=uofgsandstone!50] (N4) -- (N6);
+            \draw [ultra thick] (N5) -- (N6);
+            \draw [thick, color=uofgsandstone!50] (N2) to [in=45, out=315] (N6);
+            \draw [thick, color=uofgsandstone!50] (N1) to [in=135, out=225] (N5);
+
+            \node [draw, circle, fill=white, inner sep=1.5pt] (M1) at (-5.5,  0) {1};
+            \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (M2) at (-3.5,  0) {2};
+            \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (M3) at (-5.5, -1.5) {3};
+            \node [draw, circle, fill=white, inner sep=1.5pt] (M4) at (-3.5, -1.5) {4};
+            \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (M5) at (-5.5, -3) {5};
+            \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (M6) at (-3.5, -3) {6};
+
+            \draw [thick, color=uofgsandstone!50] (M1) -- (M2);
+            \draw [thick, color=uofgsandstone!50] (M1) -- (M3);
+            \draw [thick, color=uofgsandstone!50] (M1) -- (M4);
+            \draw [thick, color=uofgsandstone!50] (M2) -- (M4);
+            \draw [ultra thick] (M3) -- (M5);
+            \draw [ultra thick] (M3) -- (M6);
+            \draw [thick, color=uofgsandstone!50] (M4) -- (M6);
+            \draw [ultra thick] (M5) -- (M6);
+            \draw [ultra thick] (M2) to [in=45, out=315] (M6);
+            \draw [thick, color=uofgsandstone!50] (M1) to [in=135, out=225] (M5);
+
+            \node [anchor=center, font=\Large] (A1) at (-1.5, -1.5) { $\hookleftarrow$ };
+            \node [anchor=center, font=\Large] (A2) at ( 3.5, -1.5) { $\rightarrowtail$ };
+        \end{scope}
+    \end{tikzpicture}
+
+    \caption{There is a non-induced isomorphism from the pattern graph, in the centre, to the target
+    on the right, mapping vertex 1 to 1, 2 to 3, 3 to 5 and 4 to 6. This is not an induced
+    isomorphism, since there is an edge between 1 and 5 in the target but not between 1 and 3 in the
+    pattern. The mapping from the pattern to the (same) target on the left, sending 1 to 2, 2 to 6,
+    3 to 5 and 4 to 3, is both non-induced and induced.}
+    \label{figure:sip}
+\end{figure}
 
 However, these algorithms cannot handle \emph{arbitrary} instances of this size. The experimental
 evaluations of these algorithms were performed using a mix of real-world graphs, graphs that encode
@@ -170,12 +170,13 @@ large sets of random satisfiable boolean satisfiability instances.  However, sin
 only approach used to generate random subgraph isomorphism instances, existing benchmark suites
 contain relatively few non-trivial unsatisfiable instances, and the satisfiable instances tend to be
 computationally fairly easy, with most of the difficulty being in dealing with the size of the
-model.  ?? \citet{Battiti:2007}
+model. This has lead to bias in algorithm design, to the extent that some proposed techniques will
+\emph{only} work on satisfiable instances \citet{Battiti:2007}.
 
-This problem cannot be addressed by using a pattern graph from one of the random suites with the
-``wrong'' target graph: this tends to give either a trivially unsatisfiable instance, or a
-satisfiable instance. (In particular, it is \emph{not} the case that a relatively small random graph
-is unlikely to appear in a larger random graph.)
+The lack of unsatisfiable instances cannot be addressed by using a pattern graph from one of the
+random suites with the ``wrong'' target graph: this tends to give either a trivially unsatisfiable
+instance, or a satisfiable instance. (In particular, it is \emph{not} the case that a relatively
+small random graph is unlikely to appear in a larger random graph.)
 
 Here we present and evaluate a new method for creating random pattern/target pairs. This method
 generates both satisfiable and unsatisfiable instances, and can produce computationally challenging
@@ -350,14 +351,13 @@ some of VF2's weakness on graphs that are not extremely sparse.
 
 \section{Induced Subgraph Isomorphisms}
 
-\begin{figure*}[p]
+\begin{figure*}[t]
+    \setlength{\abovecaptionskip}{0pt}
     \input{gen-graph-induced.tex}
     \caption{Behaviour of algorithms on the induced variant, shown in the style
     of \cref{figure:non-induced}. The second, third and fourth rows show the number of search nodes used by the
-    Glasgow, LAD and VF2 algorithms. The fifth row shows a bound on the satisfiable region, by
-    considering where a \emph{non-}induced isomorphism may also be a non-induced isomorphism between
-    complement graphs. The sixth row plots constrainedness: the darkest region is where
-    constrainedness is exactly one, and the lighter regions show where the problem is either over-
+    Glasgow, LAD and VF2 algorithms. The fifth row plots constrainedness: the darkest region is where
+    $\kappa = 1$, and the lighter regions show where the problem is either over-
     or under-constrained. The final row shows when the Glasgow algorithm performs better when given
     the complements of the pattern and target graphs as inputs---the solid lines show the location
 of the phase transition, and the dotted lines are $t_d=0.5$ and the $p_d=t_d$ diagonal.}\label{figure:induced}
@@ -375,15 +375,12 @@ We also plot patterns of orders 14, 15 and 16, to show the transition between th
 
 \subsection{Predictions and Heuristics}
 
-For small patterns, simply considering the $p_d=t_d$ diagonal mirror image of the non-induced
-prediction provides a reasonable approximation of the location of the phase transition (recall the
-complement property), but as we show on the fifth row of the figure, this breaks down for larger
-patterns. For a better prediction, we repeat the argument for locating the non-induced phase
-transition and additionally considering non-edges, to get an expected number of solutions of \[
-\langle Sol \rangle = t^{\underline{p}} \cdot {d_t}^{d_p \cdot \binom{p}{2}} \cdot {(1 -
-d_{t})}^{(1 - d_{p}) \cdot \binom{p}{2}} \textnormal{.} \] We plot this using black lines on the top
-row of \cref{figure:induced}---again, our prediction is accurate except for very sparse or very
-dense patterns.
+To predict the location of the induced phase transition, we repeat the argument for locating the
+non-induced phase transition and additionally considering non-edges, to get an expected number of
+solutions of \[ \langle Sol \rangle = t^{\underline{p}} \cdot {d_t}^{d_p \cdot \binom{p}{2}} \cdot
+{(1 - d_{t})}^{(1 - d_{p}) \cdot \binom{p}{2}} \textnormal{.} \] We plot this using black lines on
+the top row of \cref{figure:induced}---again, our prediction is accurate except for very sparse or
+very dense patterns.
 
 We might guess that degree-based heuristics would just not work for the induced problem: for any
 claim about the degree, the opposite will hold for the complement constraints. However, empirically,
@@ -476,7 +473,7 @@ close to 1 are hard, and problems where $\kappa$ is very small or very large are
 handling injectivity as a restriction on the size of the state space rather than as a constraint, we
 derive \[ \kappa = 1 - \frac{\log \left( t^{\underline{p}} \cdot {d_t}^{d_p \cdot \binom{p}{2}} \cdot {(1 -
 d_{t})}^{(1 - d_{p}) \cdot \binom{p}{2}} \right)}{\log t^{\underline{p}}}\] for induced isomorphisms, which
-we plot on the sixth row of \cref{figure:induced}. We see that constrainedness predicts that the
+we plot on the fifth row of \cref{figure:induced}. We see that constrainedness predicts that the
 central region will still be relatively difficult for larger pattern graphs: although the problem is
 overconstrained, it is less overconstrained than in the regions the Glasgow and LAD solvers found easy.
 Thus it seems that rather than just being a unification of existing generalised heuristic

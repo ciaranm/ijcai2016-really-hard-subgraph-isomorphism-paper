@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz color size 7.8in,9.1in font '\tiny'
+set terminal tikz color size 7.8in,7.9in font '\tiny'
 set output "gen-graph-induced.tex"
 
 unset xlabel
@@ -12,7 +12,7 @@ set noytics
 set size square
 set cbtics out scale 0.5 nomirror offset -1
 
-set multiplot layout 7,6 spacing 0.02, 0.02
+set multiplot layout 6,6 spacing 0.02, 0.02
 
 set label 1 at screen 0.07, graph 0.5 center 'Satisfiable?' rotate by 90
 
@@ -151,31 +151,31 @@ set notitle
 set cbrange [0:1]
 unset format cb
 
-set label 1 at screen 0.07, graph 0.5 center 'Non-induced satisfiability' rotate by 90
-set label 2 at screen 0.07, graph 0.5 center 'mirrored along $p_d=t_d$' rotate by 90 offset character 1.2, character 0
-
-set cbtics 0.5
-plot "data/ps10-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
-
-unset label 1
-unset label 2
-
-set cbtics 0.5
-plot "data/ps14-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
-
-set cbtics 0.5
-plot "data/ps15-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
-
-set cbtics 0.5
-plot "data/ps16-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
-
-set cbtics 0.5
-plot "data/ps20-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
-
-set colorbox
-
-set cbtics 0.5
-plot "data/ps30-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+# set label 1 at screen 0.07, graph 0.5 center 'Non-induced satisfiability' rotate by 90
+# set label 2 at screen 0.07, graph 0.5 center 'mirrored along $p_d=t_d$' rotate by 90 offset character 1.2, character 0
+# 
+# set cbtics 0.5
+# plot "data/ps10-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+# 
+# unset label 1
+# unset label 2
+# 
+# set cbtics 0.5
+# plot "data/ps14-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+# 
+# set cbtics 0.5
+# plot "data/ps15-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+# 
+# set cbtics 0.5
+# plot "data/ps16-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+# 
+# set cbtics 0.5
+# plot "data/ps20-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
+# 
+# set colorbox
+# 
+# set cbtics 0.5
+# plot "data/ps30-ts150.induced.predicted-proportion-sat.plot" u ($2/50):($1/50):($3) matrix w image notitle
 
 load "ylgnbuwl.pal"
 set palette negative
