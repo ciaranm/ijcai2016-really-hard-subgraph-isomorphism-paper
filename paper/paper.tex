@@ -86,7 +86,7 @@ The \emph{non-induced subgraph isomorphism problem} is to find an injective mapp
 pattern graph to a given target graph which preserves adjacency---in essence, we are ``finding a
 copy of'' the pattern inside the target. The \emph{induced} variant of the problem additionally
 requires that the mapping preserve non-adjacency, so there are no ``extra edges'' in the copy of the
-pattern that we find. We illustrate both variants in \cref{figure:sip}.
+pattern that we find. % We illustrate both variants in \cref{figure:sip}.
 Despite these problems being \NP-complete, modern practical subgraph isomorphism algorithms can
 handle problem instances with many hundreds of vertices in the pattern graph, and up to ten thousand
 vertices in the target graph \citep{Cordella:2004,Solnon:2010,Audemard:2014,McCreesh:2015}, leading
@@ -94,68 +94,68 @@ to successful application in areas such as computer
 vision \citep{Damiand:2011,Solnon:2015}, biochemistry \citep{Giugno:2013,Carletti:2015}, and pattern
 recognition \citep{Conte:2004}.
 
-\begin{figure}[b]
-    \centering
-    \begin{tikzpicture}[scale=0.5]
-        \begin{scope}
-            \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (Na) at (1,  0) {1};
-            \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (Nb) at (1, -1.5) {2};
-            \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (Nc) at (0, -3) {3};
-            \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (Nd) at (2, -3) {4};
-
-            \draw [ultra thick] (Na) -- (Nb);
-            \draw [ultra thick] (Nb) -- (Nc);
-            \draw [ultra thick] (Nc) -- (Nd);
-            \draw [ultra thick] (Nb) -- (Nd);
-
-            \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (N1) at (5.5,  0) {1};
-            \node [draw, circle, fill=white, inner sep=1.5pt] (N2) at (7.5,  0) {2};
-            \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (N3) at (5.5, -1.5) {3};
-            \node [draw, circle, fill=white, inner sep=1.5pt] (N4) at (7.5, -1.5) {4};
-            \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (N5) at (5.5, -3) {5};
-            \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (N6) at (7.5, -3) {6};
-
-            \draw [thick, color=uofgsandstone!50] (N1) -- (N2);
-            \draw [ultra thick] (N1) -- (N3);
-            \draw [thick, color=uofgsandstone!50] (N1) -- (N4);
-            \draw [thick, color=uofgsandstone!50] (N2) -- (N4);
-            \draw [ultra thick] (N3) -- (N5);
-            \draw [ultra thick] (N3) -- (N6);
-            \draw [thick, color=uofgsandstone!50] (N4) -- (N6);
-            \draw [ultra thick] (N5) -- (N6);
-            \draw [thick, color=uofgsandstone!50] (N2) to [in=45, out=315] (N6);
-            \draw [thick, color=uofgsandstone!50] (N1) to [in=135, out=225] (N5);
-
-            \node [draw, circle, fill=white, inner sep=1.5pt] (M1) at (-5.5,  0) {1};
-            \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (M2) at (-3.5,  0) {2};
-            \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (M3) at (-5.5, -1.5) {3};
-            \node [draw, circle, fill=white, inner sep=1.5pt] (M4) at (-3.5, -1.5) {4};
-            \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (M5) at (-5.5, -3) {5};
-            \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (M6) at (-3.5, -3) {6};
-
-            \draw [thick, color=uofgsandstone!50] (M1) -- (M2);
-            \draw [thick, color=uofgsandstone!50] (M1) -- (M3);
-            \draw [thick, color=uofgsandstone!50] (M1) -- (M4);
-            \draw [thick, color=uofgsandstone!50] (M2) -- (M4);
-            \draw [ultra thick] (M3) -- (M5);
-            \draw [ultra thick] (M3) -- (M6);
-            \draw [thick, color=uofgsandstone!50] (M4) -- (M6);
-            \draw [ultra thick] (M5) -- (M6);
-            \draw [ultra thick] (M2) to [in=45, out=315] (M6);
-            \draw [thick, color=uofgsandstone!50] (M1) to [in=135, out=225] (M5);
-
-            \node [anchor=center, font=\Large] (A1) at (-1.5, -1.5) { $\hookleftarrow$ };
-            \node [anchor=center, font=\Large] (A2) at ( 3.5, -1.5) { $\rightarrowtail$ };
-        \end{scope}
-    \end{tikzpicture}
-
-    \caption{There is a non-induced isomorphism from the pattern graph, in the centre, to the target
-    on the right, mapping vertex 1 to 1, 2 to 3, 3 to 5 and 4 to 6. This is not an induced
-    isomorphism, since there is an edge between 1 and 5 in the target but not between 1 and 3 in the
-    pattern. The mapping from the pattern to the (same) target on the left, sending 1 to 2, 2 to 6,
-    3 to 5 and 4 to 3, is both non-induced and induced.}
-    \label{figure:sip}
-\end{figure}
+%%% \begin{figure}[b]
+%%%     \centering
+%%%     \begin{tikzpicture}[scale=0.5]
+%%%         \begin{scope}
+%%%             \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (Na) at (1,  0) {1};
+%%%             \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (Nb) at (1, -1.5) {2};
+%%%             \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (Nc) at (0, -3) {3};
+%%%             \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (Nd) at (2, -3) {4};
+%%% 
+%%%             \draw [ultra thick] (Na) -- (Nb);
+%%%             \draw [ultra thick] (Nb) -- (Nc);
+%%%             \draw [ultra thick] (Nc) -- (Nd);
+%%%             \draw [ultra thick] (Nb) -- (Nd);
+%%% 
+%%%             \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (N1) at (5.5,  0) {1};
+%%%             \node [draw, circle, fill=white, inner sep=1.5pt] (N2) at (7.5,  0) {2};
+%%%             \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (N3) at (5.5, -1.5) {3};
+%%%             \node [draw, circle, fill=white, inner sep=1.5pt] (N4) at (7.5, -1.5) {4};
+%%%             \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (N5) at (5.5, -3) {5};
+%%%             \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (N6) at (7.5, -3) {6};
+%%% 
+%%%             \draw [thick, color=uofgsandstone!50] (N1) -- (N2);
+%%%             \draw [ultra thick] (N1) -- (N3);
+%%%             \draw [thick, color=uofgsandstone!50] (N1) -- (N4);
+%%%             \draw [thick, color=uofgsandstone!50] (N2) -- (N4);
+%%%             \draw [ultra thick] (N3) -- (N5);
+%%%             \draw [ultra thick] (N3) -- (N6);
+%%%             \draw [thick, color=uofgsandstone!50] (N4) -- (N6);
+%%%             \draw [ultra thick] (N5) -- (N6);
+%%%             \draw [thick, color=uofgsandstone!50] (N2) to [in=45, out=315] (N6);
+%%%             \draw [thick, color=uofgsandstone!50] (N1) to [in=135, out=225] (N5);
+%%% 
+%%%             \node [draw, circle, fill=white, inner sep=1.5pt] (M1) at (-5.5,  0) {1};
+%%%             \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (M2) at (-3.5,  0) {2};
+%%%             \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (M3) at (-5.5, -1.5) {3};
+%%%             \node [draw, circle, fill=white, inner sep=1.5pt] (M4) at (-3.5, -1.5) {4};
+%%%             \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (M5) at (-5.5, -3) {5};
+%%%             \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (M6) at (-3.5, -3) {6};
+%%% 
+%%%             \draw [thick, color=uofgsandstone!50] (M1) -- (M2);
+%%%             \draw [thick, color=uofgsandstone!50] (M1) -- (M3);
+%%%             \draw [thick, color=uofgsandstone!50] (M1) -- (M4);
+%%%             \draw [thick, color=uofgsandstone!50] (M2) -- (M4);
+%%%             \draw [ultra thick] (M3) -- (M5);
+%%%             \draw [ultra thick] (M3) -- (M6);
+%%%             \draw [thick, color=uofgsandstone!50] (M4) -- (M6);
+%%%             \draw [ultra thick] (M5) -- (M6);
+%%%             \draw [ultra thick] (M2) to [in=45, out=315] (M6);
+%%%             \draw [thick, color=uofgsandstone!50] (M1) to [in=135, out=225] (M5);
+%%% 
+%%%             \node [anchor=center, font=\Large] (A1) at (-1.5, -1.5) { $\hookleftarrow$ };
+%%%             \node [anchor=center, font=\Large] (A2) at ( 3.5, -1.5) { $\rightarrowtail$ };
+%%%         \end{scope}
+%%%     \end{tikzpicture}
+%%% 
+%%%     \caption{There is a non-induced isomorphism from the pattern graph, in the centre, to the target
+%%%     on the right, mapping vertex 1 to 1, 2 to 3, 3 to 5 and 4 to 6. This is not an induced
+%%%     isomorphism, since there is an edge between 1 and 5 in the target but not between 1 and 3 in the
+%%%     pattern. The mapping from the pattern to the (same) target on the left, sending 1 to 2, 2 to 6,
+%%%     3 to 5 and 4 to 3, is both non-induced and induced.}
+%%%     \label{figure:sip}
+%%% \end{figure}
 
 However, these algorithms cannot handle \emph{arbitrary} instances of this size. The experimental
 evaluations of these algorithms were performed using a mix of real-world graphs, graphs that encode
@@ -474,8 +474,8 @@ $\kappa < 1$ is said to be underconstrained, and is likely to be satisfiable; a 
 > 1$ is overconstrained, and is likely to be unsatisfiable. Empirically, problems with $\kappa$
 close to 1 are hard, and problems where $\kappa$ is very small or very large are usually easy. By
 handling injectivity as a restriction on the size of the state space rather than as a constraint, we
-derive \[ \kappa = 1 - \frac{\log t^{\underline{p}} \cdot {d_t}^{d_p \cdot \binom{p}{2}} \cdot {(1 -
-d_{t})}^{(1 - d_{p}) \cdot \binom{p}{2}}}{\log t^{\underline{p}}}\] for induced isomorphisms, which
+derive \[ \kappa = 1 - \frac{\log \left( t^{\underline{p}} \cdot {d_t}^{d_p \cdot \binom{p}{2}} \cdot {(1 -
+d_{t})}^{(1 - d_{p}) \cdot \binom{p}{2}} \right)}{\log t^{\underline{p}}}\] for induced isomorphisms, which
 we plot on the sixth row of \cref{figure:induced}. We see that constrainedness predicts that the
 central region will still be relatively difficult for larger pattern graphs: although the problem is
 overconstrained, it is less overconstrained than in the regions the Glasgow and LAD solvers found easy.
