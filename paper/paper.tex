@@ -346,8 +346,8 @@ $\operatorname{V}(G)$ for the vertex set of a graph $G$. The \emph{complement} o
 denoted $\shortoverline{G}$, is the
 graph with the same vertex set as $G$, and with an edge between distinct vertices $v$ and $w$ if and
 only if
-$v$ and $w$ are not adjacent in $G$. We write $G(v, p)$ for an Erd\H{o}s-R\'enyi random graph with
-$v$ vertices, and an edge between each distinct pair of vertices with independent probability $p$.
+$v$ and $w$ are not adjacent in $G$. We write $G(n, p)$ for an Erd\H{o}s-R\'enyi random graph with
+$n$ vertices, and an edge between each distinct pair of vertices with independent probability $p$.
 
 A \emph{non-induced subgraph isomorphism} from a graph $P$ (called the \emph{pattern}) to a graph
 $T$ (called the \emph{target}) is an injective mapping from $\operatorname{V}(P)$ to
@@ -384,9 +384,9 @@ less detailed.
     \setlength{\abovecaptionskip}{6pt}
     \input{gen-graph-phase-transition.tex}
     \caption{With a fixed a pattern graph order of 20, a target graph order of 150, a target edge
-        probability of 0.4, and varying pattern edge probability, we observe a phase transition and
+        probability of 0.40, and varying pattern edge probability, we observe a phase transition and
         complexity peak with the Glasgow solver in the non-induced variant. Each point represents
-        one instance. The lines show mean search effort, and mean proportion satisfiable.}
+        one instance. The lines show mean search effort and mean proportion satisfiable.}
     \label{figure:phase-transition}
 \end{figure}
 
@@ -414,17 +414,16 @@ satisfiable instances tend to be easier, but show greater variation than unsatis
         pattern edge probability and the y-axis is the target edge probability, both from 0 to 1.
         Along the top row, we show the proportion of instances which are satisfiable; the white
         bands shows the phase transitions, and the black lines are our predictions of where the
-        phase transition will occur. On the second row, we show the number of search nodes used by the
-        Glasgow algorithm, on the third row, the number of search nodes used by the LAD algorithm, and the
-        fourth, VF2; the dark regions indicate ``really hard'' instances.}
+        phase transition will occur. On the final three rows, we show the number of search nodes used by the
+        Glasgow, LAD and VF2 solvers; the dark regions indicate ``really hard'' instances.}
     \label{figure:non-induced}
 \end{figure}
 
 What if we alter the edge probabilities for both the pattern graph and the target graph?  In the top
 row of \cref{figure:non-induced} we show the satisfiability phase transition for the non-induced
-variant, for patterns of order 10, 20 and 30, a target of order 150, and varying pattern (x-axis)
+variant, for patterns of order 10, 20 and 30, targets of order 150, and varying pattern (x-axis)
 and target (y-axis) edge probabilities. Each axis runs over 51 edge probabilities, from 0 to 1 in
-steps of 0.05; for each of these 2601 points, we generate ten random instances. The colour denotes
+steps of 0.02; for each of these 2601 points, we generate ten random instances. The colour denotes
 the proportion of these instances which were found to be satisfiable.  Inside the orange region, at
 the bottom right of each plot, every instance is unsatisfiable---here we are trying to find a dense
 pattern in a sparse target. In the purple region, at the top left, every instance is
@@ -466,14 +465,14 @@ satisfiable---a similar behaviour is seen with random constraint satisfaction pr
 
 \subsection{Variable and Value Ordering Heuristics}
 
-When designing variable and value ordering heuristics for backtracking search algorithms, there are
-various general principles which appear to be effective---one of these is to try to maximise the
-expected number of solutions inside any subproblem considered during search \citep{Gent:1996:EN}.
-This is usually done by cheaper surrogates, rather than direct calculation. When branching, both LAD
-and Glasgow pick a variable with fewest remaining values in its domain: doing this will generally
-reduce the first part of the $\langle Sol \rangle$ equation by as little as possible. When two or
-more domains are of equal size, LAD simply breaks ties lexicographically, whereas Glasgow will pick
-a variable corresponding to a pattern vertex of highest degree. This strategy was apparently
+Various general principles have been considered when designing variable and value ordering
+heuristics for backtracking search algorithms---one of these is to try to maximise the expected
+number of solutions inside any subproblem considered during search \citep{Gent:1996:EN}.  This is
+usually done by cheaper surrogates, rather than direct calculation. When branching, both LAD and
+Glasgow pick a variable with fewest remaining values in its domain: doing this will generally reduce
+the first part of the $\langle Sol \rangle$ equation by as little as possible. When two or more
+domains are of equal size, LAD simply breaks ties lexicographically, whereas Glasgow will pick a
+variable corresponding to a pattern vertex of highest degree. This strategy was apparently
 determined empirically, but could have been derived from the $\langle Sol \rangle$ formula: picking
 a pattern vertex of high degree will make the remaining pattern subgraph sparser, which will
 decrease the exponent in the second half of the formula, maximising the overall value. LAD does not
@@ -527,7 +526,7 @@ connectivity in the pattern graph.)
 
 For patterns of order 10, it is always better to try to move towards the satisfiable region: if we
 are in the bottom right diagonal half, we are best retaining the original heuristics (which move us
-towards the top right), and if we are in the top left we should use the complement instead. This
+towards the top left), and if we are in the top left we should use the complement instead. This
 goes against a suggestion by \citet{Walsh:1998} that switching heuristics based upon an estimate of
 the solubility of the problem may offer good performance.
 
@@ -551,7 +550,7 @@ non-induced heuristics on induced problems.
 
 The region in the parameter space where both pattern and target have medium density is far from a
 phase transition, but nevertheless contains instances that are hard for all three solvers. We would
-like to know whether this is due to a weakness in current solvers (perhaps our solvers cannot region
+like to know whether this is due to a weakness in current solvers (perhaps our solvers cannot reason
 about adjacency and non-adjacency simultaneously?), or whether instances in this region are
 inherently difficult to solve.  Thus we repeat the induced experiments on smaller pattern and target
 graphs, using different solving techniques.  Although these techniques are not competitive in
@@ -569,7 +568,7 @@ encoding.}\label{figure:alt}
 \end{figure*}
 
 The pseudo-boolean (PB) encoding is as follows. For each pattern vertex $v$ and each target
-vertex $w$, we have a binary variable which takes the value 1 if and only if that $v$ is mapped to
+vertex $w$, we have a binary variable which takes the value 1 if and only if $v$ is mapped to
 $w$.  Constraints are added to ensure that each pattern vertex maps to exactly one target vertex,
 that each target vertex is mapped to by at most one pattern vertex, that adjacent vertices are
 mapped to adjacent vertices, and that non-adjacent vertices are mapped to non-adjacent vertices. We
