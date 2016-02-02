@@ -61,8 +61,8 @@
 % University of Glasgow, Glasgow, Scotland \\
 % c.mccreesh.1@research.gla.ac.uk}
 
-\author{First Author \thanks{This work was supported by a small pile of money and a large
-    electricity bill.} \and Second Author
+\author{First Author \thanks{This work was supported by a small pile of money from an anonymous
+        funding agency, and a large electricity bill.} \and Second Author
     \and Third Author \\
 Some Instituion, Somewhere, Some Country \\
 anonymous@example.com}
@@ -516,7 +516,7 @@ We might guess that degree-based heuristics would just not work for the induced 
 claim about the degree, the opposite will hold for the complement constraints. However, empirically,
 this is not the case: on the final row of \cref{figure:induced}, we show whether it is better to use
 the original pattern and target as the input to the Glasgow algorithm, or to take the complements.
-(The only steps performed by the Glagsow algorithm which differs under taking the complements are
+(The only steps performed by the Glagsow algorithm which differ under taking the complements are
 the degree-based heuristics.  LAD and VF2 are not symmetric in this way: LAD performs a filtering
 step using degree information, but does not consider the complement degree, and VF2 uses
 connectivity in the pattern graph.)
@@ -540,7 +540,7 @@ the data suggests that the actual location of the phase transition may be involv
 
 In practice, this is unlikely to be a problem: most real-world instances are extremely sparse and
 are usually easy, which perhaps explains the continuing popularity of VF2's connectivity-based
-heuristics \citep{Carletti:2015}. In this situation, these experiments justify re-using the
+heuristics \citep{Carletti:2015}. In this situation, these experiments justify reusing the
 non-induced heuristics on induced problems.
 
 \subsection{Why is the Central Region Hard?}
@@ -564,20 +564,18 @@ solver, and the fourth row shows the number of search nodes used by BBMC on the 
 encoding.}\label{figure:alt}
 \end{figure*}
 
-The pseudo-boolean (PB) encoding is as follows. For each pattern vertex $v$ and each target
-vertex $w$, we have a binary variable which takes the value 1 if and only if $v$ is mapped to
-$w$.  Constraints are added to ensure that each pattern vertex maps to exactly one target vertex,
-that each target vertex is mapped to by at most one pattern vertex, that adjacent vertices are
-mapped to adjacent vertices, and that non-adjacent vertices are mapped to non-adjacent vertices. We
-used the Clasp solver~\citep{gekakaosscsc11a} version 3.1.3 to solve the pseudo-boolean instances.
-The instances that are hard for the Glasgow solver remain hard for the PB solver, including
-instances inside the central region, and the easy satisfiable instances remain easy.
-
-We also implemented (but do not plot) an equivalent SAT encoding with direct encoding of the
-cardinality constraints.  Using the Glucose solver, we saw very similar performance to the PB
-encoding. We also implemented a similar integer program encoding; the Gurobi solver was only able to
-solve some of the trivial satisfiable instances, and was almost never able to prove unsatisfiability
-within the time limit.
+The pseudo-boolean (PB) encoding is as follows. For each pattern vertex $v$ and each target vertex
+$w$, we have a binary variable which takes the value 1 if and only if $v$ is mapped to $w$.
+Constraints are added to ensure that each pattern vertex maps to exactly one target vertex, that
+each target vertex is mapped to by at most one pattern vertex, that adjacent vertices are mapped to
+adjacent vertices, and that non-adjacent vertices are mapped to non-adjacent vertices. We used the
+Clasp solver~\citep{gekakaosscsc11a} version 3.1.3 to solve the pseudo-boolean instances.  The
+instances that are hard for the Glasgow solver remain hard for the PB solver, including instances
+inside the central region, and the easy satisfiable instances remain easy. (Similar results were
+seen with the Glucose SAT solver using a direct encoding of the cardinality constraints. We also
+implemented an integer program encoding; the Gurobi solver was only able to solve some of the
+trivial satisfiable instances, and was almost never able to prove unsatisfiability within the time
+limit.)
 
 The \emph{association graph encoding} of a subgraph isomorphism problem (illustrated in
 \cref{figure:sip}) is constructed by creating a new graph with a vertex for each pair $(p, t)$ of
@@ -590,7 +588,7 @@ clique algorithm \citep{SanSegundo:2011}. Again, the instances in the central re
 and additionally, some of the easy satisfiable instances become hard.
 
 These results suggest that the central region may be genuinely hard, despite not being near a phase
-transition. The clique encoding in particular rules out the hypothesis that subgraph isomorphism
+transition. The clique results in particular rule out the hypothesis that subgraph isomorphism
 solvers only find this region hard due to not reasoning simultaneously about adjacency and
 non-adjacency, since the association graph encoding constraints consider compatibility rather than
 adjacency and non-adjacency.
