@@ -96,24 +96,24 @@ recognition \citep{Conte:2004}.
 
 \begin{figure}[b]
     \centering
-    \begin{tikzpicture}[scale=0.5]
+    \begin{tikzpicture}[scale=0.45,every node/.style={font=\footnotesize}]
         \begin{scope}
-            \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (Na) at (1,  0) {1};
-            \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (Nb) at (1, -1.5) {2};
-            \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (Nc) at (0, -3) {3};
-            \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (Nd) at (2, -3) {4};
+            \node [draw, circle, fill=uofgcobalt, inner sep=1pt] (Na) at (1,  0) {1};
+            \node [draw, circle, fill=uofgpumpkin, inner sep=1pt] (Nb) at (1, -1.5) {2};
+            \node [draw, circle, fill=uofglawn, inner sep=1pt] (Nc) at (0, -3) {3};
+            \node [draw, circle, fill=uofgthistle, inner sep=1pt] (Nd) at (2, -3) {4};
 
             \draw [ultra thick] (Na) -- (Nb);
             \draw [ultra thick] (Nb) -- (Nc);
             \draw [ultra thick] (Nc) -- (Nd);
             \draw [ultra thick] (Nb) -- (Nd);
 
-            \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (N1) at (5.5,  0) {1};
-            \node [draw, circle, fill=white, inner sep=1.5pt] (N2) at (7.5,  0) {2};
-            \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (N3) at (5.5, -1.5) {3};
-            \node [draw, circle, fill=white, inner sep=1.5pt] (N4) at (7.5, -1.5) {4};
-            \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (N5) at (5.5, -3) {5};
-            \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (N6) at (7.5, -3) {6};
+            \node [draw, circle, fill=uofgcobalt, inner sep=1pt] (N1) at (5.5,  0) {1};
+            \node [draw, circle, fill=white, inner sep=1pt] (N2) at (7.5,  0) {2};
+            \node [draw, circle, fill=uofgpumpkin, inner sep=1pt] (N3) at (5.5, -1.5) {3};
+            \node [draw, circle, fill=white, inner sep=1pt] (N4) at (7.5, -1.5) {4};
+            \node [draw, circle, fill=uofglawn, inner sep=1pt] (N5) at (5.5, -3) {5};
+            \node [draw, circle, fill=uofgthistle, inner sep=1pt] (N6) at (7.5, -3) {6};
 
             \draw [thick, color=uofgsandstone!50] (N1) -- (N2);
             \draw [ultra thick] (N1) -- (N3);
@@ -126,12 +126,12 @@ recognition \citep{Conte:2004}.
             \draw [thick, color=uofgsandstone!50] (N2) to [in=45, out=315] (N6);
             \draw [thick, color=uofgsandstone!50] (N1) to [in=135, out=225] (N5);
 
-            \node [draw, circle, fill=white, inner sep=1.5pt] (M1) at (-5.5,  0) {1};
-            \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (M2) at (-3.5,  0) {2};
-            \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (M3) at (-5.5, -1.5) {3};
-            \node [draw, circle, fill=white, inner sep=1.5pt] (M4) at (-3.5, -1.5) {4};
-            \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (M5) at (-5.5, -3) {5};
-            \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (M6) at (-3.5, -3) {6};
+            \node [draw, circle, fill=white, inner sep=1pt] (M1) at (-5.5,  0) {1};
+            \node [draw, circle, fill=uofgcobalt, inner sep=1pt] (M2) at (-3.5,  0) {2};
+            \node [draw, circle, fill=uofgthistle, inner sep=1pt] (M3) at (-5.5, -1.5) {3};
+            \node [draw, circle, fill=white, inner sep=1pt] (M4) at (-3.5, -1.5) {4};
+            \node [draw, circle, fill=uofglawn, inner sep=1pt] (M5) at (-5.5, -3) {5};
+            \node [draw, circle, fill=uofgpumpkin, inner sep=1pt] (M6) at (-3.5, -3) {6};
 
             \draw [thick, color=uofgsandstone!50] (M1) -- (M2);
             \draw [thick, color=uofgsandstone!50] (M1) -- (M3);
@@ -147,32 +147,32 @@ recognition \citep{Conte:2004}.
             \node [anchor=center, font=\Large] (A1) at (-1.5, -1.5) { $\hookleftarrow$ };
             \node [anchor=center, font=\Large] (A2) at ( 3.5, -1.5) { $\rightarrowtail$ };
         \end{scope}
-    \end{tikzpicture}\\[0.75cm]
-    \begin{tikzpicture}[scale=0.5]
+    \end{tikzpicture}\\[0.25cm]
+    \begin{tikzpicture}[scale=0.45,every node/.style={font=\footnotesize}]
         \begin{scope}
             \foreach \n in {1, ..., 6}{
-                \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (N1\n) at (\n, 0) {\n};
+                \node [draw, circle, fill=uofgcobalt, inner sep=1pt] (N1\n) at (\n, 0) {\n};
             }
 
             \draw [decorate, decoration={brace, raise=0.2cm}, very thick] (N11.north west) -- (N16.north
                 east) node [midway, above=0.3cm] { $1 \mapsto$ };
 
             \foreach \n in {1, ..., 6}{
-                \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (N2\n) at (0, -\n) {\n};
+                \node [draw, circle, fill=uofgpumpkin, inner sep=1pt] (N2\n) at (0, -\n) {\n};
             }
 
             \draw [decorate, decoration={brace, raise=0.2cm, mirror}, very thick] (N21.north west) --
                 (N26.south west) node [midway, left=0.3cm] { $2 \mapsto$ };
 
             \foreach \n in {1, ..., 6}{
-                \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (N3\n) at (7, -\n) {\n};
+                \node [draw, circle, fill=uofglawn, inner sep=1pt] (N3\n) at (7, -\n) {\n};
             }
 
             \draw [decorate, decoration={brace, raise=0.2cm}, very thick] (N31.north east) -- (N36.south
                 east) node [midway, right=0.3cm] { $3 \mapsto$ };
 
             \foreach \n in {1, ..., 6}{
-                \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (N4\n) at (\n, -7) {\n};
+                \node [draw, circle, fill=uofgthistle, inner sep=1pt] (N4\n) at (\n, -7) {\n};
             }
 
             \draw [decorate, decoration={brace, raise=0.2cm, mirror}, very thick] (N41.south west) --
@@ -299,15 +299,15 @@ biochemistry and computer vision problems, and randomly generated graph pairs. U
 instances to evaluate algorithm behaviour can be beneficial, because it provides a way of generating
 many instances cheaply, and reduces the risk of over-fitting when tuning design parameters. The
 random instances used in each case came from common datasets \citep{DeSanto:2003,Zampelli:2010},
-which were generated by taking a random subgraph of a random graph (using various models, including
-Erd\H{o}s-R\'enyi, scale-free, bounded degree, and meshes) and permuting the vertices. Such
-instances are guaranteed to be satisfiable---\citet{Anton:2009} exploited this property to create
-large sets of random satisfiable boolean satisfiability instances.  However, since this has been the
-only approach used to generate random subgraph isomorphism instances, existing benchmark suites
-contain relatively few non-trivial unsatisfiable instances, and the satisfiable instances tend to be
-computationally fairly easy, with most of the difficulty being in dealing with the size of the
-model. This has lead to bias in algorithm design, to the extent that some proposed techniques will
-\emph{only} work on satisfiable instances \citet{Battiti:2007}.
+which were generated by taking a random subgraph of a random (Erd\H{o}s-R\'enyi, scale-free, bounded
+degree, or mesh) graph and permuting the vertices. Such instances are guaranteed to be
+satisfiable---\citet{Anton:2009} exploited this property to create large sets of random satisfiable
+boolean satisfiability instances.  However, since this has been the only approach used to generate
+random subgraph isomorphism instances, existing benchmark suites contain relatively few non-trivial
+unsatisfiable instances, and the satisfiable instances tend to be computationally fairly easy, with
+most of the difficulty being in dealing with the size of the model. This has lead to bias in
+algorithm design, to the extent that some proposed techniques will \emph{only} work on satisfiable
+instances \citep{Battiti:2007}.
 
 %%% The lack of unsatisfiable instances cannot be addressed by using a pattern graph from one of the
 %%% random suites with the ``wrong'' target graph: this tends to give either a trivially unsatisfiable
@@ -340,14 +340,12 @@ phase transition, being an accurate predictor of difficulty.
 
 \subsection{Definitions}
 
-Throughout, our graphs are unlabelled, undirected, and do not have any loops (vertices which are
-adjacent to themselves).  The \emph{order} of a graph is the cardinality of its vertex set. We write
-$\operatorname{V}(G)$ for the vertex set of a graph $G$. The \emph{complement} of a graph $G$,
-denoted $\shortoverline{G}$, is the
-graph with the same vertex set as $G$, and with an edge between distinct vertices $v$ and $w$ if and
-only if
-$v$ and $w$ are not adjacent in $G$. We write $G(n, p)$ for an Erd\H{o}s-R\'enyi random graph with
-$n$ vertices, and an edge between each distinct pair of vertices with independent probability $p$.
+Throughout, our graphs are unlabelled, undirected, and do not have any loops.  The \emph{order} of a
+graph is the cardinality of its vertex set. We write $\operatorname{V}(G)$ for the vertex set of a
+graph $G$. The \emph{complement} of a graph $G$, denoted $\shortoverline{G}$, is the graph with the
+same vertex set as $G$, and with an edge between distinct vertices $v$ and $w$ if and only if $v$
+and $w$ are not adjacent in $G$. We write $G(n, p)$ for an Erd\H{o}s-R\'enyi random graph with $n$
+vertices, and an edge between each distinct pair of vertices with independent probability $p$.
 
 A \emph{non-induced subgraph isomorphism} from a graph $P$ (called the \emph{pattern}) to a graph
 $T$ (called the \emph{target}) is an injective mapping from $\operatorname{V}(P)$ to
@@ -362,12 +360,11 @@ that an induced isomorphism $i : P \hookrightarrow T$ is a non-induced isomorphi
 
 \subsection{Experimental Setup}
 
-Our experiments were performed on systems with Intel Xeon E5-4650 v2 CPUs and 768GBytes RAM
-(although this much RAM was not needed), running Scientific Linux release 6.7. We selected three
-subgraph isomorphism solvers: the Glasgow solver \citep{McCreesh:2015}, LAD \citep{Solnon:2010}, and
-VF2 \citep{Cordella:2004}; each was compiled using GCC 4.9. These solvers all use backtracking
-search to build up an assignment of target vertices (values) to pattern vertices (variables), with
-different kinds of inference and ordering heuristics.
+Our experiments were performed on systems with Intel Xeon E5-4650 v2 CPUs, running Scientific Linux
+release 6.7. We selected three subgraph isomorphism solvers: the Glasgow solver
+\citep{McCreesh:2015}, LAD \citep{Solnon:2010}, and VF2 \citep{Cordella:2004}; each was compiled
+using GCC 4.9. Each uses backtracking search to build up an assignment of target vertices (values)
+to pattern vertices (variables), with different kinds of inference and ordering heuristics.
 
 In each case we measure the number of recursive calls (guessed assignments) made, not runtimes. We
 are not aiming to compare absolute performance between solvers; rather, we are looking for
@@ -404,8 +401,8 @@ is trivial, for dense patterns proving unsatisfiability is not particularly diff
 complexity peak around the point where half the instances are satisfiable.  We also plot the search
 cost of individual instances, as points. The behaviour we observe looks remarkably similar to random
 3SAT problems---compare, for example, Figure 1 of \citet{LeytonBrown:2014}. In particular,
-satisfiable instances tend to be easier, but show greater variation than unsatisfiable instances. % , and
-% there are exceptionally hard satisfiable instances \citep{Smith:1997}.
+satisfiable instances tend to be easier, but show greater variation than unsatisfiable instances, and
+there are exceptionally hard satisfiable instances \citep{Smith:1997}.
 
 \begin{figure}[tb]
     \setlength{\abovecaptionskip}{0pt}
@@ -539,7 +536,7 @@ parameter space, the partial derivatives of $\langle Sol \rangle$ disagree on wh
 use, and using directional derivatives is not enough to resolve the problem. A close observation of
 the data suggests that the actual location of the phase transition may be involved (and perhaps
 \citeauthor{Walsh:1998}'s suggestion applies only in these conditions). In any case, $\langle Sol
-\rangle$ is insufficient to explain the observed behaviour.
+\rangle$ is insufficient to explain the observed behaviour in these two eighths of the parameter space.
 
 In practice, this is unlikely to be a problem: most real-world instances are extremely sparse and
 are usually easy, which perhaps explains the continuing popularity of VF2's connectivity-based
@@ -576,21 +573,21 @@ used the Clasp solver~\citep{gekakaosscsc11a} version 3.1.3 to solve the pseudo-
 The instances that are hard for the Glasgow solver remain hard for the PB solver, including
 instances inside the central region, and the easy satisfiable instances remain easy.
 
-We also implemented an equivalent SAT encoding with direct encoding of the cardinality constraints.
-Using the Glucose solver, we saw very similar performance to the PB encoding. We also implemented a
-similar integer program encoding; the Gurobi solver was only able to solve some of the trivial
-satisfiable instances, and was almost never able to prove unsatisfiability within the time limit. We
-do not plot the results for either of these solvers.
+We also implemented (but do not plot) an equivalent SAT encoding with direct encoding of the
+cardinality constraints.  Using the Glucose solver, we saw very similar performance to the PB
+encoding. We also implemented a similar integer program encoding; the Gurobi solver was only able to
+solve some of the trivial satisfiable instances, and was almost never able to prove unsatisfiability
+within the time limit.
 
-The \emph{association graph encoding} of a subgraph isomorphism problem is constructed by creating a
-new graph with a vertex for each pair $(p, t)$ of vertices from the pattern and target graphs
-respectively. There is an edge between vertex $(p_1, t_1)$ and vertex $(p_2, t_2)$ if mapping $p_1$
-to $t_1$ and $p_2$ to $t_2$ simultaneously is permitted, i.e.\ $p_1$ is adjacent to $p_2$ if and
-only if $t_1$ is adjacent to $t_2$. A clique of size equal to the order of the pattern graph exists
-in the association graph if and only if the problem is satisfiable \citep{Levi:1973}.  We illustrate
-this in \cref{figure:sip}. We used this encoding with a version of the BBMC clique algorithm
-\citep{SanSegundo:2011} modified to solve the decision problem. Again, the instances in the central
-region remain hard, and additionally, some of the easy satisfiable instances become hard.
+The \emph{association graph encoding} of a subgraph isomorphism problem (illustrated in
+\cref{figure:sip}) is constructed by creating a new graph with a vertex for each pair $(p, t)$ of
+vertices from the pattern and target graphs respectively. There is an edge between vertex $(p_1,
+t_1)$ and vertex $(p_2, t_2)$ if mapping $p_1$ to $t_1$ and $p_2$ to $t_2$ simultaneously is
+permitted, i.e.\ $p_1$ is adjacent to $p_2$ if and only if $t_1$ is adjacent to $t_2$. A clique of
+size equal to the order of the pattern graph exists in the association graph if and only if the
+problem is satisfiable \citep{Levi:1973}. We used this encoding with a decision version of the BBMC
+clique algorithm \citep{SanSegundo:2011}. Again, the instances in the central region remain hard,
+and additionally, some of the easy satisfiable instances become hard.
 
 These results suggest that the central region may be genuinely hard, despite not being near a phase
 transition. The clique encoding in particular rules out the hypothesis that subgraph isomorphism
@@ -616,16 +613,17 @@ constrainedness gives the same predictions as maximising the expected number of 
 
 \section{Conclusion}
 
-?? We found hard instances, some where we'd expect, some in unexpected places. These unexpected
-instances, by and large, remained hard under reductions. We looked at how existing non-induced
-heuristics could be recovered from Sol, and how this gives us better heuristics for the induced
-variant.
+We have shown how to generate small but hard instances for the non-induced and induced subgraph
+isomorphism problems, which will help offset the bias in existing datasets. For non-induced
+isomorphisms, behaviour was as in many other hard problems, but for induced isomorphisms we
+uncovered several interesting phenomena: there are hard instances far from a phase transition,
+constrainedness predicts this, and existing general techniques for designing heuristics do not work
+in certain portions of the parameter space.
 
-?? Consider dynamic heuristics.
-
-?? Other random models and non-random.
-
-?? Does not give hard instances for graph isomorphism.
+In future work, we intend to repeat the experiments using other random models, including bounded and
+regular degree. We will also look at dynamic heuristics, and switching pattern and target heuristics
+independently. Finally, we intend to investigate whether variance can be calculated efficiently
+enough to give better predictions for very sparse or dense pattern graphs.
 
 % \section*{Acknowledgements}
 % 
