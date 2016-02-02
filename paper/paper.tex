@@ -147,13 +147,149 @@ recognition \citep{Conte:2004}.
             \node [anchor=center, font=\Large] (A1) at (-1.5, -1.5) { $\hookleftarrow$ };
             \node [anchor=center, font=\Large] (A2) at ( 3.5, -1.5) { $\rightarrowtail$ };
         \end{scope}
+    \end{tikzpicture}\\[0.75cm]
+    \begin{tikzpicture}[scale=0.5]
+        \begin{scope}
+            \foreach \n in {1, ..., 6}{
+                \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (N1\n) at (\n, 0) {\n};
+            }
+
+            \draw [decorate, decoration={brace, raise=0.2cm}, very thick] (N11.north west) -- (N16.north
+                east) node [midway, above=0.3cm] { $1 \mapsto$ };
+
+            \foreach \n in {1, ..., 6}{
+                \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (N2\n) at (0, -\n) {\n};
+            }
+
+            \draw [decorate, decoration={brace, raise=0.2cm, mirror}, very thick] (N21.north west) --
+                (N26.south west) node [midway, left=0.3cm] { $2 \mapsto$ };
+
+            \foreach \n in {1, ..., 6}{
+                \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (N3\n) at (7, -\n) {\n};
+            }
+
+            \draw [decorate, decoration={brace, raise=0.2cm}, very thick] (N31.north east) -- (N36.south
+                east) node [midway, right=0.3cm] { $3 \mapsto$ };
+
+            \foreach \n in {1, ..., 6}{
+                \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (N4\n) at (\n, -7) {\n};
+            }
+
+            \draw [decorate, decoration={brace, raise=0.2cm, mirror}, very thick] (N41.south west) --
+                (N46.south east) node [midway, below=0.3cm] { $4 \mapsto$ };
+
+            \begin{scope}[on background layer]
+                \draw [color=uofgsandstone!50] ($(N11)!0.8!(N11.south)$) -- ($(N22)!0.8!(N22.east)$);
+                \draw [color=uofgsandstone!50] ($(N11)!0.8!(N11.south)$) -- ($(N23)!0.8!(N23.east)$);
+                \draw [color=uofgsandstone!50] ($(N11)!0.8!(N11.south)$) -- ($(N24)!0.8!(N24.east)$);
+                \draw [color=uofgsandstone!50] ($(N11)!0.8!(N11.south)$) -- ($(N25)!0.8!(N25.east)$);
+                \draw [color=uofgsandstone!50] ($(N11)!0.8!(N11.south)$) -- ($(N36)!0.8!(N36.west)$);
+                \draw [color=uofgsandstone!50] ($(N11)!0.8!(N11.south)$) -- ($(N46)!0.8!(N46.north)$);
+                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N12)!0.8!(N12.south)$);
+                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N32)!0.8!(N32.west)$);
+                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N42)!0.8!(N42.north)$);
+                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N13)!0.8!(N13.south)$);
+                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N33)!0.8!(N33.west)$);
+                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N43)!0.8!(N43.north)$);
+                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N14)!0.8!(N14.south)$);
+                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N34)!0.8!(N34.west)$);
+                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N44)!0.8!(N44.north)$);
+                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N15)!0.8!(N15.south)$);
+                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N35)!0.8!(N35.west)$);
+                \draw [color=uofgsandstone!50] ($(N21)!0.8!(N21.east)$) -- ($(N45)!0.8!(N45.north)$);
+                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N22)!0.8!(N22.east)$);
+                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N42)!0.8!(N42.north)$);
+                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N23)!0.8!(N23.east)$);
+                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N43)!0.8!(N43.north)$);
+                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N24)!0.8!(N24.east)$);
+                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N44)!0.8!(N44.north)$);
+                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N25)!0.8!(N25.east)$);
+                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N45)!0.8!(N45.north)$);
+                \draw [color=uofgsandstone!50] ($(N31)!0.8!(N31.west)$) -- ($(N16)!0.8!(N16.south)$);
+                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N22)!0.8!(N22.east)$);
+                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N32)!0.8!(N32.west)$);
+                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N23)!0.8!(N23.east)$);
+                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N33)!0.8!(N33.west)$);
+                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N24)!0.8!(N24.east)$);
+                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N34)!0.8!(N34.west)$);
+                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N25)!0.8!(N25.east)$);
+                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N35)!0.8!(N35.west)$);
+                \draw [color=uofgsandstone!50] ($(N41)!0.8!(N41.north)$) -- ($(N16)!0.8!(N16.south)$);
+                \draw [color=uofgsandstone!50] ($(N12)!0.8!(N12.south)$) -- ($(N33)!0.8!(N33.west)$);
+                \draw [color=uofgsandstone!50] ($(N12)!0.8!(N12.south)$) -- ($(N24)!0.8!(N24.east)$);
+                \draw [color=uofgsandstone!50] ($(N12)!0.8!(N12.south)$) -- ($(N45)!0.8!(N45.north)$);
+                \draw [color=uofgsandstone!50] ($(N22)!0.8!(N22.east)$) -- ($(N14)!0.8!(N14.south)$);
+                \draw [color=uofgsandstone!50] ($(N22)!0.8!(N22.east)$) -- ($(N34)!0.8!(N34.west)$);
+                \draw [color=uofgsandstone!50] ($(N22)!0.8!(N22.east)$) -- ($(N44)!0.8!(N44.north)$);
+                \draw [color=uofgsandstone!50] ($(N22)!0.8!(N22.east)$) -- ($(N16)!0.8!(N16.south)$);
+                \draw [color=uofgsandstone!50] ($(N22)!0.8!(N22.east)$) -- ($(N36)!0.8!(N36.west)$);
+                \draw [color=uofgsandstone!50] ($(N22)!0.8!(N22.east)$) -- ($(N46)!0.8!(N46.north)$);
+                \draw [color=uofgsandstone!50] ($(N32)!0.8!(N32.west)$) -- ($(N13)!0.8!(N13.south)$);
+                \draw [color=uofgsandstone!50] ($(N32)!0.8!(N32.west)$) -- ($(N24)!0.8!(N24.east)$);
+                \draw [color=uofgsandstone!50] ($(N32)!0.8!(N32.west)$) -- ($(N44)!0.8!(N44.north)$);
+                \draw [color=uofgsandstone!50] ($(N32)!0.8!(N32.west)$) -- ($(N15)!0.8!(N15.south)$);
+                \draw [color=uofgsandstone!50] ($(N32)!0.8!(N32.west)$) -- ($(N26)!0.8!(N26.east)$);
+                \draw [color=uofgsandstone!50] ($(N32)!0.8!(N32.west)$) -- ($(N46)!0.8!(N46.north)$);
+                \draw [color=uofgsandstone!50] ($(N42)!0.8!(N42.north)$) -- ($(N13)!0.8!(N13.south)$);
+                \draw [color=uofgsandstone!50] ($(N42)!0.8!(N42.north)$) -- ($(N24)!0.8!(N24.east)$);
+                \draw [color=uofgsandstone!50] ($(N42)!0.8!(N42.north)$) -- ($(N34)!0.8!(N34.west)$);
+                \draw [color=uofgsandstone!50] ($(N42)!0.8!(N42.north)$) -- ($(N15)!0.8!(N15.south)$);
+                \draw [color=uofgsandstone!50] ($(N42)!0.8!(N42.north)$) -- ($(N26)!0.8!(N26.east)$);
+                \draw [color=uofgsandstone!50] ($(N42)!0.8!(N42.north)$) -- ($(N36)!0.8!(N36.west)$);
+                \draw [color=uofgsandstone!50] ($(N13)!0.8!(N13.south)$) -- ($(N34)!0.8!(N34.west)$);
+                \draw [color=uofgsandstone!50] ($(N13)!0.8!(N13.south)$) -- ($(N44)!0.8!(N44.north)$);
+                \draw [color=uofgsandstone!50] ($(N13)!0.8!(N13.south)$) -- ($(N25)!0.8!(N25.east)$);
+                \draw [color=uofgsandstone!50] ($(N13)!0.8!(N13.south)$) -- ($(N26)!0.8!(N26.east)$);
+                \draw [color=uofgsandstone!50] ($(N23)!0.8!(N23.east)$) -- ($(N15)!0.8!(N15.south)$);
+                \draw [color=uofgsandstone!50] ($(N23)!0.8!(N23.east)$) -- ($(N35)!0.8!(N35.west)$);
+                \draw [color=uofgsandstone!50] ($(N23)!0.8!(N23.east)$) -- ($(N45)!0.8!(N45.north)$);
+                \draw [color=uofgsandstone!50] ($(N23)!0.8!(N23.east)$) -- ($(N16)!0.8!(N16.south)$);
+                \draw [color=uofgsandstone!50] ($(N23)!0.8!(N23.east)$) -- ($(N36)!0.8!(N36.west)$);
+                \draw [color=uofgsandstone!50] ($(N23)!0.8!(N23.east)$) -- ($(N46)!0.8!(N46.north)$);
+                \draw [color=uofgsandstone!50] ($(N33)!0.8!(N33.west)$) -- ($(N14)!0.8!(N14.south)$);
+                \draw [color=uofgsandstone!50] ($(N33)!0.8!(N33.west)$) -- ($(N25)!0.8!(N25.east)$);
+                \draw [color=uofgsandstone!50] ($(N33)!0.8!(N33.west)$) -- ($(N45)!0.8!(N45.north)$);
+                \draw [color=uofgsandstone!50] ($(N33)!0.8!(N33.west)$) -- ($(N26)!0.8!(N26.east)$);
+                \draw [color=uofgsandstone!50] ($(N33)!0.8!(N33.west)$) -- ($(N46)!0.8!(N46.north)$);
+                \draw [color=uofgsandstone!50] ($(N43)!0.8!(N43.north)$) -- ($(N14)!0.8!(N14.south)$);
+                \draw [color=uofgsandstone!50] ($(N43)!0.8!(N43.north)$) -- ($(N25)!0.8!(N25.east)$);
+                \draw [color=uofgsandstone!50] ($(N43)!0.8!(N43.north)$) -- ($(N36)!0.8!(N36.west)$);
+                \draw [color=uofgsandstone!50] ($(N14)!0.8!(N14.south)$) -- ($(N35)!0.8!(N35.west)$);
+                \draw [color=uofgsandstone!50] ($(N14)!0.8!(N14.south)$) -- ($(N45)!0.8!(N45.north)$);
+                \draw [color=uofgsandstone!50] ($(N14)!0.8!(N14.south)$) -- ($(N26)!0.8!(N26.east)$);
+                \draw [color=uofgsandstone!50] ($(N24)!0.8!(N24.east)$) -- ($(N16)!0.8!(N16.south)$);
+                \draw [color=uofgsandstone!50] ($(N24)!0.8!(N24.east)$) -- ($(N36)!0.8!(N36.west)$);
+                \draw [color=uofgsandstone!50] ($(N24)!0.8!(N24.east)$) -- ($(N46)!0.8!(N46.north)$);
+                \draw [color=uofgsandstone!50] ($(N34)!0.8!(N34.west)$) -- ($(N15)!0.8!(N15.south)$);
+                \draw [color=uofgsandstone!50] ($(N34)!0.8!(N34.west)$) -- ($(N26)!0.8!(N26.east)$);
+                \draw [color=uofgsandstone!50] ($(N34)!0.8!(N34.west)$) -- ($(N46)!0.8!(N46.north)$);
+                \draw [color=uofgsandstone!50] ($(N44)!0.8!(N44.north)$) -- ($(N15)!0.8!(N15.south)$);
+                \draw [color=uofgsandstone!50] ($(N44)!0.8!(N44.north)$) -- ($(N26)!0.8!(N26.east)$);
+                \draw [color=uofgsandstone!50] ($(N44)!0.8!(N44.north)$) -- ($(N36)!0.8!(N36.west)$);
+                \draw [color=uofgsandstone!50] ($(N15)!0.8!(N15.south)$) -- ($(N26)!0.8!(N26.east)$);
+                \draw [color=uofgsandstone!50] ($(N25)!0.8!(N25.east)$) -- ($(N16)!0.8!(N16.south)$);
+                \draw [color=uofgsandstone!50] ($(N25)!0.8!(N25.east)$) -- ($(N36)!0.8!(N36.west)$);
+                \draw [color=uofgsandstone!50] ($(N25)!0.8!(N25.east)$) -- ($(N46)!0.8!(N46.north)$);
+                \draw [color=uofgsandstone!50] ($(N35)!0.8!(N35.west)$) -- ($(N46)!0.8!(N46.north)$);
+                \draw [color=uofgsandstone!50] ($(N45)!0.8!(N45.north)$) -- ($(N26)!0.8!(N26.east)$);
+                \draw [color=uofgsandstone!50] ($(N45)!0.8!(N45.north)$) -- ($(N36)!0.8!(N36.west)$);
+                \draw [ultra thick] ($(N12)!0.8!(N12.south)$) -- ($(N43)!0.8!(N43.north)$);
+                \draw [ultra thick] ($(N12)!0.8!(N12.south)$) -- ($(N35)!0.8!(N35.west)$);
+                \draw [ultra thick] ($(N12)!0.8!(N12.south)$) -- ($(N26)!0.8!(N26.east)$);
+                \draw [ultra thick] ($(N43)!0.8!(N43.north)$) -- ($(N35)!0.8!(N35.west)$);
+                \draw [ultra thick] ($(N43)!0.8!(N43.north)$) -- ($(N26)!0.8!(N26.east)$);
+                \draw [ultra thick] ($(N35)!0.8!(N35.west)$) -- ($(N26)!0.8!(N26.east)$);
+            \end{scope}
+        \end{scope}
     \end{tikzpicture}
 
-    \caption{There is a non-induced isomorphism from the pattern graph, in the centre, to the target
+    \caption{On top, there is a non-induced isomorphism from the pattern graph, in the center, to the target
     on the right, mapping vertex 1 to 1, 2 to 3, 3 to 5 and 4 to 6. This is not an induced
     isomorphism, since there is an edge between 1 and 5 in the target but not between 1 and 3 in the
-    pattern. The mapping from the pattern to the (same) target on the left, sending 1 to 2, 2 to 6,
-    3 to 5 and 4 to 3, is both non-induced and induced.}
+    pattern. The mapping from the pattern to the (same) target on the left, sending 1 to 2, 2 to 6, 3 to
+    5 and 4 to 3, is both non-induced and induced.
+    Below, the association graph encoding for the induced version: the highlighted clique
+    corresponds to the same mapping.}
     \label{figure:sip}
 \end{figure}
 
@@ -452,10 +588,10 @@ new graph with a vertex for each pair $(p, t)$ of vertices from the pattern and 
 respectively. There is an edge between vertex $(p_1, t_1)$ and vertex $(p_2, t_2)$ if mapping $p_1$
 to $t_1$ and $p_2$ to $t_2$ simultaneously is permitted, i.e.\ $p_1$ is adjacent to $p_2$ if and
 only if $t_1$ is adjacent to $t_2$. A clique of size equal to the order of the pattern graph exists
-in the association graph if and only if the problem is satisfiable \citep{Levi:1973}.  We used this
-encoding with a version of the BBMC clique algorithm \citep{SanSegundo:2011} modified to solve the
-decision problem. Again, the instances in the central region remain hard, and additionally, some of
-the easy satisfiable instances become hard.
+in the association graph if and only if the problem is satisfiable \citep{Levi:1973}.  We illustrate
+this in \cref{figure:sip}. We used this encoding with a version of the BBMC clique algorithm
+\citep{SanSegundo:2011} modified to solve the decision problem. Again, the instances in the central
+region remain hard, and additionally, some of the easy satisfiable instances become hard.
 
 These results suggest that the central region may be genuinely hard, despite not being near a phase
 transition. The clique encoding in particular rules out the hypothesis that subgraph isomorphism
