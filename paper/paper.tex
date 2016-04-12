@@ -303,10 +303,10 @@ most of the difficulty being in dealing with the size of the model. This has lea
 algorithm design, to the extent that some proposed techniques will \emph{only} work on satisfiable
 instances \citep{Battiti:2007}.
 
-%%% The lack of unsatisfiable instances cannot be addressed by using a pattern graph from one of the
-%%% random suites with the ``wrong'' target graph: this tends to give either a trivially unsatisfiable
-%%% instance, or a satisfiable instance. (In particular, it is \emph{not} the case that a relatively
-%%% small random graph is unlikely to appear in a larger random graph.)
+The lack of unsatisfiable instances cannot be addressed by using a pattern graph from one of the
+random suites with the ``wrong'' target graph: this tends to give either a trivially unsatisfiable
+instance, or a satisfiable instance. (In particular, it is \emph{not} the case that a relatively
+small random graph is unlikely to appear in a larger random graph.)
 
 Here we present and evaluate a new method for creating random pattern/target pairs. This method
 generates both satisfiable and unsatisfiable instances, and can produce computationally challenging
@@ -396,7 +396,10 @@ complexity peak around the point where half the instances are satisfiable.  We a
 cost of individual instances, as points. The behaviour we observe looks remarkably similar to random
 3SAT problems---compare, for example, Figure 1 of \citet{LeytonBrown:2014}. In particular,
 satisfiable instances tend to be easier, but show greater variation than unsatisfiable instances, and
-there are exceptionally hard satisfiable instances \citep{Smith:1997}.
+there are exceptionally hard satisfiable instances \citep{Smith:1997}. (The Glasgow solver supports
+parallel search with a work-stealing strategy explicitly designed to eliminate these. We have not
+enabled this option to avoid dealing with the complexity of search tree measurements under
+parallelism.)
 
 \begin{figure}[tb]
     \setlength{\abovecaptionskip}{0pt}
