@@ -6,10 +6,10 @@ require 'bigdecimal'
 ps = ARGV[0].to_i
 ts = ARGV[1].to_i
 
-0.upto(50) do | y |
-    0.upto(50) do | x |
-        pd = BigDecimal.new(x) / 50;
-        td = BigDecimal.new(y) / 50;
+0.upto(100) do | y |
+    0.upto(100) do | x |
+        pd = BigDecimal.new(x) / 100;
+        td = BigDecimal.new(y) / 100;
 
         cliqueedges = BigDecimal.new(ps * (ps - 1) / 2);
         nedges = pd * cliqueedges;

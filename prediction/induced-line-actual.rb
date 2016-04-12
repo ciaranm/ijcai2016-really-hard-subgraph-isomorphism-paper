@@ -85,8 +85,8 @@ end
             tdresult[pass] = (upper + lower) / 1000.0
         end
 
-        pdround[pass] = (pdresult[pass] * 50.0).to_i
-        tdround[pass] = (tdresult[pass] * 50.0).to_i
+        pdround[pass] = (pdresult[pass] * 100.0).to_i
+        tdround[pass] = (tdresult[pass] * 100.0).to_i
 
         while tdround[pass] < 49 and tdround[pass] > 1 and measured[pdround[pass]][tdround[pass]].to_f < 0.5 do
             tdround[pass] += (pass == 0 ? 1 : -1)

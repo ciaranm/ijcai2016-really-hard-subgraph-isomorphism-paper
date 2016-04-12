@@ -415,16 +415,16 @@ parallelism.)
 
 What if we alter the edge probabilities for both the pattern graph and the target graph?  In the top
 row of \cref{figure:non-induced} we show the satisfiability phase transition for the non-induced
-variant, for patterns of order 10, 20 and 30, targets of order 150, and varying pattern (x-axis)
-and target (y-axis) edge probabilities. Each axis runs over 51 edge probabilities, from 0 to 1 in
-steps of 0.02; for each of these 2601 points, we generate ten random instances. The colour denotes
-the proportion of these instances which were found to be satisfiable.  Inside the orange region, at
-the bottom right of each plot, every instance is unsatisfiable---here we are trying to find a dense
-pattern in a sparse target. In the purple region, at the top left, every instance is
-satisfiable---we are looking for a sparse pattern in a dense target (which is easy, since we only
-have to preserve adjacency, not non-adjacency). The white band between the regions shows the
-location of the phase transition: here, roughly half the instances are satisfiable. (We discuss the
-black line below.)
+variant, for patterns of order 10, 20 and 30, targets of order 150, and varying pattern (x-axis) and
+target (y-axis) edge probabilities. Each axis runs over 101 edge probabilities, from 0 to 1 in steps
+of 0.01, except for the VF2 row which uses steps of 0.02. For each of these points, we generate ten
+random instances. The colour denotes the proportion of these instances which were found to be
+satisfiable.  Inside the orange region, at the bottom right of each plot, every instance is
+unsatisfiable---here we are trying to find a dense pattern in a sparse target. In the purple region,
+at the top left, every instance is satisfiable---we are looking for a sparse pattern in a dense
+target (which is easy, since we only have to preserve adjacency, not non-adjacency). The white band
+between the regions shows the location of the phase transition: here, roughly half the instances are
+satisfiable. (We discuss the black line below.)
 
 On subsequent rows, we show the average number of search nodes used by the different algorithms. In
 general, satisfiable instances are easy, until very close to the phase transition. As we hit the
