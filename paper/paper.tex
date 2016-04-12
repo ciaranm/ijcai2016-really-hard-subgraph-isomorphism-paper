@@ -452,10 +452,11 @@ This prediction is generally reasonably accurate, except that for very low and v
 densities, we overestimate the satisfiable region. This is due to variance: although an expected
 number of solutions much below one implies a high likelihood of unsatisfiability, it is not true
 that a high expected number of solutions implies that any particular instance is likely to be
-satisfiable---a similar behaviour is seen with random constraint satisfaction problems
-\citep{Smith:1996}.
-
-% \citep{Smith:1994}
+satisfiable. (Consider, for example, a sparse graph which has several isolated vertices. If one
+solution exists, other symmetric solutions can be obtained by permuting the isolated vertices.
+Thus although the expected number of solutions may be one, there cannot be exactly one solution.) A
+similar behaviour is seen with random constraint satisfaction problems
+\citep{Smith:1994,Smith:1996}.
 
 \subsection{Variable and Value Ordering Heuristics}
 
