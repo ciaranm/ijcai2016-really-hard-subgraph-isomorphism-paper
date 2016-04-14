@@ -12,7 +12,6 @@
 \usepackage{amssymb}
 \usepackage{placeins}
 \usepackage{cleveref}
-\usepackage{natbib}
 \usepackage{dblfloatfix}
 
 % \usepackage{showframe}
@@ -39,6 +38,7 @@
 \definecolor{uofgpillarbox}{rgb}{0.701961, 0.047059, 0}
 \definecolor{uofglavendar}{rgb}{0.356863, 0.301961, 0.580392}
 
+% Without these, figure 4 causes horrible page layout problems
 \renewcommand{\topfraction}{0.9}
 \renewcommand{\bottomfraction}{0.8}
 \renewcommand{\dbltopfraction}{0.9}
@@ -47,12 +47,30 @@
 \renewcommand{\floatpagefraction}{0.85}
 \renewcommand{\dblfloatpagefraction}{0.85}
 
+\newcommand{\citet}[1]{\citeauthor{#1} \shortcite{#1}}
+\newcommand{\citep}[1]{\cite{#1}}
+
 % cref style
 \crefname{figure}{Figure}{Figures}
 \Crefname{figure}{Figure}{Figures}
 
 % http://tex.stackexchange.com/questions/22100/the-bar-and-overline-commands
 \newcommand{\shortoverline}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\makeatletter\@ifpackageloaded{showframe}{
+    % show lines down the middle columns too
+    % http://tex.stackexchange.com/questions/16199/test-if-a-package-or-package-option-is-loaded
+\newlength\Fcolumnseprule\setlength\Fcolumnseprule{0.4pt}\def\@outputdblcol{%
+  \if@firstcolumn\global \@firstcolumnfalse \global \setbox\@leftcolumn \box\@outputbox
+  \else
+    \global \@firstcolumntrue
+    \setbox\@outputbox \vbox{\hb@xt@\textwidth{\hb@xt@\columnwidth{\box\@leftcolumn \hss}%
+    \vrule \@width\Fcolumnseprule\hfil{\normalcolor\vrule \@width\columnseprule}
+    \hfil\vrule \@width\Fcolumnseprule\hb@xt@\columnwidth {\box\@outputbox \hss}}}\@combinedblfloats\@outputpage
+    \begingroup\@dblfloatplacement\@startdblcolumn\@whilesw\if@fcolmade \fi{\@outputpage\@startdblcolumn}\endgroup
+  \fi
+}}{}
+\makeatother
 
 \title{Heuristics and Really Hard Instances for Subgraph Isomorphism Problems}
 
@@ -90,24 +108,24 @@ recognition \citep{Conte:2004}.
 
 \begin{figure}[b]
     \centering
-    \begin{tikzpicture}[scale=0.45,every node/.style={font=\footnotesize}]
+    \begin{tikzpicture}[scale=0.5,every node/.style={font=\footnotesize}]
         \begin{scope}
-            \node [draw, circle, fill=uofgcobalt, inner sep=1pt] (Na) at (1,  0) {1};
-            \node [draw, circle, fill=uofgpumpkin, inner sep=1pt] (Nb) at (1, -1.5) {2};
-            \node [draw, circle, fill=uofglawn, inner sep=1pt] (Nc) at (0, -3) {3};
-            \node [draw, circle, fill=uofgthistle, inner sep=1pt] (Nd) at (2, -3) {4};
+            \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (Na) at (1,  0) {1};
+            \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (Nb) at (1, -1.5) {2};
+            \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (Nc) at (0, -3) {3};
+            \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (Nd) at (2, -3) {4};
 
             \draw [ultra thick] (Na) -- (Nb);
             \draw [ultra thick] (Nb) -- (Nc);
             \draw [ultra thick] (Nc) -- (Nd);
             \draw [ultra thick] (Nb) -- (Nd);
 
-            \node [draw, circle, fill=uofgcobalt, inner sep=1pt] (N1) at (5.5,  0) {1};
-            \node [draw, circle, fill=white, inner sep=1pt] (N2) at (7.5,  0) {2};
-            \node [draw, circle, fill=uofgpumpkin, inner sep=1pt] (N3) at (5.5, -1.5) {3};
-            \node [draw, circle, fill=white, inner sep=1pt] (N4) at (7.5, -1.5) {4};
-            \node [draw, circle, fill=uofglawn, inner sep=1pt] (N5) at (5.5, -3) {5};
-            \node [draw, circle, fill=uofgthistle, inner sep=1pt] (N6) at (7.5, -3) {6};
+            \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (N1) at (5.5,  0) {1};
+            \node [draw, circle, fill=white, inner sep=1.5pt] (N2) at (7.5,  0) {2};
+            \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (N3) at (5.5, -1.5) {3};
+            \node [draw, circle, fill=white, inner sep=1.5pt] (N4) at (7.5, -1.5) {4};
+            \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (N5) at (5.5, -3) {5};
+            \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (N6) at (7.5, -3) {6};
 
             \draw [thick, color=uofgsandstone!50] (N1) -- (N2);
             \draw [ultra thick] (N1) -- (N3);
@@ -120,12 +138,12 @@ recognition \citep{Conte:2004}.
             \draw [thick, color=uofgsandstone!50] (N2) to [in=45, out=315] (N6);
             \draw [thick, color=uofgsandstone!50] (N1) to [in=135, out=225] (N5);
 
-            \node [draw, circle, fill=white, inner sep=1pt] (M1) at (-5.5,  0) {1};
-            \node [draw, circle, fill=uofgcobalt, inner sep=1pt] (M2) at (-3.5,  0) {2};
-            \node [draw, circle, fill=uofgthistle, inner sep=1pt] (M3) at (-5.5, -1.5) {3};
-            \node [draw, circle, fill=white, inner sep=1pt] (M4) at (-3.5, -1.5) {4};
-            \node [draw, circle, fill=uofglawn, inner sep=1pt] (M5) at (-5.5, -3) {5};
-            \node [draw, circle, fill=uofgpumpkin, inner sep=1pt] (M6) at (-3.5, -3) {6};
+            \node [draw, circle, fill=white, inner sep=1.5pt] (M1) at (-5.5,  0) {1};
+            \node [draw, circle, fill=uofgcobalt, inner sep=1.5pt] (M2) at (-3.5,  0) {2};
+            \node [draw, circle, fill=uofgthistle, inner sep=1.5pt] (M3) at (-5.5, -1.5) {3};
+            \node [draw, circle, fill=white, inner sep=1.5pt] (M4) at (-3.5, -1.5) {4};
+            \node [draw, circle, fill=uofglawn, inner sep=1.5pt] (M5) at (-5.5, -3) {5};
+            \node [draw, circle, fill=uofgpumpkin, inner sep=1.5pt] (M6) at (-3.5, -3) {6};
 
             \draw [thick, color=uofgsandstone!50] (M1) -- (M2);
             \draw [thick, color=uofgsandstone!50] (M1) -- (M3);
@@ -141,7 +159,7 @@ recognition \citep{Conte:2004}.
             \node [anchor=center, font=\Large] (A1) at (-1.5, -1.5) { $\hookleftarrow$ };
             \node [anchor=center, font=\Large] (A2) at ( 3.5, -1.5) { $\rightarrowtail$ };
         \end{scope}
-    \end{tikzpicture}\\[0.25cm]
+    \end{tikzpicture}\\[0.5cm]
     \begin{tikzpicture}[scale=0.45,every node/.style={font=\footnotesize}]
         \begin{scope}
             \foreach \n in {1, ..., 6}{
@@ -330,7 +348,8 @@ not a simple weakness of current subgraph isomorphism algorithms, we verify that
 hard when using a pseudo-boolean encoding, and under reduction to the clique problem. Interestingly,
 the constrainedness measure proposed by \citet{Gent:1996:Kappa} \emph{does} predict this difficult
 region---these instances provide evidence in favour of constrainedness, rather than proximity to a
-phase transition, being an accurate predictor of difficulty.
+phase transition, being an accurate predictor of difficulty, and show that constrainedness is not
+simply a refinement of a phase transition prediction.
 
 \subsection{Definitions}
 
@@ -357,8 +376,13 @@ that an induced isomorphism $i : P \hookrightarrow T$ is a non-induced isomorphi
 Our experiments were performed on systems with Intel Xeon E5-4650 v2 CPUs, running Scientific Linux
 release 6.7. We selected three subgraph isomorphism solvers: the Glasgow solver
 \citep{McCreesh:2015}, LAD \citep{Solnon:2010}, and VF2 \citep{Cordella:2004}; each was compiled
-using GCC 4.9. Each uses backtracking search to build up an assignment of target vertices (values)
-to pattern vertices (variables), with different kinds of inference and ordering heuristics.
+using GCC 4.9.
+
+The Glasgow and LAD solvers use backtracking search to build up an assignment of target vertices
+(values) to pattern vertices (variables), but differ in terms of inference and ordering heuristics.
+The approach used by VF2 is similar, although the domains of variables are not stored (in the style
+of conventional backtracking, rather than forward-checking), and so domain wipeouts are not detected
+until an assignment is made.
 
 In each case we measure the number of recursive calls (guessed assignments) made, not runtimes. We
 are not aiming to compare absolute performance between solvers; rather, we are looking for
@@ -372,7 +396,6 @@ less detailed.
 \section{Non-Induced Subgraph Isomorphisms}
 
 \begin{figure}[tb]
-    \setlength{\abovecaptionskip}{6pt}
     \input{gen-graph-phase-transition.tex}
     \caption{With a fixed pattern graph order of 20, a target graph order of 150, a target edge
         probability of 0.40, and varying pattern edge probability, we observe a phase transition and
@@ -402,7 +425,6 @@ enabled this option to avoid dealing with the complexity of search tree measurem
 parallelism.)
 
 \begin{figure}[tb]
-    \setlength{\abovecaptionskip}{0pt}
     \input{gen-graph-non-induced.tex}
     \caption{Behaviour of algorithms on the non-induced variant. For each plot, the x-axis is the
         pattern edge probability and the y-axis is the target edge probability, both from 0 to 1.
@@ -439,14 +461,14 @@ observe the easy-hard-easy pattern seen in many other \NP-complete problems.
 We can approximately predict the location of the phase transition by calculating (with
 simplifications regarding rounding and independence) the expected number of solutions for given
 parameters. Since we are trying to find an \emph{injective} mapping from a pattern $P = G(p, d_p)$
-to a target $T = G(t, d_t)$, there are $t^{\underline{p}} = t \cdot (t - 1) \cdot \ldots \cdot (t -
-p + 1)$ possible assignments of target vertices to pattern vertices.  We expect the pattern to have
+to a target $T = G(t, d_t)$, there are \[ t^{\underline{p}} = t \cdot (t - 1) \cdot \ldots \cdot (t -
+p + 1) \] possible assignments of target vertices to pattern vertices.  We expect the pattern to have
 $d_p \cdot \binom{p}{2}$ edges, so we obtain the probability of all of these edges being mapped to
 edges in the target by raising $d_t$ to this power, giving an expected number of solutions of \[
 \langle Sol \rangle = t^{\underline{p}} \cdot {d_t}^{d_p \cdot \binom{p}{2}} \textnormal{.} \] This
 formula predicts a very sharp phase transition from $\langle Sol \rangle \ll 1$ to $\langle Sol
-\rangle \gg 1$. We plot where this occurs using black lines in the first row of
-\cref{figure:non-induced}.
+\rangle \gg 1$, which may easily be located numerically. We plot where this occurs using black lines
+in the first row of \cref{figure:non-induced}.
 
 This prediction is generally reasonably accurate, except that for very low and very high pattern
 densities, we overestimate the satisfiable region. This is due to variance: although an expected
@@ -467,20 +489,18 @@ usually done by cheaper surrogates, rather than direct calculation. When branchi
 Glasgow pick a variable with fewest remaining values in its domain: doing this will generally reduce
 the first part of the $\langle Sol \rangle$ equation by as little as possible. When two or more
 domains are of equal size, LAD simply breaks ties lexicographically, whereas Glasgow will pick a
-variable corresponding to a pattern vertex of highest degree. This strategy was apparently
-determined empirically, but could have been derived from the $\langle Sol \rangle$ formula: picking
-a pattern vertex of high degree will make the remaining pattern subgraph sparser, which will
-decrease the exponent in the second half of the formula, maximising the overall value. LAD does not
-apply a value ordering heuristic, but Glasgow does: it prefers target vertices of lowest degree.
-Again, this appears to have been determined empirically, but it has the effect of increasing
-$\langle Sol \rangle$ by increasing the remaining target density. The VF2 heuristics, in contrast,
-are based around preserving connectivity, which gives very little discrimination except on the
-sparsest of inputs.
+variable corresponding to a pattern vertex of highest degree. This strategy was determined
+empirically, but could have been derived from the $\langle Sol \rangle$ formula: picking a pattern
+vertex of high degree will make the remaining pattern subgraph sparser, which will decrease the
+exponent in the second half of the formula, maximising the overall value. LAD does not apply a value
+ordering heuristic, but Glasgow does: it prefers target vertices of lowest degree.  Again, this was
+determined empirically, but it has the effect of increasing $\langle Sol \rangle$ by increasing the
+remaining target density. The VF2 heuristics, in contrast, are based around preserving connectivity,
+which gives very little discrimination except on the sparsest of inputs.
 
 \section{Induced Subgraph Isomorphisms}
 
 \begin{figure*}[t]
-    \setlength{\abovecaptionskip}{0pt}
     \input{gen-graph-induced.tex}
     \caption{Behaviour of algorithms on the induced variant, shown in the style
     of \cref{figure:non-induced}. The second, third and fourth rows show the number of search nodes used by the
@@ -553,7 +573,6 @@ absolute terms, we wish to see if the same pattern of behaviour occurs. The resu
 \cref{figure:alt}.
 
 \begin{figure*}[t]
-    \setlength{\abovecaptionskip}{0pt}
     \input{gen-graph-sat.tex}
     \caption{Behaviour of other solvers on the induced variant on smaller graphs, shown in the style of
         \cref{figure:non-induced}. The second row shows the number of search nodes used by the
@@ -616,9 +635,28 @@ uncovered several interesting phenomena: there are hard instances far from a pha
 constrainedness predicts this, and existing general techniques for designing heuristics do not work
 in certain portions of the parameter space.
 
+The model we have proposed may be extended to graphs with labels on the vertices or edges, which
+arise naturally in many applications. Broadly speaking, randomly allocated labels make the problem
+easier by restricting the search space, although there are pathological cases where increasing the
+number of labels shifts an instance from the easy satisfiable region to being close to the phase
+transition. The model may also be extended to the (decision version of the) maximum common subgraph
+problem. The reduction to maximum clique is a competitive approach for maximum common subgraph
+problem, so it is interesting to observe that some of the easy portions of the search space become
+hard under this reduction---this suggests a possible unnecessary weakness of maximum clique
+algorithms on certain kinds of input. (Maximum clique algorithms use a greedy colouring as a bound,
+and the association graphs produced by this reduction can be very bad for greedy colourings in the
+same way that crown graphs are.)
+
+In contrast, it is worth noting that this technique does \emph{not} give a way of generating hard
+instances for graph isomorphism problems: the pattern graph must be substantially smaller than the
+target graph for independent pairs of randomly generated instances to give interesting behaviour.
+
 In future work, we intend to repeat the experiments using other random models, including bounded,
-regular degree, and scale-free. We will also look at dynamic heuristics, and switching pattern and
-target heuristics independently. Finally, we intend to investigate whether variance can be
+regular degree, and scale-free; regular degree graphs in particular foil existing degree-based
+heuristics. Similarly, we will look at alternatives to simple randomness for labelling
+strategies---for example, in chemical datasets, label sets tend to differ based upon the degrees of
+their corresponding vertices.  We will also look at dynamic heuristics, and switching pattern and
+target heuristics independently.  Finally, we intend to investigate whether variance can be
 calculated efficiently enough to give better predictions for very sparse or dense pattern graphs.
 
 \section*{Acknowledgements}
