@@ -600,31 +600,38 @@ vertices from the pattern and target graphs respectively. There is an edge betwe
 t_1)$ and vertex $(p_2, t_2)$ if mapping $p_1$ to $t_1$ and $p_2$ to $t_2$ simultaneously is
 permitted, i.e.\ $p_1$ is adjacent to $p_2$ if and only if $t_1$ is adjacent to $t_2$. A clique of
 size equal to the order of the pattern graph exists in the association graph if and only if the
-problem is satisfiable \citep{Levi:1973}. We used this encoding with a decision version of the BBMC
-clique algorithm \citep{SanSegundo:2011}. Again, the instances in the central region remain hard,
-and additionally, some of the easy satisfiable instances become hard.
+problem is satisfiable \citep{Levi:1973}. We used this encoding with the BBMC clique algorithm
+\citep{SanSegundo:2011}, which we implemented in C++. Usually BBMC solves the optimisation version
+of the clique problem, we adapted it to solve the decision problem by initialising the incumbent to
+be one less than the decision value, and allowing it to exit as soon as a clique with size equal to
+the decision value is encountered.  Again, our results show that the instances in the central region
+remain hard, and additionally, some of the easy unsatisfiable instances become hard.
 
-These results suggest that the central region may be genuinely hard, despite not being near a phase
-transition. The clique results in particular rule out the hypothesis that subgraph isomorphism
-solvers only find this region hard due to not reasoning simultaneously about adjacency and
-non-adjacency, since the association graph encoding constraints consider compatibility rather than
-adjacency and non-adjacency.
+Together, these experiments suggest that the central region may be genuinely hard, despite not being
+near a phase transition. The clique results in particular rule out the hypothesis that subgraph
+isomorphism solvers only find this region hard due to not reasoning simultaneously about adjacency
+and non-adjacency, since the association graph encoding constraints consider compatibility rather
+than adjacency and non-adjacency.
 
-Constrainedness, denoted $\kappa$, is an alternative measure of difficulty designed to generalise
-hardness parameters across different combinatorial problems \citep{Gent:1996:Kappa}. A problem with
-$\kappa < 1$ is said to be underconstrained, and is likely to be satisfiable; a problem with $\kappa
-> 1$ is overconstrained, and is likely to be unsatisfiable. Empirically, problems with $\kappa$
-close to 1 are hard, and problems where $\kappa$ is very small or very large are usually easy. By
-handling injectivity as a restriction on the size of the state space rather than as a constraint, we
-derive \[ \kappa = 1 - \frac{\log \left( t^{\underline{p}} \cdot {d_t}^{d_p \cdot \binom{p}{2}} \cdot {(1 -
-d_{t})}^{(1 - d_{p}) \cdot \binom{p}{2}} \right)}{\log t^{\underline{p}}}\] for induced isomorphisms, which
-we plot on the fifth row of \cref{figure:induced}. We see that constrainedness predicts that the
-central region will still be relatively difficult for larger pattern graphs: although the problem is
-overconstrained, it is less overconstrained than in the regions the Glasgow and LAD solvers found easy.
-Thus it seems that rather than just being a unification of existing generalised heuristic
+Constrainedness, denoted $\kappa$, is an alternative measure of difficulty designed to refine the
+phase transition concept, and to generalise hardness parameters across different combinatorial
+problems \citep{Gent:1996:Kappa}. A problem with $\kappa < 1$ is said to be underconstrained, and is
+likely to be satisfiable; a problem with $\kappa > 1$ is overconstrained, and is likely to be
+unsatisfiable. Empirically, problems with $\kappa$ close to 1 are hard, and problems where $\kappa$
+is very small or very large are usually easy. By handling injectivity as a restriction on the size
+of the state space rather than as a constraint, we derive \[ \kappa = 1 - \frac{\log \left(
+t^{\underline{p}} \cdot {d_t}^{d_p \cdot \binom{p}{2}} \cdot {(1 - d_{t})}^{(1 - d_{p}) \cdot
+\binom{p}{2}} \right)}{\log t^{\underline{p}}}\] for induced isomorphisms, which we plot on the
+fifth row of \cref{figure:induced}. We see that constrainedness predicts that the central region
+will still be relatively difficult for larger pattern graphs: although the problem is
+overconstrained, it is less overconstrained than in the regions the Glasgow and LAD solvers found
+easy.  Thus it seems that rather than just being a unification of existing generalised heuristic
 techniques, constrainedness also gives a better predictor of difficulty than proximity to a phase
-transition.  Unfortunately, constrainedness does not help us with heuristics: minimising
-constrainedness gives the same predictions as maximising the expected number of solutions.
+transition---our method generates instances where constrainedness and ``close to a phase
+transition'' give very different predictions, and constrainedness gives the better predictions.
+
+Unfortunately, constrainedness does not help us with heuristics: minimising constrainedness gives
+the same predictions as maximising the expected number of solutions.
 
 \section{Conclusion}
 
