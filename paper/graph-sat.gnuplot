@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz color size 7.8in,5.2in font '\tiny'
+set terminal tikz color size 7.7in,5.2in font '\scriptsize'
 set output "gen-graph-sat.tex"
 
 unset xlabel

@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz color size 3.4in,4.6in font '\tiny'
+set terminal tikz color size 3.3in,4.6in font '\scriptsize'
 set output "gen-graph-non-induced.tex"
 
 unset xlabel
