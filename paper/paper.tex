@@ -607,7 +607,7 @@ permitted, i.e.\ $p_1$ is adjacent to $p_2$ if and only if $t_1$ is adjacent to 
 size equal to the order of the pattern graph exists in the association graph if and only if the
 problem is satisfiable \citep{Levi:1973}. We used this encoding with the BBMC clique algorithm
 \citep{SanSegundo:2011}, which we implemented in C++. Usually BBMC solves the optimisation version
-of the clique problem, we adapted it to solve the decision problem by initialising the incumbent to
+of the clique problem; we adapted it to solve the decision problem by initialising the incumbent to
 be one less than the decision value, and allowing it to exit as soon as a clique with size equal to
 the decision value is encountered.  Again, our results show that the instances in the central region
 remain hard, and additionally, some of the easy unsatisfiable instances become hard.
