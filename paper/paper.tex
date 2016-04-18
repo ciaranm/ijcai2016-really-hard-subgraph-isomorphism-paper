@@ -10,42 +10,17 @@
 \usepackage{gnuplot-lua-tikz}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{placeins}
 \usepackage{cleveref}
-\usepackage{dblfloatfix}
 
 % \usepackage{showframe}
 
 \usetikzlibrary{decorations, decorations.pathreplacing, calc, backgrounds}
 
-\definecolor{uofguniversityblue}{rgb}{0, 0.219608, 0.396078}
-
-\definecolor{uofgheather}{rgb}{0.356863, 0.32549, 0.490196}
-\definecolor{uofgaquamarine}{rgb}{0.603922, 0.72549, 0.678431}
-\definecolor{uofgslate}{rgb}{0.309804, 0.34902, 0.380392}
-\definecolor{uofgrose}{rgb}{0.823529, 0.470588, 0.709804}
-\definecolor{uofgmocha}{rgb}{0.709804, 0.564706, 0.47451}
 \definecolor{uofgsandstone}{rgb}{0.321569, 0.278431, 0.231373}
-\definecolor{uofgforest}{rgb}{0, 0.2, 0.129412}
 \definecolor{uofglawn}{rgb}{0.517647, 0.741176, 0}
 \definecolor{uofgcobalt}{rgb}{0, 0.615686, 0.92549}
-\definecolor{uofgturquoise}{rgb}{0, 0.709804, 0.819608}
-\definecolor{uofgsunshine}{rgb}{1.0, 0.862745, 0.211765}
 \definecolor{uofgpumpkin}{rgb}{1.0, 0.72549, 0.282353}
 \definecolor{uofgthistle}{rgb}{0.584314, 0.070588, 0.447059}
-\definecolor{uofgrust}{rgb}{0.603922, 0.227451, 0.023529}
-\definecolor{uofgburgundy}{rgb}{0.490196, 0.133333, 0.223529}
-\definecolor{uofgpillarbox}{rgb}{0.701961, 0.047059, 0}
-\definecolor{uofglavendar}{rgb}{0.356863, 0.301961, 0.580392}
-
-% Without these, figure 4 causes horrible page layout problems
-\renewcommand{\topfraction}{0.9}
-\renewcommand{\bottomfraction}{0.8}
-\renewcommand{\dbltopfraction}{0.9}
-\renewcommand{\textfraction}{0.05}
-\setcounter{dbltopnumber}{2}
-\renewcommand{\floatpagefraction}{0.85}
-\renewcommand{\dblfloatpagefraction}{0.85}
 
 \newcommand{\citet}[1]{\citeauthor{#1} \shortcite{#1}}
 \newcommand{\citep}[1]{\cite{#1}}
@@ -56,21 +31,6 @@
 
 % http://tex.stackexchange.com/questions/22100/the-bar-and-overline-commands
 \newcommand{\shortoverline}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
-
-\makeatletter\@ifpackageloaded{showframe}{
-    % show lines down the middle columns too
-    % http://tex.stackexchange.com/questions/16199/test-if-a-package-or-package-option-is-loaded
-\newlength\Fcolumnseprule\setlength\Fcolumnseprule{0.4pt}\def\@outputdblcol{%
-  \if@firstcolumn\global \@firstcolumnfalse \global \setbox\@leftcolumn \box\@outputbox
-  \else
-    \global \@firstcolumntrue
-    \setbox\@outputbox \vbox{\hb@xt@\textwidth{\hb@xt@\columnwidth{\box\@leftcolumn \hss}%
-    \vrule \@width\Fcolumnseprule\hfil{\normalcolor\vrule \@width\columnseprule}
-    \hfil\vrule \@width\Fcolumnseprule\hb@xt@\columnwidth {\box\@outputbox \hss}}}\@combinedblfloats\@outputpage
-    \begingroup\@dblfloatplacement\@startdblcolumn\@whilesw\if@fcolmade \fi{\@outputpage\@startdblcolumn}\endgroup
-  \fi
-}}{}
-\makeatother
 
 \title{Heuristics and Really Hard Instances for Subgraph Isomorphism Problems}
 
@@ -111,7 +71,7 @@ to successful application in areas such as computer
 vision \citep{Damiand:2011,Solnon:2015}, biochemistry \citep{Giugno:2013,Carletti:2015}, and pattern
 recognition \citep{Conte:2004}.
 
-\begin{figure}[b]
+\begin{figure}[t]
     \centering
     \begin{tikzpicture}[scale=0.5,every node/.style={font=\footnotesize}]
         \begin{scope}
@@ -483,7 +443,7 @@ satisfiable. (Consider, for example, a sparse graph which has several isolated v
 solution exists, other symmetric solutions can be obtained by permuting the isolated vertices.
 Thus although the expected number of solutions may be one, there cannot be exactly one solution.) A
 similar behaviour is seen with random constraint satisfaction problems
-\citep{Smith:1994,Smith:1996}.
+\citep{Smith:1996}.
 
 \subsection{Variable and Value Ordering Heuristics}
 
@@ -505,7 +465,7 @@ which gives very little discrimination except on the sparsest of inputs.
 
 \section{Induced Subgraph Isomorphisms}
 
-\begin{figure*}[t]
+\begin{figure*}[p]
     \input{gen-graph-induced.tex}
     \caption{Behaviour of algorithms on the induced variant, shown in the style
     of \cref{figure:non-induced}. The second, third and fourth rows show the number of search nodes used by the
@@ -514,6 +474,15 @@ which gives very little discrimination except on the sparsest of inputs.
     or under-constrained. The final row shows when the Glasgow algorithm performs better when given
     the complements of the pattern and target graphs as inputs---the solid lines show the location
 of the phase transition, and the dotted lines are $t_d=0.5$ and the $p_d=t_d$ diagonal.}\label{figure:induced}
+\end{figure*}
+
+\begin{figure*}[t]
+    \input{gen-graph-sat.tex}
+    \caption{Behaviour of other solvers on the induced variant on smaller graphs, shown in the style of
+        \cref{figure:non-induced}. The second row shows the number of search nodes used by the
+    Glasgow algorithm, the third and fourth rows show the number of decisions made by the pseudo-boolean
+and SAT solvers, and the final shows the number of search nodes used on the clique
+encoding.}\label{figure:alt}
 \end{figure*}
 
 In the first four rows of \cref{figure:induced} we repeat our experiments, finding induced
@@ -576,15 +545,6 @@ inherently difficult to solve.  Thus we repeat the induced experiments on smalle
 graphs, using different solving techniques.  Although these techniques are not competitive in
 absolute terms, we wish to see if the same pattern of behaviour occurs. The results are plotted in
 \cref{figure:alt}.
-
-\begin{figure*}[t]
-    \input{gen-graph-sat.tex}
-    \caption{Behaviour of other solvers on the induced variant on smaller graphs, shown in the style of
-        \cref{figure:non-induced}. The second row shows the number of search nodes used by the
-    Glasgow algorithm, the third and fourth rows show the number of decisions made by the pseudo-boolean
-and SAT solvers, and the final shows the number of search nodes used on the clique
-encoding.}\label{figure:alt}
-\end{figure*}
 
 The pseudo-boolean (PB) encoding is as follows. For each pattern vertex $v$ and each target vertex
 $w$, we have a binary variable which takes the value 1 if and only if $v$ is mapped to $w$.
