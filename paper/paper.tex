@@ -593,8 +593,8 @@ each target vertex is mapped to by at most one pattern vertex, that adjacent ver
 adjacent vertices, and that non-adjacent vertices are mapped to non-adjacent vertices. We used the
 Clasp solver~\citep{gekakaosscsc11a} version 3.1.3 to solve the pseudo-boolean instances.  The
 instances that are hard for the Glasgow solver remain hard for the PB solver, including instances
-inside the central region, and the easy satisfiable instances remain easy. (Similar results were
-seen with the Glucose SAT solver using a direct encoding of the cardinality constraints. We also
+inside the central region, and the easy satisfiable instances remain easy. Similar results were
+seen with the Glucose SAT solver \cite{glucose} using a direct encoding of the cardinality constraints. (We also
 implemented an integer program encoding; the Gurobi solver was only able to solve some of the
 trivial satisfiable instances, and was almost never able to prove unsatisfiability within the time
 limit.)
