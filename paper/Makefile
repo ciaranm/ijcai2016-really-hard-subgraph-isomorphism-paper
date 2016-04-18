@@ -3,13 +3,14 @@ all : tables graphs
 
 TABLES =
 
-GRAPHS = gen-graph-sat.tex gen-graph-non-induced.tex gen-graph-induced.tex gen-graph-phase-transition.tex
+GRAPHS = gen-graph-sat.pdf gen-graph-non-induced.pdf gen-graph-induced.pdf gen-graph-phase-transition.pdf
 
 tables : $(TABLES)
 
 graphs : $(GRAPHS)
 
-gen-graph-%.tex : graph-%.gnuplot
+gen-graph-%.pdf : graph-%.gnuplot
 	gnuplot $<
-	sed -i -e '5s/^\(\\path.*\)/\% \1/' $@ # epic haxx
+	sed -i -e '19s/^\(\\path.*\)/\% \1/' gen-graph-$*.tex # epic haxx
+	latexmk -pdf gen-graph-$*
 

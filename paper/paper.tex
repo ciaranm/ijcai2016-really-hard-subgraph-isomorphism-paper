@@ -7,12 +7,10 @@
 \usepackage{times}
 \usepackage{complexity}
 \usepackage{microtype}
-\usepackage{gnuplot-lua-tikz}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{cleveref}
-
-% \usepackage{showframe}
+\usepackage{tikz}
 
 \usetikzlibrary{decorations, decorations.pathreplacing, calc, backgrounds}
 
@@ -361,7 +359,7 @@ less detailed.
 \section{Non-Induced Subgraph Isomorphisms}
 
 \begin{figure}[tb]
-    \input{gen-graph-phase-transition.tex}
+    \includegraphics{gen-graph-phase-transition.pdf}
     \caption{With a fixed pattern graph order of 20, a target graph order of 150, a target edge
         probability of 0.40, and varying pattern edge probability, we observe a phase transition and
         complexity peak with the Glasgow solver in the non-induced variant. Each point represents
@@ -390,7 +388,7 @@ enabled this option to avoid dealing with the complexity of search tree measurem
 parallelism.)
 
 \begin{figure}[tb]
-    \input{gen-graph-non-induced.tex}
+    \includegraphics{gen-graph-non-induced.pdf}
     \caption{Behaviour of algorithms on the non-induced variant. For each plot, the x-axis is the
         pattern edge probability and the y-axis is the target edge probability, both from 0 to 1.
         Along the top row, we show the proportion of instances which are satisfiable; the white
@@ -466,7 +464,7 @@ which gives very little discrimination except on the sparsest of inputs.
 \section{Induced Subgraph Isomorphisms}
 
 \begin{figure*}[p]
-    \input{gen-graph-induced.tex}
+    \includegraphics{gen-graph-induced.pdf}
     \caption{Behaviour of algorithms on the induced variant, shown in the style
     of \cref{figure:non-induced}. The second, third and fourth rows show the number of search nodes used by the
     Glasgow, LAD and VF2 algorithms. The fifth row plots constrainedness: the darkest region is where
@@ -477,7 +475,7 @@ of the phase transition, and the dotted lines are $t_d=0.5$ and the $p_d=t_d$ di
 \end{figure*}
 
 \begin{figure*}[t]
-    \input{gen-graph-sat.tex}
+    \includegraphics{gen-graph-sat.pdf}
     \caption{Behaviour of other solvers on the induced variant on smaller graphs, shown in the style of
         \cref{figure:non-induced}. The second row shows the number of search nodes used by the
     Glasgow algorithm, the third and fourth rows show the number of decisions made by the pseudo-boolean
