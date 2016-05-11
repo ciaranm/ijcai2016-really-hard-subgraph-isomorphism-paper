@@ -1,6 +1,6 @@
 # vim: set et ft=gnuplot sw=4 :
 
-set terminal tikz size 12.5in,7.1in
+set terminal tikz size 12.5in,6.8in
 set output "gen-graph-phase-transition.tex"
 
 set xrange [0:1]

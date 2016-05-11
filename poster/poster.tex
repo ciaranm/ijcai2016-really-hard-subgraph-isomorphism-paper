@@ -209,13 +209,13 @@ The \textbf{non-induced subgraph isomorphism problem} is to find an injective ma
 pattern graph to a given target graph which preserves adjacency---in essence, we are ``finding a
 copy of'' the pattern inside the target.
 
-\medskip
+\bigskip
 
 The \textbf{induced} variant of the problem additionally requires that the mapping preserve
 non-adjacency, so there are no ``extra edges'' in the copy of the pattern that we find. The top
 example is induced, whereas the bottom example is not, due to the dashed edge.
 
-\medskip
+\bigskip
 
 Despite these problems being \NP-complete, modern practical subgraph isomorphism algorithms can
 handle problem instances with many hundreds of vertices in the pattern graph, and up to \textbf{ten thousand
@@ -226,11 +226,26 @@ fifty vertices respectively which cannot be solved within one hour.
 }
 
 \block{The Expected Number of Solutions, and Heuristics}{
-    If we randomly generate a pattern graph with $p$ vertices and density $d_p$, and a target graph
-    with $t$ vertices and density $d_t$, the expected number of solutions to the non-induced
-    isomorphism problem is \[
-        \mathsf{\langle Sol \rangle = t \cdot (t - 1) \cdot \ldots \cdot (t - p + 1)\cdot {d_t}^{d_p \cdot
-        \binom{p}{2}} } \textnormal{.} \]
+
+If we randomly generate a pattern graph with $p$ vertices and density $d_p$, and a target graph
+with $t$ vertices and density $d_t$, the \textbf{expected number of solutions} to the non-induced
+isomorphism problem is \[
+    \mathsf{\langle Sol \rangle = t \cdot (t - 1) \cdot \ldots \cdot (t - p + 1)\cdot {d_t}^{d_p \cdot
+    \binom{p}{2}} } \textnormal{.} \]
+
+\bigskip
+
+By considering when $\mathsf{\langle Sol \rangle = 1}$, we can \textbf{estimate the location} of the
+satisfiable / unsatisfiable phase transition. (This is not entirely accurate due to variance,
+particularly when the pattern is very sparse or very dense).
+
+\bigskip
+
+We can also use this formula to recover \textbf{variable} and \textbf{value ordering heuristics}: we
+should make branching decisions which maximise the expected number of solutions during search. This
+tells us to prefer small domains and pattern vertices of high degree, but target vertices of low
+degree, which matches the empirically-determined heuristics used in state of the art solvers.
+
 }
 
 \column{0.5}
@@ -248,12 +263,12 @@ fifty vertices respectively which cannot be solved within one hour.
     \end{center}
 
     We can also look at what happens if we vary both the pattern and the target density, for
-    different orders of pattern. The top row shows satisfiability---the black lines show where the
-    expected number of solutions is one. The bottom row shows the search cost for one of the three
+    different orders of pattern. The top row shows satisfiability---the black lines show where
+    $\mathsf{\langle Sol \rangle = 1}$. The bottom row shows the search cost for one of the three
     algorithms we consider in the paper. As expected, the ``really hard'' instances are near the
     phase transition.
 
-    \vspace*{1em}
+    \vspace*{0.9em}
 
     \begin{center}
         \small
@@ -264,15 +279,42 @@ fifty vertices respectively which cannot be solved within one hour.
 \end{columns}
 
 \block{Induced Phase Transitions}{
-\begin{wrapfigure}[21]{r}{0.62\linewidth}\begin{center}
+\begin{wrapfigure}[24]{r}{0.64\linewidth}\begin{center}
     \small\input{gen-graph-induced}
 \end{center}\end{wrapfigure}
 
-    For induced isomorphisms, the expected number of solutions is \[
+    For induced isomorphisms, the behaviour is much richer. We can derive an expected number of
+    solutions of \[
         \mathsf{\langle Sol \rangle = t \cdot (t - 1) \cdot \ldots \cdot (t - p + 1)\cdot
                     {d_t}^{d_p \cdot \binom{p}{2}} \cdot {(1 - d_{t})}^{(1 - d_{p}) \cdot \binom{p}{2}} } \textnormal{.} \]
 
-    \vspace*{52ex}
+    \bigskip
+
+    Again this predicts a sharp phase transition. When the pattern is small, we see hard instances
+    near the phase transition, and easy instances elsewhere. However, when the pattern is larger,
+    the central unsatisfiable region \textbf{remains very hard}, even though it is no longer near a
+    phase transition.
+
+    \bigskip
+
+    This is not just a weakness of current subgraph isomorphism algorithms: the region is also hard
+    for pseudo-boolean and boolean satisfiability solvers, and under reduction to the clique
+    problem.
+
+    \bigskip
+
+    The central hard region \emph{is} predicted correctly by \textbf{constrainedness}, as we
+    show in the third row of plots. Although far from a phase transition, this region is only
+    slightly overconstrained.
+
+    \bigskip
+
+    Looking to maximise $\mathsf{\langle Sol \rangle}$ derives existing variable and value ordering
+    heuristics, in the case that both the pattern and target graphs are sparse. The formula suggests
+    that algorithms should swap heuristics when the pattern and target are dense---empirically, this
+    does indeed give an improvement. However, maximising the expected number of solutions is
+    \textbf{not enough to select the best heuristic} in two eighths of the search space (and
+    constrainedness does not help).
 }
 
 \begin{columns}
