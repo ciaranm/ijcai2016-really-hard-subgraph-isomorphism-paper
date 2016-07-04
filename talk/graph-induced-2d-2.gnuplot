@@ -21,7 +21,7 @@ set notitle
 
 set label 1 at screen 0.01, graph 0.5 center 'Satisfiable?' rotate by 90
 
-set label 2 at graph 0.5, screen 1 center "$G(14,x){\\rightarrowtail}G(150,y)$"
+set label 2 at graph 0.5, screen 1 center "$G(14,x){\\hookrightarrow}G(150,y)$"
 set cbtics 0.5
 plot "ps14-ts150.induced.proportion-sat.plot" u ($2/100):($1/100):($3) matrix w image notitle, \
     "ps14-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
@@ -30,14 +30,14 @@ plot "ps14-ts150.induced.proportion-sat.plot" u ($2/100):($1/100):($3) matrix w 
 unset label 1
 
 set cbtics 0.5
-set label 2 at graph 0.5, screen 1 center "$G(15,x){\\rightarrowtail}G(150,y)$"
+set label 2 at graph 0.5, screen 1 center "$G(15,x){\\hookrightarrow}G(150,y)$"
 plot "ps15-ts150.induced.proportion-sat.plot" u ($2/100):($1/100):($3) matrix w image notitle, \
     "ps15-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
     "ps15-ts150.induced.predicted-line.plot" u 4:5 w line notitle lc "black"
 
 set colorbox user origin screen 0.98, graph 0 size character 1, graph 1
 
-set label 2 at graph 0.5, screen 1 center "$G(16,x){\\rightarrowtail}G(150,y)$"
+set label 2 at graph 0.5, screen 1 center "$G(16,x){\\hookrightarrow}G(150,y)$"
 plot "ps16-ts150.induced.proportion-sat.plot" u ($2/100):($1/100):($3) matrix w image notitle, \
     "ps16-ts150.induced.predicted-line.plot" u 1:2 w line notitle lc "black", \
     "ps16-ts150.induced.predicted-line.plot" u 4:5 w line notitle lc "black"
@@ -51,7 +51,7 @@ set format cb '$10^{%.0f}$'
 unset colorbox
 set cbrange [2:8]
 
-set label 1 at screen 0.01, graph 0.5 center 'Glasgow' rotate by 90
+set label 1 at screen 0.01, graph 0.5 center 'Difficulty (Glasgow)' rotate by 90
 
 plot "ps14-ts150.induced.average-nodes.plot" u ($2/100):($1/100):(log10($3+1)) matrix w image notitle
 

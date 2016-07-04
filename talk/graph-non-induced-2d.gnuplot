@@ -48,7 +48,7 @@ set format cb '$10^{%.0f}$'
 unset colorbox
 set cbrange [2:8]
 
-set label 1 at screen 0.01, graph 0.5 center 'Glasgow' rotate by 90
+set label 1 at screen 0.01, graph 0.5 center 'Difficulty (Glasgow)' rotate by 90
 
 plot "ps10-ts150.non-induced.average-nodes.plot" u ($2/100):($1/100):(log10($3+1)) matrix w image notitle
 
